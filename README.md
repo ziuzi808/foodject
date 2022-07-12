@@ -4,7 +4,7 @@
 
 
 1. yee burn
-2. 三번
+2. 3
 3. 진짜 사번은 나야!
 4. five number dkijij
 5. no.6
