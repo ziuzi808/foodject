@@ -7,7 +7,7 @@
 3. 진짜 삼번은 나야! (진가영)
 4. five number dkijij
 5. no.6
-6. seven
+6. 음six
 
 #BKJ
 
