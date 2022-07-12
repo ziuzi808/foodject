@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.semi4.mapper.OrderMapper">
+
+	
+	<insert id="orderinsert" parameterType="orderVO">
+		insert into orders values(null, #{uid}, sysdate(), #{oname}, #{oaddr}, #{ophon}, 0);
+		<selectKey keyProperty="oid" resultType="Integer" order = "AFTER" >
+	    	SELECT LAST_INSERT_ID()
+	  </selectKey>
+	</insert>
+	<insert id="orderdetailinsert" parameterType="orderVO">
+		insert into orderdetail values( #{oid}, #{pid}, #{dnum}, #{dprice} );
+	</insert>
+	<select id="selecdetail" resultType="orderVO">
+		select o.oid, o.uid, o.oname, o.oaddr, o.ophon, o.odate, o.ostatus, d.pid, d.dnum, d.dprice, p.title, p.writer, p.pub, p.img0 
+		from orders o, orderdetail d, product p 
+		WHERE o.oid = d.oid and d.pid = p.pid and o.oid = #{oid} and o.uid = #{uid} order by odate, oid desc;
+	</select>
+	<select id="selectuser" resultType="orderVO">
+		select o.oid, o.uid, o.oname, o.oaddr, o.ophon, o.odate, o.ostatus, d.pid, d.dnum, d.dprice, p.title, p.writer, p.pub, p.img0 
+		from orders o, orderdetail d, product p 
+		WHERE o.oid = d.oid and d.pid = p.pid and o.uid = #{uid} order by odate, oid desc;
+	</select>
+	
+</mapper>
+
+
+
+
+
+

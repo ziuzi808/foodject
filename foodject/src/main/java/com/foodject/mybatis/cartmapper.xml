@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.semi4.mapper.CartMapper">
+	<select id="select" parameterType="int" resultType="cartVO">
+		select cartid, c.uid, c.pid, title, price, num, writer, status, img0
+		from cart c 
+		INNER JOIN cust cu ON c.uid= cu.uid
+		INNER JOIN product p ON c.pid= p.pid
+		 where CARTID=#{cartid}
+	</select>
+	<select id="selectID" parameterType="String" resultType="cartVO">
+		select cartid, c.uid, c.pid, title, price, num, writer, status, img0
+		from cart c 
+		INNER JOIN cust cu ON c.uid= cu.uid
+		INNER JOIN product p ON c.pid= p.pid
+		 where C.UID=#{uid}
+	</select>
+	<select id="selectcp" parameterType="cartVO" resultType="cartVO">
+		select cartid, c.uid, c.pid, title, price, num, writer, status, img0
+		from cart c 
+		INNER JOIN cust cu ON c.uid= cu.uid
+		INNER JOIN product p ON c.pid= p.pid
+		 where C.UID=#{uid} and C.PID=#{pid}
+	</select>
+	<update id="updateucp" parameterType="cartVO">
+		update CART set NUM=#{num} 
+		 where UID=#{uid} and  PID=#{pid}
+	</update>
+	<select id="selectall" resultType="cartVO">
+		select cartid, c.uid, c.pid, title, price, num, writer, status, img0
+		from cart c 
+		INNER JOIN cust cu ON c.uid= cu.uid
+		INNER JOIN product p ON c.pid= p.pid
+		order by cartid asc
+	</select>
+	<select id="cartcnt" parameterType="cartVO" resultType="int">
+		Select count(cartid) from cart where UID=#{uid}
+	</select>
+	<insert id="insert" parameterType="cartVO">
+		INSERT INTO CART VALUES (NULL,#{uid},#{pid},#{num})
+	</insert>
+	<update id="update" parameterType="cartVO">
+		UPDATE CART SET NUM=#{num} WHERE CARTID=#{cartid}
+	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM CART WHERE CARTID=#{cartid}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+

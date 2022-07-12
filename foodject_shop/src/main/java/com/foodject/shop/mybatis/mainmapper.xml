@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.semi4.mapper.MainMapper">
+
+	<select id="selectall" resultType="productVO">
+		SELECT pid, title, writer, price, adult, img0 from product order by pid desc limit 8;
+	</select>
+	<select id="serchall" parameterType="String"  resultType="productVO">
+		select * from product where title like '%' ||  #{obj} || '%';
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
