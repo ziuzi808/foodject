@@ -7,8 +7,9 @@
 2. 三번
 3. 진짜 사번은 나야!
 
-4. 아무렇게나
-5. 5. 5번은 하나뿐이야
+4. five number dkijij
+5. no.6
+
 
 6. five number dkijij
 7. 내가 6번이야 6번은 거짓말치고 있어
