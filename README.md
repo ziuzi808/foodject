@@ -8,7 +8,12 @@
 4. 사번
 5. five number dkijij
 6. no.6
-7. 11
+7. seven
+
 
 # moon
 아무거나 적으시고
+
+
+#kayoung
+
