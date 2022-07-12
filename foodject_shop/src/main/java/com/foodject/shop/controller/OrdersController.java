@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping("/orders")
 public class OrdersController {
 	
 	public void mainProduct(Model m) {
@@ -21,14 +22,14 @@ public class OrdersController {
 //		}
 	}
 
-	@RequestMapping("/orders")
+	@RequestMapping("")
 	public ModelAndView orders(ModelAndView mv) {
 		mv.setViewName("/index");
 		mv.addObject("center", "orders/center" );
 		return mv;
 	}
 
-	@RequestMapping("/orderslist")
+	@RequestMapping("/list")
 	public ModelAndView orderslist(ModelAndView mv) {
 		mv.setViewName("/index");
 		mv.addObject("center", "orders/delivery" );

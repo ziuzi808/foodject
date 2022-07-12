@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping("/cust")
 public class CustController {
 	
 	public void mainProduct(Model m) {
@@ -20,7 +21,7 @@ public class CustController {
 //			e.printStackTrace();
 //		}
 	}
-	@RequestMapping("/cust")
+	@RequestMapping("")
 	public ModelAndView cust(ModelAndView mv) {
 		mv.setViewName("index");
 		mv.addObject("center", "/cust/center" );
@@ -32,7 +33,7 @@ public class CustController {
 		return "/cust/login";
 	}
 
-	@RequestMapping("/custimpl")
+	@RequestMapping("/impl")
 	public String custimpl(Model m) {
 		return "/cust/impl";
 	}
