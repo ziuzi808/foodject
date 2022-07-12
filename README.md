@@ -2,13 +2,13 @@
 
 깃 테스트
 
-   
-1. 이번
+
+1. yee burn
 2. 三번
 3. 진짜 사번은 나야!
 4. five number dkijij
 5. no.6
-6. seven
+6. 음six
 
 #BKJ
 
