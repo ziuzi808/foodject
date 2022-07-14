@@ -2,22 +2,23 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.semi4.mapper.CustMapper">
+<mapper namespace="com.foodject.mapper.CustMapper">
 	
 	<select id="select" parameterType="String" resultType="custVO">
-		SELECT * FROM CUST WHERE UID=#{uid}
+		SELECT * FROM cust WHERE id=#{id}
 	</select>
 	<select id="selectall" resultType="custVO">
-		SELECT * FROM CUST
+		SELECT * FROM cust
 	</select>
 	<insert id="insert" parameterType="custVO">
-		INSERT INTO CUST VALUES (#{uid}, #{pwd}, #{name}, #{addr}, #{phon}, #{birth})
+		INSERT INTO cust VALUES(#{id}, #{pwd}, #{nick}, #{name}, #{birth},SYSDATE(), #{phon}, #{addr}, #{status}, #{img})
 	</insert>
 	<update id="update" parameterType="custVO">
-		UPDATE CUST SET PWD=#{pwd}, NAME=#{name}, ADDR=#{addr}, PHON=#{phon}, BIRTH=#{birth} WHERE UID=#{uid}
+		UPDATE cust SET pwd=#{pwd}, nick=#{nick}, name=#{name}, birth=#{birth},phon=#{phon}, addr=#{addr}, status=#{status}, img=#{img} WHERE id=#{id}
 	</update>
 	<delete id="delete" parameterType="String">
-		DELETE FROM CUST WHERE UID=#{uid}
+		DELETE FROM cust WHERE id=#{id}
 	</delete>
+
 	
 </mapper>
