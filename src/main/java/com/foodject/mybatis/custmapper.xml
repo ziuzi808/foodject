@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodject.mapper.CustMapper">
+	
+	<select id="select" parameterType="String" resultType="custVO">
+		SELECT * FROM cust WHERE id=#{id}
+	</select>
+	<select id="selectall" resultType="custVO">
+		SELECT * FROM cust
+	</select>
+	<insert id="insert" parameterType="custVO">
+		INSERT INTO cust VALUES(#{id}, #{pwd}, #{nick}, #{name}, #{birth},SYSDATE(), #{phon}, #{addr}, #{status}, #{img})
+	</insert>
+	<update id="update" parameterType="custVO">
+		UPDATE cust SET pwd=#{pwd}, nick=#{nick}, name=#{name}, birth=#{birth},phon=#{phon}, addr=#{addr}, status=#{status}, img=#{img} WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="String">
+		DELETE FROM cust WHERE id=#{id}
+	</delete>
+
+	
+</mapper>
