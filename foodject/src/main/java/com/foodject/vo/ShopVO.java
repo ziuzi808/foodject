@@ -27,7 +27,26 @@ public class ShopVO {
 	private int allmin;
 	private int status;
 	
-	
+
+	//for updateSts (2)
+	public ShopVO(int id, int status) {
+		this.id = id;
+		this.status = status;
+	}
+
+	//for update (7)
+	public ShopVO(int id, String name, String addr, String phon, String logo, String info, int allmin) {
+		this.id = id;
+		this.name = name;
+		this.addr = addr;
+		this.phon = phon;
+		this.logo = logo;
+		this.info = info;
+
+		this.allmin = allmin;
+	}
+
+	//for insert (9)
 	public ShopVO(String mid, String name, String bnum, String addr, String phon, String logo, String info, Date date,
 			int allmin) {
 		this.mid = mid;
@@ -40,27 +59,6 @@ public class ShopVO {
 		this.date = date;
 		this.allmin = allmin;
 	}
-
-	//for update
-	public ShopVO(int id, String mid, String name, String addr, String phon, String logo, String info, int allmin) {
-		this.id = id;
-		this.mid = mid;
-		this.name = name;
-		this.addr = addr;
-		this.phon = phon;
-		this.logo = logo;
-		this.info = info;
-		this.allmin = allmin;
-	}
-	
-	//for updateSts
-	public ShopVO(int id, int status) {
-		this.id = id;
-		this.status = status;
-	}
-	
-
-	
 }
 
 
