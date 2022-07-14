@@ -402,10 +402,11 @@
       <!-- partial  <div th:insert="${center} ? ${center} : center"></div>  -->
       
 
-
-
- 		<div th:insert="${center} ? ${center} : center"></div>
-
+		<div class="main-panel">
+			<div class="content-wrapper">
+				<div th:insert="${center} ? ${center} : center"></div>
+			</div>
+			
 
 
         <!-- content-wrapper ends -->
@@ -422,7 +423,7 @@
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
-    </div>   
+    </div> 
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
