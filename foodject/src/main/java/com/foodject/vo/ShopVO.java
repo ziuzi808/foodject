@@ -27,9 +27,7 @@ public class ShopVO {
 	private int allmin;
 	private int status;
 	
-	
-	
-	
+
 	//for updateSts (2)
 	public ShopVO(int id, int status) {
 		this.id = id;
@@ -44,6 +42,7 @@ public class ShopVO {
 		this.phon = phon;
 		this.logo = logo;
 		this.info = info;
+
 		this.allmin = allmin;
 	}
 
@@ -60,11 +59,6 @@ public class ShopVO {
 		this.date = date;
 		this.allmin = allmin;
 	}
-	
-	
-	
-	
-	
 }
 
 
