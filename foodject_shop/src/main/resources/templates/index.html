@@ -95,16 +95,19 @@
               </a>
             </div>
           </li>
-          <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="login" data-toggle="dropdown" id="profileDropdown">
-              <img src="/skydash/images/faces/face28.jpg" alt="profile"/>
+          <li class="nav-item nav-profile dropdown" th:if="${session.loginshop == null}">
+          	<a th:href="@{/login}">Login</a>
+          </li>
+          <li class="nav-item nav-profile dropdown" th:unless="${session.loginshop == null}">	
+            <a class="nav-link dropdown-toggle" th:href="login" data-toggle="dropdown" id="profileDropdown">
+              <span th:text="${session.loginshop.name}"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item">
+              <a class="dropdown-item" th:href="@{/login/logout}">
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>
@@ -378,7 +381,8 @@
             </a>
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/skydash/pages/samples/login.html"> Login11 </a></li>
+                <li class="nav-item"> 
+                <a class="nav-link" href="/login"> Login</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/skydash/pages/samples/register.html"> Register </a></li>
               </ul>
             </div>
