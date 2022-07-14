@@ -107,7 +107,7 @@
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item">
+              <a class="dropdown-item" th:href="@{/login/logout}">
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>
@@ -381,7 +381,8 @@
             </a>
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/login"> Login11 </a></li>
+                <li class="nav-item"> 
+                <a class="nav-link" href="/login"> Login</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/skydash/pages/samples/register.html"> Register </a></li>
               </ul>
             </div>

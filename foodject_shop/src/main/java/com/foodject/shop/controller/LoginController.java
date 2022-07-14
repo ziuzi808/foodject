@@ -60,5 +60,13 @@ public class LoginController {
 		}
 		return "index";
 	}
+	@RequestMapping("/logout")
+	public String logout(Model m, HttpSession session) {
+		if (session != null) {
+			session.invalidate();
+		}
+		return "index";
+	}
+
 
 }
