@@ -1,13 +1,9 @@
 package com.foodject.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.foodject.biz.CustBiz;
-import com.foodject.vo.CustVO;
 
 @Controller
 @RequestMapping("/cust")
@@ -25,11 +21,6 @@ public class CustController {
 //			e.printStackTrace();
 //		}
 	}
-	
-	
-	@Autowired
-	CustBiz custbiz;
-	
 	@RequestMapping("")
 	public ModelAndView cust(ModelAndView mv) {
 		mv.setViewName("index");
@@ -42,12 +33,9 @@ public class CustController {
 		return "/cust/login";
 	}
 
-	@RequestMapping("/register")
-	public String register(Model m) {
-		return "/cust/register";
+	@RequestMapping("/impl")
+	public String custimpl(Model m) {
+		return "/cust/impl";
 	}
-	
-
-	
 
 }

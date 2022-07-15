@@ -8,7 +8,6 @@ class FoodjectApplicationTests {
 
 	@Test
 	void contextLoads() {
-		System.out.println("dd");
 	}
 
 }
