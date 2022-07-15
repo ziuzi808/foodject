@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping("/menu")
 public class MenuController {
 	
 	public void mainProduct(Model m) {
@@ -21,14 +22,13 @@ public class MenuController {
 //		}
 	}
 
-	@RequestMapping("/menu")
-	public ModelAndView orders(ModelAndView mv) {
-		mv.setViewName("/index");
-		mv.addObject("center", "menu/center" );
-		return mv;
+	@RequestMapping("")
+	public String orders(Model m) {
+		m.addAttribute("center", "menu/center");
+		return "/index";
 	}
 
-	@RequestMapping("/menusetting")
+	@RequestMapping("/setting")
 	public ModelAndView setting(ModelAndView mv) {
 		mv.setViewName("/index");
 		mv.addObject("center", "menu/setting" );
