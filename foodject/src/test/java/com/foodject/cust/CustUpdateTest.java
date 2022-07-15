@@ -26,7 +26,6 @@ class CustUpdateTest {
 			date = formatter.parse(dateStr);
 			System.out.println(date);
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
@@ -36,7 +35,6 @@ class CustUpdateTest {
 			biz.modify(cust);
 			System.out.println("updated");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

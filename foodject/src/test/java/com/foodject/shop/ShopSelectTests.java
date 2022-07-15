@@ -20,7 +20,6 @@ class ShopSelectTests {
 			obj = biz.get(1);
 			System.out.println(obj);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
