@@ -33,11 +33,29 @@
 </head>
 <script >
 $(document).ready(function(){
+	
+	$('#id').keyup(function(){
+		var inputid = $(this).val();
+		$.ajax({
+			url:'/checkid',
+			data:{id:inputid},
+			success:function(result){
+				if(result == '1'){
+					$('#idspan').text('사용불가한 아이디입니다');
+				}else{
+					$('#idspan').text('멋진 아이디네요!');
+				}
+			}
+		});
+		
+	});
+	
+	
 	$('#registerbtn').click(function(){
 		$('#registerform').attr({
 			'enctype':'multipart/form-data',
 			'method':'post',
-			'action':'/registerimpl'
+			'action':'/cust/registerimpl'
 		});
 		$('#registerform').submit();
 	});	
@@ -75,55 +93,61 @@ $(document).ready(function(){
                     <form id="registerform" class="row gx-2 gy-2 align-items-center">
                       <div class="col">
                       
-                        <label for="birth">아이디를 입력해주세요</label><br>
+                        <label for="id">아이디를 입력해주세요</label><br>
                         <div class="input-group">
                           <input class="form-control input-box form-foodwagon-control"
                           id="id" name="id" type="text" placeholder="ID" required>
-                        </div> <p></p>
+                        </div> 
+                        <span style="font-size: smaller; color:gray;" id="idspan"></span><p></p>
                         
-                        <label for="birth">비밀번호를 입력해주세요</label><br>
+                        <label for="pwd">비밀번호를 입력해주세요</label><br>
                         <div class="input-group">
                           <input class="form-control input-box form-foodwagon-control"
-                          id="pwd" name="pwd" type="text" placeholder="Password" required>
+                          id="pwd" name="pwd" type="password" placeholder="Password" value="txt"  required>
                         </div> <p></p>
+                        <span style="font-size: smaller; color:gray;" id="pwdspan"></span><p></p>
                         
-                        <label for="birth">비밀번호 확인</label><br>
+                        <label for="pwdcheck">비밀번호 확인</label><br>
                         <div class="input-group">
                           <input class="form-control input-box form-foodwagon-control"
-                          id="pwdcheck" name="pwdcheck" type="text" placeholder="Password checking" required>
+                          id="pwdcheck" type="password" placeholder="Password checking" value="txt"  required>
                         </div> <p></p>
+                        <span style="font-size: smaller; color:gray;" id="pwdcheckspan"></span><p></p>
                         
-                        <label for="birth">이름을 입력해주세요</label><br>
+                        <label for="name">이름을 입력해주세요</label><br>
                         <div class="input-group">
                           <input class="form-control input-box form-foodwagon-control"
-                          id="name" name="name" type="text" placeholder="Full Name" required>
+                          id="name" name="name" type="text" placeholder="Full Name" value="txt"  required>
                         </div> <p></p>
-
-                         <label for="birth">생년월일을 입력하세요</label><br>
-                         <div class="input-group">
-                          <input class="form-control input-box form-foodwagon-control"
-                          id="birth" name="birth" type="date" placeholder="Birthday" required>
-                        </div> <p></p>
-                        
-                        <label for="birth">휴대폰 번호를 입력하세요</label><br>
+						<span style="font-size: smaller; color:gray;" id="namespan"></span><p></p>\
+						
+                        <label for="birth">생년월일을 입력하세요</label><br>
                         <div class="input-group">
                           <input class="form-control input-box form-foodwagon-control"
-                          id="phon" name="phon" type="tel" placeholder="Phone Number" maxlength="13" required>
+                          id="birth" name="birth" type="date" placeholder="Birthday" value="2020-02-02" required>
+                        </div> <p></p>
+                                       
+                        <label for="phon">휴대폰 번호를 입력하세요</label><br>
+                        <div class="input-group">
+                          <input class="form-control input-box form-foodwagon-control"
+                          id="phon" name="phon" type="tel" placeholder="Phone Number" value="123"  maxlength="13" required>
                         </div><p></p>
-                      
-                        <label for="birth">주소를 입력하세요</label><br>
+                                               
+                        <label for="addr">주소를 입력하세요</label><br>
                         <div class="input-group">
                           <input class="form-control input-box form-foodwagon-control"
-                          id="phon" name="addr" type="tel" placeholder="Address" maxlength="13" required>
+                          id="phon" name="addr" type="tel" placeholder="Address" value="txt" required>
                         </div><p></p>
+                        <span style="font-size: smaller; color:gray;" id="addrspan"></span><p></p>
                                                                         
-                        <label for="birth">닉네임을 입력해주세요</label><br>
+                        <label for="nick">닉네임을 입력해주세요</label><br>
                         <div class="input-group">
                           <input class="form-control input-box form-foodwagon-control"
-                          id="nick" name="nick" type="text" placeholder="Nickname" required>
+                          id="nick" name="nick" type="text" placeholder="Nickname" value="txt"  required>
                         </div> <p></p>
+                        <span style="font-size: smaller; color:gray;" id="nickspan"></span><p></p>
                         
-                        <label for="birth">* 프로필사진을 등록하시겠어요? </label><br>
+                        <label for="img">* 프로필사진을 등록하시겠어요? </label><br>
                         <div class="input-group">
                           <input class="form-control input-box form-foodwagon-control"
                           id="img" name="mf" type="file" placeholder="Profile Image" >

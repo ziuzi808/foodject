@@ -1,12 +1,21 @@
 package com.foodject.controller;
 
+import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.foodject.biz.CustBiz;
+import com.foodject.frame.Util;
 import com.foodject.vo.CustVO;
 
 @Controller
@@ -30,6 +39,9 @@ public class CustController {
 	@Autowired
 	CustBiz custbiz;
 	
+	@Value("${custdir}")
+	String custdir;
+	
 	@RequestMapping("")
 	public ModelAndView cust(ModelAndView mv) {
 		mv.setViewName("index");
@@ -47,6 +59,37 @@ public class CustController {
 		return "/cust/register";
 	}
 	
+	@RequestMapping("/registerimpl")
+	public String registerimpl(Model m, CustVO cust) {
+		//이미지 경로설정
+		String pimgpath = Paths.get(System.getProperty("user.dir"), "src", "main","resources","static","custimg").toString();
+		//이미지파일 이름 저장
+		String imgname = cust.getMf().getOriginalFilename();
+		String[] splitname = imgname.split("[.]");
+		String idname = cust.getId();
+		String savename = idname + "." + splitname[splitname.length -1];
+		cust.setImg(savename);		
+		
+		try {
+			custbiz.register(cust);
+			Util.saveFile(cust, pimgpath);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "/cust/login";
+	}
+
+	
+//	String pimgpath = Paths.get(System.getProperty("user.dir"), "src", "main","resources","static", "custimg").toString();
+//	System.out.println(pimgpath);
+//	String imgpath = "foodject.jpg";
+//	String[] splits = imgpath.split("[.]");
+//	System.out.println(Arrays.toString(splits));
+//	System.out.println("test");
+//	System.out.println("id." +splits[1]);
+
 
 	
 
