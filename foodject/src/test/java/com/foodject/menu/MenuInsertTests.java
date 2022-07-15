@@ -1,26 +1,25 @@
-package com.foodject.shop;
+package com.foodject.menu;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.foodject.biz.ShopBiz;
-import com.foodject.vo.ShopVO;
+import com.foodject.biz.MenuBiz;
+import com.foodject.vo.MenuVO;
 
 @SpringBootTest
-class ShopUpdateStsTests {
+class MenuInsertTests {
 	
 	@Autowired
-	ShopBiz biz;
+	MenuBiz biz;
 	
 	@Test
 	void contextLoads() {
-		ShopVO obj = new ShopVO(3, 1);
+		MenuVO obj = new MenuVO(3, 3, 8, "짜장면", 4500, 1);
 		try {
-			biz.modifySts(obj);
+			biz.register(obj);
 			System.out.println("complete ...");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

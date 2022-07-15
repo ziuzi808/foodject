@@ -27,7 +27,7 @@ public class ShopBiz implements Biz<Integer, ShopVO> {
 
 	@Override
 	public void remove(Integer k) throws Exception {
-				
+		dao.delete(k);
 	}
 
 	@Override
@@ -40,8 +40,12 @@ public class ShopBiz implements Biz<Integer, ShopVO> {
 		return dao.selectall();
 	}
 	
-	public void remove(ShopVO v) throws Exception {
+	public void modifySts(ShopVO v) throws Exception {
 		dao.updateSts(v);
+	}
+	
+	public List<ShopVO> getSts(int k) throws Exception {
+		return dao.select_bySts(k);
 	}
 	
 

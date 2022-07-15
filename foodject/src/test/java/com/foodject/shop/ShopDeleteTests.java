@@ -8,17 +8,19 @@ import com.foodject.biz.ShopBiz;
 import com.foodject.vo.ShopVO;
 
 @SpringBootTest
-class ShopUpdateStsTests {
+class ShopDeleteTests {
 	
 	@Autowired
 	ShopBiz biz;
 	
 	@Test
 	void contextLoads() {
-		ShopVO obj = new ShopVO(3, 1);
+		int id = 3;
+		ShopVO obj = null;
 		try {
-			biz.modifySts(obj);
-			System.out.println("complete ...");
+			biz.remove(id);
+			obj = biz.get(id);
+			System.out.println(obj);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
