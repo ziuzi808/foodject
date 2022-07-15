@@ -26,7 +26,6 @@ class CustInsertTest {
 			date = formatter.parse(dateStr);
 			System.out.println(date);
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		

@@ -24,7 +24,6 @@ class CustSelectAllTest {
 				System.out.println(custVO);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

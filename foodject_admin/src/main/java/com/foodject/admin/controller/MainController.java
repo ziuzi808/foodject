@@ -1,11 +1,18 @@
 package com.foodject.admin.controller;
 
+import java.nio.file.Paths;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/foodject_admin/cust")
 public class MainController {
+	
+	
+
+
 	
 	public void mainProduct(Model m) {
 //		List<ProductVO> plist = null;
@@ -30,6 +37,6 @@ public class MainController {
 		mainProduct(m);
 		return "index";
 	}
-	
+
 
 }
