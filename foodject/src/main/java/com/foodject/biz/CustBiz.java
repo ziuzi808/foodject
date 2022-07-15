@@ -3,6 +3,7 @@ package com.foodject.biz;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.foodject.frame.Biz;
@@ -40,5 +41,5 @@ public class CustBiz implements Biz<String, CustVO>{
 		return dao.selectall();
 	}
 
-	
+
 }
