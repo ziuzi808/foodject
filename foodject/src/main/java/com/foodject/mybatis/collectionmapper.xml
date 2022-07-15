@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodject.mapper.CollectionMapper">
+	
+
+	<insert id="insert" parameterType="collectionVO">
+		INSERT INTO collection VALUES (null, #{name}, #{line})
+	</insert>
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM collection WHERE id=#{id}
+	</delete>
+	<update id="update" parameterType="collectionVO">
+		UPDATE collection SET name=#{name} WHERE id=#{id}
+	</update>
+	<!-- 순서 수정은 따로.(한 화면에서 순서 다 지정해줄 거니까) -->
+	<update id="updateLine" parameterType="collectionVO">
+		UPDATE collection SET line=#{line} WHERE id=#{id}
+	</update>
+	
+	<select id="select" parameterType="Integer" resultType="collectionVO">
+		SELECT * FROM collection
+		WHERE id=#{id}
+	</select>
+	<select id="selectall" resultType="collectionVO">
+		SELECT * FROM collection
+	</select>
+	
+	
+</mapper>
