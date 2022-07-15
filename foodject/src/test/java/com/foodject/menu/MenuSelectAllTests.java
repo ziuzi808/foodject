@@ -1,26 +1,29 @@
-package com.foodject.shop;
+package com.foodject.menu;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.foodject.biz.ShopBiz;
-import com.foodject.vo.ShopVO;
+import com.foodject.biz.MenuBiz;
+import com.foodject.vo.MenuVO;
 
 @SpringBootTest
-class ShopUpdateStsTests {
+class MenuSelectAllTests {
 	
 	@Autowired
-	ShopBiz biz;
+	MenuBiz biz;
 	
 	@Test
 	void contextLoads() {
-		ShopVO obj = new ShopVO(3, 1);
+		List<MenuVO> list = null;
 		try {
-			biz.modifySts(obj);
-			System.out.println("complete ...");
+			list = biz.get();
+			for (MenuVO obj : list) {
+				System.out.println(obj);
+			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

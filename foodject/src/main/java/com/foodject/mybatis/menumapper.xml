@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodject.mapper.MenuMapper">
+	
+
+	<insert id="insert" parameterType="menuVO">
+		INSERT INTO menu VALUES (null, #{sid} , #{cid} , #{collid} , #{name} , #{price} , #{line} ,SYSDATE())
+	</insert>
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM menu WHERE id=#{id}
+	</delete>
+	
+	<!-- sid, cid는 바뀔 일이 없음. 메뉴를 삭제하고 다시 추가하는 것이 합리적 -->
+	<update id="update" parameterType="menuVO">
+		UPDATE menu SET collid=#{collid}, name=#{name}, price=#{price} WHERE id=#{id}
+	</update>
+	<!-- 순서 수정은 따로.(한 화면에서 순서 다 지정해줄 거니까) -->
+	<update id="updateLine" parameterType="menuVO">
+		UPDATE menu SET line=#{line} WHERE id=#{id}
+	</update>
+	
+	<select id="select" parameterType="Integer" resultType="menuVO">
+		SELECT * FROM menu
+		WHERE id=#{id}
+	</select>
+	<select id="selectall" resultType="menuVO">
+		SELECT * FROM menu
+	</select>
+	
+	
+</mapper>

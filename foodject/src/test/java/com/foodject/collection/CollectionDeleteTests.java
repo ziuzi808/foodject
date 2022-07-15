@@ -1,26 +1,24 @@
-package com.foodject.shop;
+package com.foodject.collection;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.foodject.biz.ShopBiz;
-import com.foodject.vo.ShopVO;
+import com.foodject.biz.CollectionBiz;
 
 @SpringBootTest
-class ShopUpdateStsTests {
+class CollectionDeleteTests {
 	
 	@Autowired
-	ShopBiz biz;
+	CollectionBiz biz;
 	
 	@Test
 	void contextLoads() {
-		ShopVO obj = new ShopVO(3, 1);
+		int id = 8;
 		try {
-			biz.modifySts(obj);
+			biz.remove(id);
 			System.out.println("complete ...");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
