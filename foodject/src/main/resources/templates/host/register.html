@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Skydash Admin</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="/bootstrap/skydash/vendors/feather/feather.css">
+  <link rel="stylesheet" href="/bootstrap/skydash/vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="/bootstrap/skydash/vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="/bootstrap/skydash/css/vertical-layout-light/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="/bootstrap/skydash/images/favicon.png" />
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script>
+$(document).ready(function(){
+	
+	$('#registerbt').click(function(){ 
+		$('#register_form').attr({
+			'action':'/host/registerimpl',
+			'method':'post'
+		}); 
+		$('#register_form').submit(); 
+	});
+});
+</script>
+
+</head>
+
+<body>
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth px-0">
+        <div class="row w-100 mx-0">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+              <div class="brand-logo">
+                <a href="/"><img src="/bootstrap/skydash/images/logo.svg" alt="logo"></a>
+              </div>
+              <h4>새로 오셨나요?</h4>
+              <h6 class="font-weight-light">환영합니다! 정보를 간단히 입력해 주세요.</h6>
+              <form class="pt-3" id="register_form">
+                <div class="form-group">
+                <label for="id">아이디:</label>
+               
+                  <input type="text" class="form-control form-control-lg" id="id" placeholder="ID" name="id">
+                </div>
+                <div class="form-group">
+                <label for="pwd">비밀번호:</label>
+               
+                  <input type="password" class="form-control form-control-lg" id="pwd" placeholder="Password" name="pwd">
+                </div>
+                <div class="form-group">
+                <label for="pwd2">비밀번호 확인:</label>
+                
+                  <input type="password" class="form-control form-control-lg" id="pwd2" placeholder="Password Check" name="pwd2">
+                </div>
+                <div class="form-group">
+                <label for="name">성함:</label>
+               
+                  <input type="text" class="form-control form-control-lg" id="name" placeholder="Name" name="name">
+                </div>
+                <div class="form-group">
+                <label for="email">이메일:</label>
+                
+                  <input type="email" class="form-control form-control-lg" id="email" placeholder="Email" name="email">
+                   <!-- <select class="form-control form-control-lg" id="exampleFormControlSelect2">
+                    <option>Country</option>
+                    <option>United States of America</option>
+                    <option>United Kingdom</option>
+                    <option>India</option>
+                    <option>Germany</option>
+                    <option>Argentina</option>
+                  </select> -->
+                </div>
+                 <div class="form-group">
+                 <label for="birth">생년월일:</label>
+                  <p><input type="date" class="form-control form-control-lg" id="birth" placeholder="Birth" name="birth" ></p>
+                </div> 
+                 <div class="form-group">
+                 <label for="phon">휴대폰 번호:</label>
+                  <input type="text" class="form-control form-control-lg" id="phon" placeholder="'-' 없이 입력해 주세요." name="Phon" >
+                </div>
+                	  
+               <!--  <div class="form-group">
+                <label for="addr">주소:</label>
+                  <select class="form-control form-control-lg" id="exampleFormControlSelect2">
+                    <option>Country</option>
+                    <option>United States of America</option>
+                    <option>United Kingdom</option>
+                    <option>India</option>
+                    <option>Germany</option>
+                    <option>Argentina</option>
+                  </select>
+                </div> -->
+                
+                <div class="mb-4">
+                  <div class="form-check">
+                    <label class="form-check-label text-muted">
+                      <input type="checkbox" class="form-check-input">
+                      I agree to all Terms & Conditions
+                    </label>
+                  </div>
+                </div>
+                <div class="mt-3">
+                  <button id="registerbt" type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
+                </div>
+                <div class="text-center mt-4 font-weight-light">
+                  Already have an account? <a href="host/login" class="text-primary">Login</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="/bootstrap/skydash/vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="/bootstrap/skydash/js/off-canvas.js"></script>
+  <script src="/bootstrap/skydash/js/hoverable-collapse.js"></script>
+  <script src="/bootstrap/skydash/js/template.js"></script>
+  <script src="/bootstrap/skydash/js/settings.js"></script>
+  <script src="/bootstrap/skydash/js/todolist.js"></script>
+  <!-- endinject -->
+</body>
+
+</html>
