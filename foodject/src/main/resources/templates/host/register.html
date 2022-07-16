@@ -19,9 +19,71 @@
   <link rel="shortcut icon" href="/bootstrap/skydash/images/favicon.png" />
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <script>
-$(document).ready(function(){
+  function sendId(id){
+		$.ajax({
+			url:'/host/checkid',
+			data:{'id':id},
+			success:function(data){
+				if(data == '1') {
+					$('#ispan').text('중복된 아이디 입니다');
+				} else {
+					$('#ispan').text('사용 가능합니다!');
+				}
+			}
+		});
+	};
+  
+  
+  
+  $(document).ready(function(){
+	  $('input[name="id"]').keyup(function(){
+			var id = $(this).val();
+			sendId(id);
+		});
 	
 	$('#registerbt').click(function(){ 
+		  var id = $('#id').val();
+	      var pwd = $('#pwd').val();
+	      var pwd2 = $('#pwd2').val();
+	      var name = $('#name').val();
+	      var email = $('#email').val();
+	      var birth = $('#birth').val();
+	      var phon = $('#phon').val();
+	      if(id == ''){
+	         $('#id').val() = id;
+	         $('#id').focus();
+	         return;      
+	      }
+	      
+	      if(pwd == ''){
+	         $('#pwd').focus();
+	         return;
+	      }
+	      if(pwd2 == ''){
+	         $('#pwd2').focus();
+	         return;
+	      }
+	      if(pwd2 != pwd){
+	         $('#pwd2').focus();
+	         return;
+	      }
+	      if(name == ''){
+	         $('#name').focus();
+	         return;
+	      }
+	      if(birth == ''){
+	         $('#birth').focus();
+	         return;
+	      }
+	      if(phon == ''){
+	         $('#phon').focus();
+	         return;
+	      }
+	      
+	     
+
+		
+		
 		$('#register_form').attr({
 			'action':'/host/registerimpl',
 			'method':'post'
@@ -41,19 +103,19 @@ $(document).ready(function(){
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
-                <a href="/"><img src="/bootstrap/skydash/images/logo.svg" alt="logo"></a>
+                <a href="/host"><img src="/bootstrap/skydash/images/logo.svg" alt="logo"></a>
               </div>
               <h4>새로 오셨나요?</h4>
               <h6 class="font-weight-light">환영합니다! 정보를 간단히 입력해 주세요.</h6>
               <form class="pt-3" id="register_form">
                 <div class="form-group">
                 <label for="id">아이디:</label>
-               
+                <span id="ispan"></span>
                   <input type="text" class="form-control form-control-lg" id="id" placeholder="ID" name="id">
                 </div>
                 <div class="form-group">
                 <label for="pwd">비밀번호:</label>
-               
+               	
                   <input type="password" class="form-control form-control-lg" id="pwd" placeholder="Password" name="pwd">
                 </div>
                 <div class="form-group">

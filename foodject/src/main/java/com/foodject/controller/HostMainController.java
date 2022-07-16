@@ -52,10 +52,12 @@ public class HostMainController {
 	}
 	@RequestMapping("/registerimpl")
 	public String registerimpl(Model m, HostManagerVO manager, HttpSession session) {
+		System.out.println("plz2");
 		try {
 			mbiz.register(manager);
 			session.setAttribute("loginshop", manager);
 		} catch (Exception e) {
+			System.out.println("plzbe");
 			e.printStackTrace();
 		}
 		return "host/index";
