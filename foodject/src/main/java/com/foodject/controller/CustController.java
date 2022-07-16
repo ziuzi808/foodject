@@ -1,17 +1,11 @@
 package com.foodject.controller;
 
 import java.nio.file.Paths;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.foodject.biz.CustBiz;
@@ -39,8 +33,7 @@ public class CustController {
 	@Autowired
 	CustBiz custbiz;
 	
-	@Value("${custdir}")
-	String custdir;
+	
 	
 	@RequestMapping("")
 	public ModelAndView cust(ModelAndView mv) {
