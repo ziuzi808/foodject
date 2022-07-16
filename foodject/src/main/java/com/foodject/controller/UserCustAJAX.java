@@ -19,14 +19,13 @@ public class UserCustAJAX {
 	public String custNum(String id) {
 		String result = "";
 		UserCustVO cust = null;
-		
 		if(id.equals("")|| id==null) {
 			return "1";
 		}
 		
 		try {
 			cust = custbiz.get(id);
-			if(cust==null) {
+			if(cust==null && id.length()>3) {
 				result="0";
 			}else {
 				result="1";
