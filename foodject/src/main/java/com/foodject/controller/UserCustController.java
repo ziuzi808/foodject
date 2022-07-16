@@ -36,6 +36,7 @@ public class UserCustController {
 	@Autowired
 	UserCustBiz custbiz;
 
+
 	@RequestMapping("")
 	public ModelAndView cust(ModelAndView mv) {
 		mv.setViewName("user/index");

@@ -3,16 +3,22 @@ package com.foodject.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.foodject.biz.HostManagerBiz;
+import com.foodject.vo.HostManagerVO;
 
 @RestController
 @RequestMapping("/host")
 public class HostMainAJAX {
 
-//	@Autowired
-//	CustBiz custbiz;
+	@Autowired
+	HostManagerBiz mngbiz;
+	
+	
 	
 	
 	@RequestMapping("mainNum")
@@ -28,6 +34,28 @@ public class HostMainAJAX {
 //			e.printStackTrace();
 //		}
 
+		return result;
+	}
+	@RequestMapping("checkid")
+	public String checkid(String id) {
+		String result = "";
+		HostManagerVO manager = null;
+		
+		if(id.equals("") || id == null) {
+			return "1";
+		}
+		
+		try {
+			manager = mngbiz.get(id);
+			if(manager == null) {
+				result = "0";
+			}else {
+				result = "1";
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return result;
 	}
 	
