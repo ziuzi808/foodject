@@ -36,6 +36,7 @@ public class UserCustController {
 	@Autowired
 	UserCustBiz custbiz;
 
+
 	@RequestMapping("")
 	public ModelAndView cust(ModelAndView mv) {
 		mv.setViewName("user/index");
@@ -56,6 +57,7 @@ public class UserCustController {
 	@RequestMapping("/registerimpl")
 	public String registerimpl(Model m, UserCustVO cust) {
 		//이미지 경로설정
+		System.out.println("ddd");
 		String pimgpath = Paths.get(System.getProperty("user.dir"), "src", "main","resources","static","custimg").toString();
 		//이미지파일 이름 저장
 		String imgname = cust.getMf().getOriginalFilename();
@@ -67,6 +69,7 @@ public class UserCustController {
 		try {
 			custbiz.register(cust);
 			Util.saveFile(cust, pimgpath);
+			System.out.println("check");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
