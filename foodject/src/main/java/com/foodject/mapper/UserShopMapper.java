@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.foodject.vo.MarkerVO;
 import com.foodject.vo.UserShopVO;
 
 @Repository
@@ -19,6 +20,9 @@ public interface UserShopMapper {
 
 	public void updateSts(UserShopVO obj) throws Exception;
 	public List<UserShopVO> select_bySts(int status) throws Exception;
+
+	public List<UserShopVO> select_byCate(int cid) throws Exception;
+	public List<UserShopVO> selectMain(MarkerVO obj) throws Exception;
 }
 
 
