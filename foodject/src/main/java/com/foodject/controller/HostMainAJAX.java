@@ -36,6 +36,19 @@ public class HostMainAJAX {
 
 		return result;
 	}
+//	@RequestMapping("/registerimpl")
+//	public String registerimpl(Model m, HostManagerVO manager, HttpSession session) {
+//		
+//		try {
+//			mngbiz.register(manager);
+//			session.setAttribute("loginshop", manager);
+//		} catch (Exception e) {
+//			
+//			e.printStackTrace();
+//		}
+//		return "host/index";
+//	}
+	
 	@RequestMapping("checkid")
 	public String checkid(String id) {
 		String result = "";
