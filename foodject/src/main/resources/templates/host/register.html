@@ -40,6 +40,22 @@
 			var id = $(this).val();
 			sendId(id);
 		});
+	  
+	  $('#cbx').click(function(){
+			
+			if(!$(this).is(":checked")){
+				
+				$('#registerbt').attr("disabled","disabled");
+			} 
+			if($(this).is(":checked")) {
+				
+				$('#registerbt').removeAttr("disabled");
+			}
+		});
+	  
+	  $('input[class="form-control form-control-lg"]').keyup(function(){
+		
+		});
 	
 	$('#registerbt').click(function(){ 
 		  var id = $('#id').val();
@@ -50,33 +66,38 @@
 	      var birth = $('#birth').val();
 	      var phon = $('#phon').val();
 	      if(id == ''){
-	         $('#id').val() = id;
 	         $('#id').focus();
 	         return;      
 	      }
 	      
 	      if(pwd == ''){
 	         $('#pwd').focus();
+	         alert("패스워드를 입력하세요.");
 	         return;
 	      }
 	      if(pwd2 == ''){
 	         $('#pwd2').focus();
+	         alert("패스워드를 확인하세요.");
 	         return;
 	      }
 	      if(pwd2 != pwd){
 	         $('#pwd2').focus();
+	         alert("패스워드가 일치하지 않습니다.");
 	         return;
 	      }
 	      if(name == ''){
 	         $('#name').focus();
+	         alert("이름을 입력하세요.");
 	         return;
 	      }
 	      if(birth == ''){
 	         $('#birth').focus();
+	         alert("생년월일을 입력하세요.");
 	         return;
 	      }
 	      if(phon == ''){
 	         $('#phon').focus();
+	         alert("전화번호를 입력하세요.");
 	         return;
 	      }
 	      
@@ -111,27 +132,27 @@
                 <div class="form-group">
                 <label for="id">아이디:</label>
                 <span id="ispan"></span>
-                  <input type="text" class="form-control form-control-lg" id="id" placeholder="ID" name="id">
+                  <input type="text" class="form-control form-control-lg" id="id" placeholder="ID" name="id" required>
                 </div>
                 <div class="form-group">
                 <label for="pwd">비밀번호:</label>
                	
-                  <input type="password" class="form-control form-control-lg" id="pwd" placeholder="Password" name="pwd">
+                  <input type="password" class="form-control form-control-lg" id="pwd" placeholder="Password" name="pwd" required>
                 </div>
                 <div class="form-group">
                 <label for="pwd2">비밀번호 확인:</label>
                 
-                  <input type="password" class="form-control form-control-lg" id="pwd2" placeholder="Password Check" name="pwd2">
+                  <input type="password" class="form-control form-control-lg" id="pwd2" placeholder="Password Check" name="pwd2" required>
                 </div>
                 <div class="form-group">
                 <label for="name">성함:</label>
                
-                  <input type="text" class="form-control form-control-lg" id="name" placeholder="Name" name="name">
+                  <input type="text" class="form-control form-control-lg" id="name" placeholder="Name" name="name" required>
                 </div>
                 <div class="form-group">
                 <label for="email">이메일:</label>
                 
-                  <input type="email" class="form-control form-control-lg" id="email" placeholder="Email" name="email">
+                  <input type="email" class="form-control form-control-lg" id="email" placeholder="Email" name="email" required>
                    <!-- <select class="form-control form-control-lg" id="exampleFormControlSelect2">
                     <option>Country</option>
                     <option>United States of America</option>
@@ -143,11 +164,11 @@
                 </div>
                  <div class="form-group">
                  <label for="birth">생년월일:</label>
-                  <p><input type="date" class="form-control form-control-lg" id="birth" placeholder="Birth" name="birth" ></p>
+                  <p><input type="date" class="form-control form-control-lg" id="birth" placeholder="Birth" name="birth" required></p>
                 </div> 
                  <div class="form-group">
                  <label for="phon">휴대폰 번호:</label>
-                  <input type="text" class="form-control form-control-lg" id="phon" placeholder="'-' 없이 입력해 주세요." name="Phon" >
+                  <input type="text" class="form-control form-control-lg" id="phon" placeholder="'-' 없이 입력해 주세요." name="Phon" required >
                 </div>
                 	  
                <!--  <div class="form-group">
@@ -165,13 +186,13 @@
                 <div class="mb-4">
                   <div class="form-check">
                     <label class="form-check-label text-muted">
-                      <input type="checkbox" class="form-check-input">
+                      <input type="checkbox" class="form-check-input" id="cbx">
                       I agree to all Terms & Conditions
                     </label>
                   </div>
                 </div>
                 <div class="mt-3">
-                  <button id="registerbt" type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
+                  <button id="registerbt" disabled = "disabled" type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
                   Already have an account? <a href="host/login" class="text-primary">Login</a>

@@ -57,7 +57,7 @@ public class HostMainController {
 			mbiz.register(manager);
 			session.setAttribute("loginshop", manager);
 		} catch (Exception e) {
-			System.out.println("plzbe");
+			
 			e.printStackTrace();
 		}
 		return "host/index";

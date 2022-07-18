@@ -31,7 +31,10 @@ public class HostLoginController {
 	}
 
 	@RequestMapping("")
-	public ModelAndView main(ModelAndView mv) {
+	public ModelAndView main(ModelAndView mv, String msg) {
+		if(msg != null && msg.equals("f")) {
+			mv.addObject("msg", "login fail !!");
+		}
 		mv.setViewName("host/login");
 //		mv.addObject("center", "login" );
 		return mv;
@@ -40,23 +43,25 @@ public class HostLoginController {
 	public String loginimpl(Model m, String id, String pwd, HttpSession session) {
 		HostManagerVO manager = null;
 		try {
-			System.out.println(id);
+			
 			manager = biz.get(id);
-			System.out.println("managergetid" + manager.getId());
-			if(manager.getId() == null) {
-				System.out.println("getid");
+			
+			
+			if(manager == null) {
+				
 				throw new Exception();
+				
 			}
 			System.out.println("manager");
 			if (manager.getPwd().equals(pwd)) {
 				session.setAttribute("loginshop", manager);
-				System.out.println("session");
+				
 			}else {
 				throw new Exception();
 			}
 		} catch (Exception e) {
-			System.out.println("redirect");
-			return "redirect:/host/login"; //? 뒤에값을 서버프로그램에 전송한다
+			
+			return "redirect:/host/login?msg=f"; //? 뒤에값을 서버프로그램에 전송한다
 		}
 		return "host/index";
 	}
