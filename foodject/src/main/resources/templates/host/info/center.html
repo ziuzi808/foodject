@@ -1,128 +1,137 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Shop Websocket</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="/webjars/sockjs-client/sockjs.min.js"></script>
-<script src="/webjars/stomp-websocket/stomp.min.js"></script>
-<style>
-#all {
-	width: 400px;
-	height: 200px;
-	overflow: auto;
-	border: 2px solid red;
-}
-
-#me {
-	width: 400px;
-	height: 200px;
-	overflow: auto;
-	border: 2px solid blue;
-}
-
-#to {
-	width: 400px;
-	height: 200px;
-	overflow: auto;
-	border: 2px solid green;
-}
-.me {
-	float: right;
-}
-</style>
-
-<script th:inline="javascript">
-	 /*<![CDATA[*/ 
-	var stompClient = null;
-	var id = [[${session.loginshop.id}]];
-	/* ]]> */
-	// 서버소켓에 연결
-	function connect() {
-		var socket = new SockJS('/ws');
-		stompClient = Stomp.over(socket);
-
-		stompClient.connect({}, function(frame) { 
-			setConnected(true);
-			console.log('Connected: ' + frame);
-			stompClient.subscribe('/send', function(msg) { 
-				$("#all").append(
-						"<h4>" + JSON.parse(msg.body).sendid +":"+
-						JSON.parse(msg.body).content1
-								+ "</h4>");
-			});
-			stompClient.subscribe('/send/'+id, function(msg) { 
-				$("#me").append(
-						"<h4 class='me'>" + JSON.parse(msg.body).content1 +" : "+
-						 JSON.parse(msg.body).sendid+"<br></h4><h4><br>Bot : "+
-						JSON.parse(msg.body).content2
-								+ "</h4>" + "<hr width='100%' color='red' noshade/>");
-				$("#me").scrollTop($("#me")[0].scrollHeight);
-			});
-			stompClient.subscribe('/send/to/'+id, function(msg) { 
-				$("#to").append(
-						"<h4>" + JSON.parse(msg.body).sendid +":"+
-						JSON.parse(msg.body).content1
-								+ "</h4>" );
-			});
-			stompClient.subscribe('/send/serversend', function(msg) { 
-				$("#servermsg1").text(JSON.parse(msg.body).content1);
-				$("#servermsg2").text(JSON.parse(msg.body).content2);
-			});
-		});
-	}
-	
-	// 서버소켓에 연결끊기
-	function disconnect() {
-		if (stompClient !== null) {
-			stompClient.disconnect();
+	<meta charset="UTF-8">
+	<title>Shop Websocket</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+	<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+	<style>
+		#me {
+			width: 400px;
+			height: 400px;
+			overflow: auto;
+			/* border: 2px solid blue; */
 		}
-		setConnected(false);
-		console.log("Disconnected");
-	}
-
-	// connect&disconnect버턴 활성화/비활성화
-	function setConnected(connected) {
-		if (connected) {
-			$("#status").text("Connected");
-		} else {
-			$("#status").text("Disconnected");
+		#chatbot {
+			/* width: 400px; */
+			height: 200px;
+			overflow: auto;
+			/* border: 2px solid blue; */
 		}
-		
-	}
+		.user {
+			text-align: right;
+			height: 50px;
+			overflow: auto;
+		}
+	</style>
 
-	// 서버에 메세지 요청 메서드
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		var stompClient = null;
+		var id = [[${ session.loginshop.id }]];
+		/* ]]> */
+		// 서버소켓에 연결
+		function connect() {
+			var socket = new SockJS('/ws');
+			stompClient = Stomp.over(socket);
 
-	function sendMe() {
-		var msg = JSON.stringify({
-			'sendid' : id,
-			'content1' : $('#metext').val()
-		});
-		stompClient.send("/receiveme", {}, msg);
-	}
+			stompClient.connect({}, function (frame) {
+				setConnected(true);
+				console.log('Connected: ' + frame);
+				stompClient.subscribe('/send/' + id, function (msg) {
 
-	$(document).ready(function() {
-		$("#connect").click(function() {
-			connect();
+					// $("#me").append(
+					// 	"<h4 class='me'>" + JSON.parse(msg.body).content1 + " : " +
+					// 	JSON.parse(msg.body).sendid + "<br></h4><h4><br>Bot : " +
+					// 	JSON.parse(msg.body).content2
+					// 	+ "</h4>" + "<hr width='100%' color='red' noshade/>");
+					// $("#me").scrollTop($("#me")[0].scrollHeight);
+
+					$("#chatbot").append(
+						"<tr>"
+						+ "<td class='user'>" + JSON.parse(msg.body).content1
+						+ " : " + JSON.parse(msg.body).sendid + "</td>"
+						+ "</tr>"
+						+ "<tr>"
+						+ "<td class='py-1'><img src='' alt='' /> Bot : " +
+						JSON.parse(msg.body).content2 + "</td>"
+						+ "</tr>"
+					);
+					$("#me").scrollTop($("#me")[0].scrollHeight);
+
+					// <tr>
+					// 	<td class="py-1">
+					// 		<img src="../../images/faces/face1.jpg" alt="image" />
+					// 		반갑습니다
+					// 	</td>
+					// 	<td></td>
+					// 	<td></td>
+					// 	<td></td>
+					// 	<td class="user">
+
+					// 		안녕하세요
+					// 		<img src="../../images/faces/face1.jpg" alt="image" />
+					// 	</td>
+					// </tr>
+
+
+				});
+
+				stompClient.subscribe('/send/serversend', function (msg) {
+					$("#servermsg1").text(JSON.parse(msg.body).content1);
+					$("#servermsg2").text(JSON.parse(msg.body).content2);
+				});
+			});
+		}
+
+		// 서버소켓에 연결끊기
+		function disconnect() {
+			if (stompClient !== null) {
+				stompClient.disconnect();
+			}
+			setConnected(false);
+			console.log("Disconnected");
+		}
+
+		// connect&disconnect버턴 활성화/비활성화
+		function setConnected(connected) {
+			if (connected) {
+				$("#status").text("Connected");
+			} else {
+				$("#status").text("Disconnected");
+			}
+
+		}
+
+		// 서버에 메세지 요청 메서드
+
+		function sendMe() {
+			var msg = JSON.stringify({
+				'sendid': id,
+				'content1': $('#metext').val()
+			});
+			stompClient.send("/receiveme", {}, msg);
+		}
+
+		$(document).ready(function () {
+			$("#connect").click(function () {
+				connect();
+			});
+			$("#disconnect").click(function () {
+				disconnect();
+			});
+			$("#sendme").click(function () {
+				sendMe();
+			});
+
 		});
-		$("#disconnect").click(function() {
-			disconnect();
-		});
-		$("#sendall").click(function() {
-			sendAll();
-		});
-		$("#sendme").click(function() {
-			sendMe();
-		});
-		$("#sendto").click(function() {
-			sendTo();
-		});
-	});
-</script>
+	</script>
 </head>
+
 <body>
-	<H1 th:text="${session.loginshop.id}">ID</H1>
+	<h1 th:text="${session.loginshop.id} ? ${session.loginshop.id} : 'host/login'">ID</h1>
 	<H1 id="status">Status</H1>
 	<H1 id="servermsg1">Server Msg1</H1>
 	<H1 id="servermsg2">Server Msg2</H1>
@@ -134,33 +143,53 @@
 	<button id="sendme">Send</button>
 	<div id="me"></div> -->
 
+	<!-- <div id="me" class="table-responsive"></div> -->
+	<!-- partial -->
 
-	<div class="col-lg-6 grid-margin stretch-card">
+	<div class="col-xl-9 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">Basic Table</h4>
+				<h4 class="card-title">Striped Table</h4>
 				<p class="card-description">
-					Add class
-					<code>.table</code>
+					Add class <code>.table-striped</code>
 				</p>
-				<div id="me" class="table-responsive"></div>
+				<div class="table-responsive">
+					<table class="table table-striped" >
+						<thead>
+							<tr>
+								<th>
+									ChatBot
+								</th>
+								<th class="user">
+									User
+								</th>
+							</tr>
+						</thead>
+						<tbody id="chatbot">
+
+						</tbody>
+					</table>
+				</div>
 			</div>
-		</div>
-	</div>
-	<div class="col-12 grid-margin stretch-card">
-		<div class="card">
+
 			<div class="card-body">
 				<h4 class="card-title">Basic form elements</h4>
 				<p class="card-description">Basic form elements</p>
 				<div class="form-group">
-					<label for="exampleInputCity1">질문을 적어주세요</label> <input type="text"
-						class="form-control" id="metext" placeholder="Location">
+					<label for="exampleInputCity1">질문을 적어주세요</label> <input type="text" class="form-control" id="metext"
+						placeholder="Location">
 				</div>
 				<button id="sendme" class="btn btn-primary mr-2">질문</button>
 				<button class="btn btn-light">취소</button>
 			</div>
 		</div>
 	</div>
+
+	<body>
+
+
+
+	</body>
+
+
 </html>
-
-

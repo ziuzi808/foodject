@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/host/info")
-public class HostInfoController2 {
+public class HostInfoController {
 	
 	public void mainProduct(Model m) {
 //		List<ProductVO> plist = null;
