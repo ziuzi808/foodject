@@ -39,14 +39,14 @@ function execDaumPostcode(){
 	daum.postcode.load(function(){
 		new daum.Postcode({
 		    oncomplete: function(data) {
-
+		    	$("#post").val(data.zonecode);
+		    	$("#addr").val(data.roadAddress);
 		    }
 		}).open();
 	});
 };
 
 $(document).ready(function(){
-
 	//id 유효성 검사 (DB중복, 길이 확인)
 	$('#id').keyup(function(){
 		var inputid = $(this).val();
@@ -55,7 +55,7 @@ $(document).ready(function(){
 			data:{id:inputid},
 			success:function(result){
 				if(result == '1'){
-					$('#idspan').text('사용불가한 아이디입니다');			
+					$('#idspan').text('사용이 불가능한 아이디입니다');			
 				}else{
 					$('#idspan').text('멋진 아이디네요!');
 				}
@@ -84,6 +84,7 @@ $(document).ready(function(){
 				
 			}else {
 				$('#pwdcheckspan').text('비밀번호를 사용할 수 있습니다');
+				
 			}
 	 });
 
@@ -150,6 +151,8 @@ $(document).ready(function(){
 		  this.value = autoHypenTel(_val);
 		});
 
+
+	
 	// 필수항목 미작성 체크 및 전송
 	$('#registerbtn').click(function(){
 		var id = $('#id').val();
@@ -187,7 +190,7 @@ $(document).ready(function(){
 			$('#nick').focus();
 			return;
 		}
-
+		
 		$('#registerform').attr({
 			'enctype':'multipart/form-data',
 			'method':'post',
@@ -220,14 +223,14 @@ $(document).ready(function(){
             <div class="card w-xxl-75">
               <div class="card-body">
                 <div class="tab-content mt-3" id="nav-tabContent">
-                
-                <!-- Login Div -->
+                <h5 th:text="${msg}"></h5>
+                <!-- Register Div -->
                   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                    <div class="text-center">
                      <h2>회원가입</h2>
                      <p>*표시는 선택항목입니다</p>
                    </div>
-                    <form id="registerform" class="row gx-2 gy-2 align-items-center">
+                    <form id="registerform" class="align-items-center">
                       <div class="col">
                       
                         <label for="id">아이디를 입력해주세요</label><br>
@@ -276,7 +279,7 @@ $(document).ready(function(){
                         <label for="addr">주소를 입력하세요</label><br>
                         <div class="input-group">
                           <input class="form-control input-box form-foodwagon-control"
-                          id="zip" name="zip" type="text" placeholder="Post Number" readonly>
+                          id="post" type="text" placeholder="Post Number" readonly>
                           <button type="button" class="btn btn-primary" onclick="execDaumPostcode()">우편번호찾기</button>
                         </div><p></p>
                         <div class="input-group">
@@ -286,7 +289,7 @@ $(document).ready(function(){
                         <div class="input-group">
                           <div class="col-sm-6">
                           <input class="form-control input-box form-foodwagon-control"
-                          id="addrd" name="addrd" type="text" placeholder="상세주소" required></div>
+                          id="addrd" name="addrd" type="text" placeholder="상세주소"></div>
                         </div><p></p>
                         <span style="font-size: smaller; color:gray;" id="addrspan"></span><p></p>
                                  
@@ -307,20 +310,22 @@ $(document).ready(function(){
                           id="img" name="mf" type="file" placeholder="Profile Image" >
                         </div> <p></p>
                          
-                        <input type="hidden" name="status" value=1>
-                                             
-                      <div class="input-group">
-                        <button id="registerbtn" class="btn btn-danger" type="submit">회원가입하기</button>
-                      </div>
-                    </form>
+                        <input type="hidden" name="status" value=1><p></p>
+                        
+	                      <div class="d-grid gap-3 col-sm-auto">
+	                        <button id="registerbtn" class="btn btn-danger" type="submit">회원가입하기</button>
+	                      </div>
 
-                  </div>
+                    </div>
+
+                  </form>
                   
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
 

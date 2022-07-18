@@ -45,9 +45,36 @@ public class UserCustController {
 	}
 	
 	@RequestMapping("/login")
-	public String login(Model m) {
+	public String login(Model m, String msg) {
+		if(msg != null && msg.equals("f")) {
+			m.addAttribute("msg", "회원정보를 확인해주세요");	
+		}
+		m.addAttribute(msg);
 		return "user/cust/login";
 	}
+	
+	@RequestMapping("/loginimpl")
+	public String loginimpl(Model m, String id, String pwd) {
+		UserCustVO cust = null;
+		try {
+			cust = custbiz.get(id);
+			if(cust != null) {
+				if(cust.getPwd().equals(pwd)) {
+					m.addAttribute(cust);
+				}else {
+					throw new Exception();
+				}
+			}else {
+				throw new Exception();
+			}
+		} catch (Exception e) {
+			return "redirect:user/cust/login?msg=f";
+		}
+		
+		return "redirect:/";
+	}
+	
+	
 
 	@RequestMapping("/register")
 	public String register(Model m) {
@@ -57,7 +84,6 @@ public class UserCustController {
 	@RequestMapping("/registerimpl")
 	public String registerimpl(Model m, UserCustVO cust) {
 		//이미지 경로설정
-		System.out.println("ddd");
 		String pimgpath = Paths.get(System.getProperty("user.dir"), "src", "main","resources","static","custimg").toString();
 		//이미지파일 이름 저장
 		String imgname = cust.getMf().getOriginalFilename();
@@ -69,7 +95,6 @@ public class UserCustController {
 		try {
 			custbiz.register(cust);
 			Util.saveFile(cust, pimgpath);
-			System.out.println("check");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
