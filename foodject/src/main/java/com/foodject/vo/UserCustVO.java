@@ -27,6 +27,7 @@ public class UserCustVO {
 	private Date date;
 	private String phon;
 	private String addr;
+	private String addrd;
 	private int status;
 	private String img;
 	private MultipartFile mf;
@@ -36,22 +37,17 @@ public class UserCustVO {
 		this.pwd = pwd;
 		this.name = name;
 	}
-	public UserCustVO(String id, String pwd, String name, Date birth, String phon, String addr) {
+	public UserCustVO(String id, String pwd, String name, Date birth, String phon, String addr, String addrd) {
 		this.id = id;
 		this.pwd = pwd;
 		this.name = name;
 		this.birth = birth;
 		this.phon = phon;
 		this.addr = addr;
+		this.addrd = addrd;
 	}
-	public UserCustVO(String id, String pwd, String name, String phon, String addr) {
-		this.id = id;
-		this.pwd = pwd;
-		this.name = name;
-		this.phon = phon;
-		this.addr = addr;
-	}
-	public UserCustVO(String id, String pwd, String nick, String name, Date birth, String phon, String addr, int status,
+
+	public UserCustVO(String id, String pwd, String nick, String name, Date birth, String phon, String addr, String addrd, int status,
 			MultipartFile mf) {
 		this.id = id;
 		this.pwd = pwd;
@@ -60,10 +56,11 @@ public class UserCustVO {
 		this.birth = birth;
 		this.phon = phon;
 		this.addr = addr;
+		this.addrd = addrd;
 		this.status = status;
 		this.mf = mf;
 	}
-	public UserCustVO(String id, String pwd, String nick, String name, Date birth, String phon, String addr, int status) {
+	public UserCustVO(String id, String pwd, String nick, String name, Date birth, String phon, String addr, String addrd, int status) {
 		this.id = id;
 		this.pwd = pwd;
 		this.nick = nick;
@@ -71,9 +68,10 @@ public class UserCustVO {
 		this.birth = birth;
 		this.phon = phon;
 		this.addr = addr;
+		this.addrd = addrd;
 		this.status = status;
 	}
-	public UserCustVO(String id, String pwd, String nick, String name, Date birth, String phon, String addr, int status,
+	public UserCustVO(String id, String pwd, String nick, String name, Date birth, String phon, String addr, String addrd, int status,
 			String img) {
 		this.id = id;
 		this.pwd = pwd;
@@ -82,6 +80,7 @@ public class UserCustVO {
 		this.birth = birth;
 		this.phon = phon;
 		this.addr = addr;
+		this.addrd = addrd;
 		this.status = status;
 		this.img = img;
 	}
