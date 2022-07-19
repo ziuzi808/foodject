@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/shop")
 public class UserShopController {
 	
 	public void mainProduct(Model m) {
@@ -20,11 +21,12 @@ public class UserShopController {
 //		}
 	}
 
-	@RequestMapping("/shop")
-	public String main(Model m) {
+	@RequestMapping("")
+	public String main(Model m, int cid, double latt, double logt) {
 		m.addAttribute("center", "user/shop/center");
 		return "user/index";
 	}
+	
 	
 	
 

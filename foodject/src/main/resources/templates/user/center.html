@@ -1,11 +1,54 @@
-<main class="main" id="top">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b026562b4e219e1e2e9f4f430a321d17&libraries=services"></script>
+<script>
+var geocoder = new kakao.maps.services.Geocoder();
+var error = 1;
+var latt = '';
+var logt = '';
+$(document).ready(function(){
+	
+	$('#test_btn').click(function(){
+		var addr = $('#address').val();
+ 		geocoder.addressSearch( addr , function(result, status){
+			alert(addr);
+		    // 정상적으로 검색이 완료됐으면
+		     if (status === kakao.maps.services.Status.OK) {
+	
+		     	// 결과값으로 받은 위치의 좌표를 띄웁니다.
+		        latt=result[0].y;
+		        logt=result[0].x;
+		     	alert(latt+"/"+logt);
+		        error = 0;
+		        
+		    }else{
+		    	error = 1;
+		    }
+		});
+ 		
+	});
+});
 
-<section class="py-5 overflow-hidden bg-primary" id="home">
+function selectMain(cid){
+	if(error == 0){
+		location.href="/shop?cid="+cid+"&latt="+latt+"&logt="+logt;
+	}else{
+		alert('위치를 입력하세요');
+		$('address').focus();
+	}
+};
+</script>
+
+
+<main class="main" id="top">
+	<section class="py-5 overflow-hidden bg-primary" id="home">
+
         <div class="container">
           <div class="row flex-center">
             <div class="col-md-5 col-lg-6 order-0 order-md-1 mt-8 mt-md-0"><a class="img-landing-banner" href="#!"><img class="img-fluid" src="/bootstrap/foodwagon/assets/img/gallery/hero-header.png" alt="hero-header" /></a></div>
             <div class="col-md-7 col-lg-6 py-8 text-md-start text-center">
               <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light">아유스타빙?</h1>
+              
+              <button id="test_btn" type="button">Test</button>
+              
               <h1 class="text-800 mb-5 fs-4">Within a few clicks, find meals that<br class="d-none d-xxl-block" />are accessible near you</h1>
               <div class="card w-xxl-75">
                 <div class="card-body">
@@ -21,7 +64,7 @@
                         <div class="col">
                           <div class="input-group-icon"><i class="fas fa-map-marker-alt text-danger input-box-icon"></i>
                             <label class="visually-hidden" for="inputDelivery">Address</label>
-                            <input class="form-control input-box form-foodwagon-control" id="inputDelivery" type="text" placeholder="Enter Your Address" />
+                            <input class="form-control input-box form-foodwagon-control" id="address" type="text" placeholder="Enter Your Address" />
                           </div>
                         </div>
                         <div class="d-grid gap-3 col-sm-auto">
@@ -70,8 +113,9 @@
                   <div class="carousel-item active" data-bs-interval="10000">
                     <div class="row h-100 align-items-center">
 
+					 
                       <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                      	<a href="/shop?keyword=한식">
+                      	<a href="#" onclick="selectMain(1);">
                         <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="/bootstrap/foodwagon/assets/img/gallery/search-pizza.png" alt="..." />
                           <div class="card-body ps-0">
                             <h5 class="text-center fw-bold text-1000 text-truncate mb-2">한식</h5>
@@ -81,7 +125,7 @@
                       </div>
 
                       <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <a href="/shop?keyword=중식">
+                        <a href="#" onclick="selectMain(2);">
                         <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="/bootstrap/foodwagon/assets/img/gallery/burger.png" alt="..." />
                           <div class="card-body ps-0">
                             <h5 class="text-center fw-bold text-1000 text-truncate mb-2">중식</h5>
@@ -91,7 +135,7 @@
                       </div>
 
                       <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <a href="/shop?keyword=일식">
+                        <a href="#" onclick="selectMain(3);">
                         <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="/bootstrap/foodwagon/assets/img/gallery/noodles.png" alt="..." />
                           <div class="card-body ps-0">
                             <h5 class="text-center fw-bold text-1000 text-truncate mb-2">일식</h5>
@@ -101,7 +145,7 @@
                       </div>
 
                       <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <a href="/shop?keyword=양식">
+                        <a href="#" onclick="selectMain(4);">
                         <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="/bootstrap/foodwagon/assets/img/gallery/sub-sandwich.png" alt="..." />
                           <div class="card-body ps-0">
                             <h5 class="text-center fw-bold text-1000 text-truncate mb-2">양식</h5>
@@ -111,7 +155,7 @@
                       </div>
 
                       <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <a href="/shop">
+                        <a href="#" onclick="selectMain(5);">
                         <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="/bootstrap/foodwagon/assets/img/gallery/chowmein.png" alt="..." />
                           <div class="card-body ps-0">
                             <h5 class="text-center fw-bold text-1000 text-truncate mb-2">전체보기</h5>
@@ -121,7 +165,7 @@
                       </div>
 
                       <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <a href="/shop?keyword=기타">
+                        <a href="#" onclick="selectMain(6);">
                         <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="/bootstrap/foodwagon/assets/img/gallery/steak.png" alt="..." />
                           <div class="card-body ps-0">
                             <h5 class="text-center fw-bold text-1000 text-truncate mb-2">기타</h5>
@@ -436,5 +480,5 @@
       <!-- ============================================-->
       
 
-      </section>
+      
 </main>

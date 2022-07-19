@@ -18,10 +18,19 @@ public class MarkerVO {
 	private double logt;
 	private int cid;
 	
+	//for insert
 	public MarkerVO(int id, double latt, double logt) {
 		this.id = id;
 		this.latt = latt;
 		this.logt = logt;
 	}
+
+	//for selectMain
+	public MarkerVO(double latt, double logt, int cid) {
+		this.latt = latt;
+		this.logt = logt;
+		this.cid = cid;
+	}
+	
 	
 }
