@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodject.mapper.HostShopMapper">
+
+	<select id="selectmid" parameterType="String" resultType="HostShopVO">
+		select * from shop where mid=#{mid};
+	</select>
+
+	
+</mapper>

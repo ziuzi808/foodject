@@ -1,4 +1,4 @@
-package com.foodject;
+package com.foodject.hostShop;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import com.foodject.biz.HostShopBiz;
 import com.foodject.vo.HostShopVO;
 
 @SpringBootTest
-class FoodjectApplicationTests {
+class HostShopGetMid {
 
 	@Autowired
 	HostShopBiz biz;

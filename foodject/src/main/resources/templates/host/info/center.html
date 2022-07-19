@@ -16,14 +16,21 @@
 		}
 		#chatbot {
 			/* width: 400px; */
-			height: 200px;
+			height: 50px;
 			overflow: auto;
 			/* border: 2px solid blue; */
+		}
+		#size{
+			height: 400px;
+			overflow: auto;
 		}
 		.user {
 			text-align: right;
 			height: 50px;
-			overflow: auto;
+
+		}
+		.chatbot {
+			height: 50px;
 		}
 	</style>
 
@@ -42,13 +49,6 @@
 				console.log('Connected: ' + frame);
 				stompClient.subscribe('/send/' + id, function (msg) {
 
-					// $("#me").append(
-					// 	"<h4 class='me'>" + JSON.parse(msg.body).content1 + " : " +
-					// 	JSON.parse(msg.body).sendid + "<br></h4><h4><br>Bot : " +
-					// 	JSON.parse(msg.body).content2
-					// 	+ "</h4>" + "<hr width='100%' color='red' noshade/>");
-					// $("#me").scrollTop($("#me")[0].scrollHeight);
-
 					$("#chatbot").append(
 						"<tr>"
 						+ "<td class='user'>" + JSON.parse(msg.body).content1
@@ -59,24 +59,7 @@
 						JSON.parse(msg.body).content2 + "</td>"
 						+ "</tr>"
 					);
-					$("#me").scrollTop($("#me")[0].scrollHeight);
-
-					// <tr>
-					// 	<td class="py-1">
-					// 		<img src="../../images/faces/face1.jpg" alt="image" />
-					// 		반갑습니다
-					// 	</td>
-					// 	<td></td>
-					// 	<td></td>
-					// 	<td></td>
-					// 	<td class="user">
-
-					// 		안녕하세요
-					// 		<img src="../../images/faces/face1.jpg" alt="image" />
-					// 	</td>
-					// </tr>
-
-
+					$("#size").scrollTop($("#size")[0].scrollHeight);
 				});
 
 				stompClient.subscribe('/send/serversend', function (msg) {
@@ -113,6 +96,7 @@
 				'content1': $('#metext').val()
 			});
 			stompClient.send("/receiveme", {}, msg);
+			$('#metext').val('') ;
 		}
 
 		$(document).ready(function () {
@@ -125,6 +109,12 @@
 			$("#sendme").click(function () {
 				sendMe();
 			});
+			$("#metext").keypress(function (e) {
+				if( e.code == 'Enter'){
+					sendMe();
+				}
+			});
+			
 
 		});
 	</script>
@@ -153,11 +143,11 @@
 				<p class="card-description">
 					Add class <code>.table-striped</code>
 				</p>
-				<div class="table-responsive">
+				<div class="table-responsive" id="size">
 					<table class="table table-striped" >
 						<thead>
 							<tr>
-								<th>
+								<th class="chatbot">
 									ChatBot
 								</th>
 								<th class="user">
