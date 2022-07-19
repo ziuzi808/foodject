@@ -23,6 +23,7 @@ public class UserShopController {
 
 	@RequestMapping("")
 	public String main(Model m, int cid, double latt, double logt) {
+		
 		m.addAttribute("center", "user/shop/center");
 		return "user/index";
 	}
