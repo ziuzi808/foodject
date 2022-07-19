@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 
 
@@ -26,11 +26,13 @@
 <script>
 $(document).ready(function(){
 	$('#loginbt').click(function(){
+		
 		$('#login_form').attr({
 			'method' : 'post',
 			'action' : '/host/login/loginimpl'
 		});
 		$('#login_form').submit();
+		
 	});
 });
 
@@ -45,12 +47,13 @@ $(document).ready(function(){
               <div class="brand-logo">
                 <a href="/host"><img src="/bootstrap/skydash/images/logo.svg" alt="logo"></a>
               </div>
-              <h4>Hello! let's get started</h4>
-              <h6 class="font-weight-light">Sign in to continue.</h6>
+              <h4>로그인</h4>
+              <h6 class="font-weight-light" th:if="${msg == null}" >Sign in to continue.</h6>
+              <p th:text="${msg}" th:unless="${msg == null}" ></p>
               <form class="pt-3" id="login_form">
                 <div class="form-group">
                   <input type="text" class="form-control form-control-lg" id="id" placeholder="Enter ID" name="id">
-                  <p th:text="${msg}"></p>
+                  
                 </div>
                 <div class="form-group">
                   <input type="password" class="form-control form-control-lg" id="pwd" placeholder="Enter Password" name="pwd">

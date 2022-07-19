@@ -1,5 +1,8 @@
 package com.foodject.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +35,10 @@ public class HostLoginController {
 
 	@RequestMapping("")
 	public ModelAndView main(ModelAndView mv, String msg) {
-		if(msg != null && msg.equals("f")) {
-			mv.addObject("msg", "login fail !!");
+		if(msg != null) {
+			msg.split(":");
+			String m[] = msg.split(":");
+			mv.addObject("msg", m[m.length-1]);
 		}
 		mv.setViewName("host/login");
 //		mv.addObject("center", "login" );
@@ -49,7 +54,7 @@ public class HostLoginController {
 			
 			if(manager == null) {
 				
-				throw new Exception();
+				throw new Exception("아이디가 존재하지 않습니다.");
 				
 			}
 			System.out.println("manager");
@@ -57,11 +62,17 @@ public class HostLoginController {
 				session.setAttribute("loginshop", manager);
 				
 			}else {
-				throw new Exception();
+				throw new Exception("비밀번호가 틀립니다.");
 			}
 		} catch (Exception e) {
-			
-			return "redirect:/host/login?msg=f"; //? 뒤에값을 서버프로그램에 전송한다
+			String msg = e.toString();
+			try {
+				msg = URLEncoder.encode(msg, "UTF-8");
+			} catch (UnsupportedEncodingException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			return "redirect:/host/login?msg=" + msg; //? 뒤에값을 서버프로그램에 전송한다
 		}
 		return "host/index";
 	}
