@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INNER JOIN mncate c ON m.cid = c.id
 	    INNER JOIN marker mk ON mk.id = s.marker
 		WHERE (mk.latt BETWEEN #{latt}-0.027 AND #{latt}+0.027)
-		AND (mk.logt BETWEEN #{logt}-0.027/#{latt} AND #{logt}+0.027/#{latt})
+		AND (mk.logt BETWEEN #{logt}-0.027/COS(RADIANS(#{latt})) AND #{logt}+0.027/COS(RADIANS(#{latt})))
 	    AND c.id=#{cid};
 	</select>
 </mapper>
