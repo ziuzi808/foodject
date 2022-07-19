@@ -3,6 +3,8 @@ package com.foodject.controller;
 
 import java.nio.file.Paths;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,41 +42,46 @@ public class UserCustController {
 	@RequestMapping("")
 	public ModelAndView cust(ModelAndView mv) {
 		mv.setViewName("user/index");
-		mv.addObject("center", "/user/cust/center" );
+		mv.addObject("center", "/user/cust/mypage" );
 		return mv;
 	}
 	
 	@RequestMapping("/login")
-	public String login(Model m, String msg) {
+	public ModelAndView login(ModelAndView mv, String msg) {
 		if(msg != null && msg.equals("f")) {
-			m.addAttribute("msg", "회원정보를 확인해주세요");	
+			mv.addObject("msg", "아이디와 패스워드가 존재하지 않습니다");
 		}
-		m.addAttribute(msg);
-		return "user/cust/login";
+		mv.setViewName("user/cust/login");
+		return mv;
 	}
 	
 	@RequestMapping("/loginimpl")
-	public String loginimpl(Model m, String id, String pwd) {
+	public String loginimpl(Model m, String id, String pwd, HttpSession session) {
 		UserCustVO cust = null;
 		try {
 			cust = custbiz.get(id);
-			if(cust != null) {
-				if(cust.getPwd().equals(pwd)) {
-					m.addAttribute(cust);
-				}else {
-					throw new Exception();
-				}
+			if(cust == null) {
+				throw new Exception();
+			}if(cust.getPwd().equals(pwd)) {
+				session.setAttribute("loginid", id);
 			}else {
 				throw new Exception();
 			}
 		} catch (Exception e) {
-			return "redirect:user/cust/login?msg=f";
+			return "user/cust/login";
 		}
-		
-		return "redirect:/";
+
+		return "user/index";
 	}
 	
-	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		if(session != null) {
+			session.invalidate();
+		}
+		return "user/index";
+	}
+		
 
 	@RequestMapping("/register")
 	public String register(Model m) {
@@ -102,6 +109,7 @@ public class UserCustController {
 		
 		return "user/cust/login";
 	}
+
 
 	
 //	String pimgpath = Paths.get(System.getProperty("user.dir"), "src", "main","resources","static", "custimg").toString();
