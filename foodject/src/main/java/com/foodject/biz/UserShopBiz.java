@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.foodject.frame.Biz;
 import com.foodject.mapper.UserShopMapper;
+import com.foodject.vo.MarkerVO;
 import com.foodject.vo.UserShopVO;
 
 @Service
@@ -46,6 +47,10 @@ public class UserShopBiz implements Biz<Integer, UserShopVO> {
 	
 	public List<UserShopVO> getSts(int k) throws Exception {
 		return dao.select_bySts(k);
+	}
+	
+	public List<UserShopVO> getMain(MarkerVO obj) throws Exception {
+		return dao.selectMain(obj);
 	}
 	
 

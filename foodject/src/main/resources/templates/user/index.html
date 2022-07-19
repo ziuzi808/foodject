@@ -30,6 +30,9 @@
     <!-- ===============================================-->
     <link href="/bootstrap/foodwagon/assets/css/theme.css" rel="stylesheet" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b026562b4e219e1e2e9f4f430a321d17&libraries=services"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
   </head>
   
 <script>
@@ -37,11 +40,14 @@ $(document).ready(function(){
 	$('#cart').click(function(){
  		location.href='/cart';
 	});
-  	$('#custinfo').click(function(){
+  	$('#mypagebt').click(function(){
       	location.href='/cust';
   	});
   	$('#loginbt').click(function(){
   		location.href='/cust/login';
+  	});
+  	$('#logoutbt').click(function(){
+  		location.href='/cust/logout';
   	});
 });
 </script>
@@ -52,7 +58,7 @@ $(document).ready(function(){
     <!-- ===============================================-->
     <main class="main" id="top">
       <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" data-navbar-on-scroll="data-navbar-on-scroll">
-        <div class="container"><a class="navbar-brand d-inline-flex" href="/"><img  class="d-inline-block" src="/bootstrap/foodwagon/assets/img/gallery/logo.svg" alt="logo" /><span class="text-1000 fs-3 fw-bold ms-2 text-gradient">foodwaGon</span></a>
+        <div class="container"><a class="navbar-brand d-inline-flex" href="/"><img  class="d-inline-block" src="/bootstrap/foodwagon/assets/img/gallery/logo.svg" alt="logo" /><span class="text-1000 fs-3 fw-bold ms-2 text-gradient">Foodject</span></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
           <div class="collapse navbar-collapse border-top border-lg-0 my-2 mt-lg-0" id="navbarSupportedContent">
             <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">
@@ -62,12 +68,33 @@ $(document).ready(function(){
             <form class="d-flex mt-4 mt-lg-0 ms-lg-auto ms-xl-0">
               <div class="input-group-icon pe-2"><i class="fas fa-search input-box-icon text-primary"></i>
                 <input class="form-control border-0 input-box bg-100" type="search" placeholder="Search Food" aria-label="Search" />
-              </div>
-              <button class="btn btn-white shadow-warning text-warning" type="button" id="cart"> <i class="fas fa-user me-2"></i>장바구니</button>
-              <button class="btn btn-white shadow-warning text-warning" type="button" id="custinfo"> <i class="fas fa-user me-2"></i>고객정보</button>
-              <button class="btn btn-white shadow-warning text-warning" type="button" id="loginbt"> <i class="fas fa-user me-2"></i>Login</button>
+              </div>            
             </form>
-            
+             <form class="d-flex mt-4 mt-lg-0 ms-lg-auto ms-xl-0">            
+              <h5 th:if="${session.loginid != null}">
+            	 <button class="btn btn-white text-warning" id="cart" type="button">
+            	 	<i class="fas fas fa-hamburger me-2"></i>My Orders
+            	 </button>              	
+           	  </h5>
+           	  
+              <h5 th:if="${session.loginid != null}">
+            	 <button class="btn btn-white text-warning" id="mypagebt" type="button">
+            	 	<i class="fas fa-portrait me-2"></i>My Page
+            	 </button>              	
+           	  </h5>
+              
+              <h5 th:if="${session.loginid == null}">
+            	 <button class="btn btn-white shadow-warning text-warning" id="loginbt" type="button">
+            	 	<i class="fas fa-user me-2"></i>Login
+            	 </button>              	
+              </h5>
+            	              
+              <h5 th:unless="${session.loginid == null}">
+            	 <button class="btn btn-primary text-white" id="logoutbt" type="button">
+            	 	<i class="fas fa-user me-2"></i>Logout
+            	 </button>              	
+              </h5>
+            </form>
           </div>
         </div>
       </nav>

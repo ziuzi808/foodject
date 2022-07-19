@@ -52,15 +52,53 @@ public class HostMainController {
 	}
 	@RequestMapping("/registerimpl")
 	public String registerimpl(Model m, HostManagerVO manager, HttpSession session) {
-		System.out.println("plz2");
+		
 		try {
 			mbiz.register(manager);
 			session.setAttribute("loginshop", manager);
 		} catch (Exception e) {
-			System.out.println("plzbe");
+			
 			e.printStackTrace();
 		}
 		return "host/index";
 	}
-
+//	@RequestMapping("/mypage")
+//	public ModelAndView mypage(ModelAndView mv) {
+//		mv.setViewName("host/mypage");
+//		return mv;
+//	}
+	@RequestMapping("/mypage")
+	public String mypage(Model m, HttpSession session) {
+		HostManagerVO mng = (HostManagerVO) session.getAttribute("loginshop");
+		try {
+			mng= mbiz.get(mng.getId());
+			m.addAttribute("m", mng);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "host/mypage";
+	}
+	@RequestMapping("/update")
+	public String update(Model m, HostManagerVO obj) {
+		try {
+			mbiz.modify(obj);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:mypage?id=" + obj.getId();
+	}
+	@RequestMapping("/delete")
+	public String updatests(Model m, HostManagerVO obj, HttpSession session ) {
+		try {
+			mbiz.modifysts(obj);
+			session.invalidate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "host/index";
+	}
 }

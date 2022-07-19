@@ -20,6 +20,7 @@ public class UserShopVO {
 	private String name;
 	private String bnum;
 	private String addr;
+	private String addrd;
 	private String phon;
 	private String logo;
 	private String info;
@@ -34,11 +35,12 @@ public class UserShopVO {
 		this.status = status;
 	}
 
-	//for update (7)
-	public UserShopVO(int id, String name, String addr, String phon, String logo, String info, int allmin) {
+	//for update (8)
+	public UserShopVO(int id, String name, String addr, String addrd, String phon, String logo, String info, int allmin) {
 		this.id = id;
 		this.name = name;
 		this.addr = addr;
+		this.addrd = addr;
 		this.phon = phon;
 		this.logo = logo;
 		this.info = info;
@@ -46,13 +48,14 @@ public class UserShopVO {
 		this.allmin = allmin;
 	}
 
-	//for insert (9)
-	public UserShopVO(String mid, String name, String bnum, String addr, String phon, String logo, String info, Date date,
+	//for insert (10)
+	public UserShopVO(String mid, String name, String bnum, String addr, String addrd, String phon, String logo, String info, Date date,
 			int allmin) {
 		this.mid = mid;
 		this.name = name;
 		this.bnum = bnum;
 		this.addr = addr;
+		this.addrd = addr;
 		this.phon = phon;
 		this.logo = logo;
 		this.info = info;
