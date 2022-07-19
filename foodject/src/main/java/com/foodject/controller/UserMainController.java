@@ -1,11 +1,15 @@
 package com.foodject.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class UserMainController {
+	
+	@Value("kakaoJSKey")
+	String kakaoJSKey;
 	
 	public void mainProduct(Model m) {
 //		List<ProductVO> plist = null;
@@ -26,6 +30,10 @@ public class UserMainController {
 
 	@RequestMapping("/")
 	public String main(Model m) {
+		
+		
+		String kakaosrc = kakaoJSKey;
+		m.addAttribute("kakaosrc",kakaosrc);
 //		m.addAttribute("center", "user/center");
 		return "user/index";
 	}
