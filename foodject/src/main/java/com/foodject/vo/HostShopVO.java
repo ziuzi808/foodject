@@ -1,5 +1,7 @@
 package com.foodject.vo;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,12 +15,17 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class HostShopVO {
-	private String uid;
-	private String pwd;
-	private String name;
+	private String id;
+	private String mid;
+	private String bnum;
 	private String addr;
 	private String phon;
-	private String birth;
+	private String logo;
+	private String info;
+	private Date date;
+	private int allmin;
+	private int status;
+	private int marker;
 }
 
 

@@ -2,6 +2,7 @@ package com.foodject.frame;
 
 import java.util.List;
 
+
 import org.springframework.transaction.annotation.Transactional;
 
 public interface Biz<K,V> {
