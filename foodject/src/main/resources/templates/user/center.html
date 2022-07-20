@@ -4,27 +4,29 @@ var error = 1;
 var latt = '';
 var logt = '';
 $(document).ready(function(){
-	
-	$('#test_btn').click(function(){
-		var addr = $('#address').val();
- 		geocoder.addressSearch( addr , function(result, status){
-			alert(addr);
-		    // 정상적으로 검색이 완료됐으면
-		     if (status === kakao.maps.services.Status.OK) {
-	
-		     	// 결과값으로 받은 위치의 좌표를 변수에 저장합니다.
-		        latt=result[0].y;
-		        logt=result[0].x;
-		     	alert(latt+"/"+logt);
-		        error = 0;
-		        
-		    }else{
-		    	error = 1;
-		    }
-		});
- 		
+	$('#address').click(function(){
+		execDaumPostcode();
 	});
 });
+
+function convertAddr(addr){
+		geocoder.addressSearch( addr , function(result, status){
+		//alert(addr);
+	    // 정상적으로 검색이 완료됐으면
+	     if (status === kakao.maps.services.Status.OK) {
+
+	     	// 결과값으로 받은 위치의 좌표를 변수에 저장합니다.
+	        latt=result[0].y;
+	        logt=result[0].x;
+	     	//alert(latt+"/"+logt);
+	        error = 0;
+	        
+	    }else{
+	    	error = 1;
+	    }
+	});
+		
+};
 
 function selectMain(cid){
 	if(error == 0){
@@ -35,7 +37,7 @@ function selectMain(cid){
 	}
 };
 
-function sample6_execDaumPostcode() {
+function execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -68,17 +70,16 @@ function sample6_execDaumPostcode() {
                     extraAddr = ' (' + extraAddr + ')';
                 }
                 // 조합된 참고항목을 해당 필드에 넣는다.
-                document.getElementById("sample6_extraAddress").value = extraAddr;
-            
+                
+                document.getElementById("address").value = addr+" "+extraAddr;
+            	convertAddr(addr);
             } else {
-                document.getElementById("sample6_extraAddress").value = '';
+                document.getElementById("address").value = '';
             }
 
-            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementById('sample6_postcode').value = data.zonecode;
-            document.getElementById("sample6_address").value = addr;
-            // 커서를 상세주소 필드로 이동한다.
-            document.getElementById("sample6_detailAddress").focus();
+            
+
+            
         }
     }).open();
 }
@@ -95,8 +96,6 @@ function sample6_execDaumPostcode() {
             <div class="col-md-7 col-lg-6 py-8 text-md-start text-center">
 
               <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light">혹시, 배고프세요?</h1><br>
-              <button id="test_btn" type="button">Test</button>
-              
               <h1 class="text-800 mb-5 fs-4">치킨, 피자, 떡볶이, 삼겹살 ... <br class="d-none d-xxl-block" />무엇이든 주문해보세요!</h1>
 
               <div class="card w-xxl-75">
@@ -113,11 +112,11 @@ function sample6_execDaumPostcode() {
                         <div class="col">
                           <div class="input-group-icon"><i class="fas fa-map-marker-alt text-danger input-box-icon"></i>
                             <label class="visually-hidden" for="inputDelivery">Address</label>
-                            <input class="form-control input-box form-foodwagon-control" id="address" type="text" placeholder="Enter Your Address" />
+                            <input class="form-control input-box form-foodwagon-control" id="address" type="text" placeholder="Enter Your Address" readonly="readonly"/>
                           </div>
                         </div>
                         <div class="d-grid gap-3 col-sm-auto">
-                          <button class="btn btn-danger" type="button" onclick="sample6_execDaumPostcode()">현재 주소 검색</button>
+                          <button class="btn btn-danger" type="button" onclick="execDaumPostcode()">주소 검색</button>
                         </div>
                       </form>
                     </div>
@@ -125,8 +124,8 @@ function sample6_execDaumPostcode() {
                       <form class="row gx-4 gy-2 align-items-center">
                         <div class="col">
                           <div class="input-group-icon"><i class="fas fa-map-marker-alt text-danger input-box-icon"></i>
-                            <label class="visually-hidden" for="inputPickup">Address</label>
-                            <input class="form-control input-box form-foodwagon-control" id="inputPickup" type="text" placeholder="Enter Your Address" />
+                            <label class="visually-hidden" for="inputPickup" >Address</label>
+                            <input class="form-control input-box form-foodwagon-control" id="address" type="text" placeholder="Enter Your Address" />
                           </div>
                         </div>
                         <div class="d-grid gap-3 col-sm-auto">
