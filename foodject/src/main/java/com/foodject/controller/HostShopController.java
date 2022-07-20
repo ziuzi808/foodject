@@ -40,18 +40,13 @@ public class HostShopController {
 		List<HostShopVO> list = null;
 		manager = (HostManagerVO) session.getAttribute("loginshop");
 		String mid = manager.getId();
-
-	
-				
 		try {
 			list = biz.getmid(mid);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		mv.addObject("slist", list );
-
 		mv.setViewName("host/index");
 		mv.addObject("center", "host/shop/center" );
 		return mv;
