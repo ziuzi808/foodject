@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class UserMainController {
 	
-	@Value("kakaoJSKey")
+	@Value("${kakaoJSKey}")
 	String kakaoJSKey;
 	
 	public void mainProduct(Model m) {
@@ -30,11 +30,8 @@ public class UserMainController {
 
 	@RequestMapping("/")
 	public String main(Model m) {
-		
-		
-		String kakaosrc = kakaoJSKey;
-		m.addAttribute("kakaosrc",kakaosrc);
-//		m.addAttribute("center", "user/center");
+		System.out.println(kakaoJSKey);
+		m.addAttribute("kakaosrc",kakaoJSKey);
 		return "user/index";
 	}
 	

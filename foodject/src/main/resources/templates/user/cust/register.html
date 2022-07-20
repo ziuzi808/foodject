@@ -38,8 +38,7 @@
 function execDaumPostcode(){
 	daum.postcode.load(function(){
 		new daum.Postcode({
-		    oncomplete: function(data) {
-		    	$("#post").val(data.zonecode);
+		    oncomplete: function(data) {		    	
 		    	$("#addr").val(data.roadAddress);
 		    }
 		}).open();
@@ -279,17 +278,12 @@ $(document).ready(function(){
                         <label for="addr">주소를 입력하세요</label><br>
                         <div class="input-group">
                           <input class="form-control input-box form-foodwagon-control"
-                          id="post" type="text" placeholder="Post Number" readonly>
+                          id="addr" name="addr" type="text" placeholder="도로명 주소" readonly>
                           <button type="button" class="btn btn-primary" onclick="execDaumPostcode()">우편번호찾기</button>
                         </div><p></p>
                         <div class="input-group">
                           <input class="form-control input-box form-foodwagon-control"
-                          id="addr" name="addr" type="text" placeholder="도로명 주소" readonly>
-                        </div><p></p>
-                        <div class="input-group">
-                          <div class="col-sm-6">
-                          <input class="form-control input-box form-foodwagon-control"
-                          id="addrd" name="addrd" type="text" placeholder="상세주소"></div>
+                          id="addrd" name="addrd" type="text" placeholder="상세주소">
                         </div><p></p>
                         <span style="font-size: smaller; color:gray;" id="addrspan"></span><p></p>
                                  
@@ -312,7 +306,7 @@ $(document).ready(function(){
                          
                         <input type="hidden" name="status" value=1><p></p>
                         
-	                      <div class="d-grid gap-3 col-sm-auto">
+	                      <div class="d-grid gap-3 col-sm-auto p-4">
 	                        <button id="registerbtn" class="btn btn-danger" type="submit">회원가입하기</button>
 	                      </div>
 

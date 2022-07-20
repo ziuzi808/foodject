@@ -37,8 +37,7 @@ public class HostShopController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("list : " + list);
-		System.out.println("list size " + list.size() );
+
 		if( list.size() != 0 ){
 			mv.addObject("slist", list );
 		}
@@ -62,6 +61,7 @@ public class HostShopController {
 		obj.setStatus(1);
 		mv.setViewName("redirect:/host/shop");
 		mv.addObject("center", "/host/shop/center" );
+
 		return mv;
 	}
 
