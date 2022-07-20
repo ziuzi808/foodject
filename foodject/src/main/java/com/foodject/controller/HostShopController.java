@@ -20,50 +20,63 @@ public class HostShopController {
 	
 	@Autowired
 	HostShopBiz biz;
-	
-	public void mainProduct(Model m) {
-//		List<ProductVO> plist = null;
-//		String pimgpath = Paths.get(System.getProperty("user.dir"), "src", "main","resources","static","img", "product_img").toString();
-//		System.out.println("imgpath : " +  pimgpath);
-//		try {	
-//			plist = mainbiz.get();
-//			m.addAttribute("plist", plist);
-//			m.addAttribute("imgpath", pimgpath);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-	}
+
 
 	@RequestMapping("")
 	public ModelAndView shop(ModelAndView mv, HttpSession session ) {
 		HostManagerVO manager = null;
 		List<HostShopVO> list = null;
+		if( session.getAttribute("loginshop") == null ){
+			mv.setViewName("redirect:/host");
+			return mv;
+		}
 		manager = (HostManagerVO) session.getAttribute("loginshop");
 		String mid = manager.getId();
 		try {
 			list = biz.getmid(mid);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		mv.addObject("slist", list );
-		mv.setViewName("host/index");
-		mv.addObject("center", "host/shop/center" );
+
+		if( list.size() != 0 ){
+			mv.addObject("slist", list );
+		}
+		mv.setViewName("/host/index");
+		mv.addObject("center", "/host/shop/center" );
+		return mv;
+	}
+	@RequestMapping("/shopregister")
+	public ModelAndView register(ModelAndView mv) {
+		mv.setViewName("/host/index");
+		mv.addObject("center", "/host/shop/register" );
 		return mv;
 	}
 
+	@RequestMapping("/shopregisterimpl")
+	public ModelAndView registerimpl(ModelAndView mv, HostShopVO obj, HttpSession session) {
+		HostManagerVO manager = null;
+		manager = (HostManagerVO) session.getAttribute("loginshop");
+		String imgname = obj.getMf().getOriginalFilename();	
+		obj.setMid(manager.getId());
+		obj.setStatus(1);
+		mv.setViewName("redirect:/host/shop");
+		mv.addObject("center", "/host/shop/center" );
+
+		return mv;
+	}
+
+
 	@RequestMapping("/orderlist")
 	public ModelAndView orderlist(ModelAndView mv) {
-		mv.setViewName("host/index");
-		mv.addObject("center", "host/shop/orderlist" );
+		mv.setViewName("/host/index");
+		mv.addObject("center", "/host/shop/orderlist" );
 		return mv;
 	}
 
 	@RequestMapping("/shopadd")
 	public ModelAndView shopadd(ModelAndView mv) {
-		mv.setViewName("host/index");
-		mv.addObject("center", "host/shop/shopadd" );
+		mv.setViewName("/host/index");
+		mv.addObject("center", "/host/shop/shopadd" );
 		return mv;
 	}
-
 }
