@@ -46,6 +46,19 @@ public class UserCustController {
 		return mv;
 	}
 	
+	@RequestMapping("/update")
+	public String update(Model m, HttpSession session) {
+		UserCustVO cust = (UserCustVO) session.getAttribute("loginid");
+		try {
+			cust = custbiz.get(cust.getId());
+			m.addAttribute("c", cust);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		m.addAttribute("center", "/user/cust/update");
+		return "user/index";
+	}
+	
 	@RequestMapping("/login")
 	public ModelAndView login(ModelAndView mv, String msg) {
 		if(msg != null && msg.equals("f")) {
@@ -63,7 +76,7 @@ public class UserCustController {
 			if(cust == null) {
 				throw new Exception();
 			}if(cust.getPwd().equals(pwd)) {
-				session.setAttribute("loginid", id);
+				session.setAttribute("loginid", cust);
 			}else {
 				throw new Exception();
 			}
@@ -89,7 +102,7 @@ public class UserCustController {
 	}
 	
 	@RequestMapping("/registerimpl")
-	public String registerimpl(Model m, UserCustVO cust) {
+	public String registerimpl(Model m, UserCustVO cust, String img) {
 		//이미지 경로설정
 		String pimgpath = Paths.get(System.getProperty("user.dir"), "src", "main","resources","static","custimg").toString();
 		//이미지파일 이름 저장
@@ -97,7 +110,12 @@ public class UserCustController {
 		String[] splitname = imgname.split("[.]");
 		String idname = cust.getId();
 		String savename = idname + "." + splitname[splitname.length -1];
-		cust.setImg(savename);		
+		
+		if(savename.equals(idname+".")) {
+			cust.setImg("icon.jpg");			
+		}else {
+			cust.setImg(savename);
+		}				
 		
 		try {
 			custbiz.register(cust);
@@ -108,6 +126,33 @@ public class UserCustController {
 		}
 		
 		return "user/cust/login";
+	}
+	
+	@RequestMapping("/updateimpl")
+	public String updateimpl(Model m, UserCustVO cust, String img) {
+		//이미지 경로설정
+		String pimgpath = Paths.get(System.getProperty("user.dir"), "src", "main","resources","static","custimg").toString();
+		//이미지파일 이름 저장
+		String imgname = cust.getMf().getOriginalFilename();
+		String[] splitname = imgname.split("[.]");
+		String idname = cust.getId();
+		String savename = idname + "." + splitname[splitname.length -1];
+		
+		if(savename.equals(idname+".")) {
+			cust.setImg("icon.jpg");			
+		}else {
+			cust.setImg(savename);
+		}				
+		
+		try {
+			custbiz.modify(cust);
+			Util.saveFile(cust, pimgpath);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "user/cust";
 	}
 
 
