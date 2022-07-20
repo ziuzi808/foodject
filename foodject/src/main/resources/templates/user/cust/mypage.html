@@ -1,3 +1,12 @@
+<script>
+$(document).ready(function(){
+	$('#update').click(function(){
+ 		location.href='/cust/update';
+	});
+});
+
+</script>
+
 <section class="pb-5 pt-8">
 
   <div class="container">
@@ -9,7 +18,7 @@
              <div class="col-md-7 col-xl-5 col-xxl-4 p-4 p-lg-5">
                 <h1 class="card-title mt-xl-5 mb-4">My Page <span class="text-primary">마이페이지</span></h1>
                 <div class="d-grid bottom-0">
-                <a class="btn btn-lg btn-primary mt-xl-6" href="/cust/update">회원정보수정하기</a><p></p>
+                <a class="btn btn-lg btn-primary mt-xl-6" id="update">회원정보수정하기</a><p></p>
                 <a class="btn btn-lg btn-primary mt-xl-6" href="#!">주문내역 조회</a><p></p>
                 <a class="btn btn-lg btn-primary mt-xl-6" href="#!">고객센터</a><p></p>
                 </div>
