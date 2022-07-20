@@ -57,15 +57,9 @@ public class HostShopController {
 	public ModelAndView registerimpl(ModelAndView mv, HostShopVO obj, HttpSession session) {
 		HostManagerVO manager = null;
 		manager = (HostManagerVO) session.getAttribute("loginshop");
-		System.out.println(obj);
-		String imgname = obj.getMf().getOriginalFilename();
+		String imgname = obj.getMf().getOriginalFilename();	
 		obj.setMid(manager.getId());
 		obj.setStatus(1);
-
-		System.out.println("set obj : " + obj);
-
-
-
 		mv.setViewName("redirect:/host/shop");
 		mv.addObject("center", "/host/shop/center" );
 		return mv;
@@ -85,5 +79,4 @@ public class HostShopController {
 		mv.addObject("center", "/host/shop/shopadd" );
 		return mv;
 	}
-
 }
