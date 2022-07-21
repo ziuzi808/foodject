@@ -30,7 +30,6 @@ public class UserMainController {
 
 	@RequestMapping("/")
 	public String main(Model m) {
-		System.out.println(kakaoJSKey);
 		m.addAttribute("kakaosrc",kakaoJSKey);
 		return "user/index";
 	}

@@ -43,5 +43,9 @@ public class UserMenuBiz implements Biz<Integer, UserMenuVO> {
 	public void modifyLine(UserMenuVO v) throws Exception {
 		dao.updateLine(v);
 	}
+	
+	public List<UserMenuVO> get_byShop(int sid) throws Exception {
+		return dao.select_byShop(sid);
+	}
 
 }

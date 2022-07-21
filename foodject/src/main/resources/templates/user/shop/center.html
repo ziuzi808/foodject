@@ -14,6 +14,7 @@
         <div class="row gx-2">
         
           <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5" th:each="shop:${shoplist}">
+         	<a th:href="'/shop/main?sid='+${shop.id}">
             <div class="card card-span h-100 text-white rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/food-world.png" alt="..." />
               <div class="card-body ps-0">
                 <div class="d-flex align-items-center mb-3"><img class="img-fluid" src="/bootstrap/foodwagon/assets/img/gallery/food-world-logo.png" alt="" />
@@ -23,6 +24,7 @@
                 </div><span class="badge bg-soft-danger p-2"><span class="fw-bold fs-1 text-danger">Opens Tomorrow</span></span>
               </div>
             </div>
+            </a>
           </div>
          
           <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">

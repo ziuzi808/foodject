@@ -20,7 +20,6 @@ function convertAddr(addr){
 	        logt=result[0].x;
 	     	//alert(latt+"/"+logt);
 	        error = 0;
-	        
 	    }else{
 	    	error = 1;
 	    }
@@ -70,16 +69,11 @@ function execDaumPostcode() {
                     extraAddr = ' (' + extraAddr + ')';
                 }
                 // 조합된 참고항목을 해당 필드에 넣는다.
-                
                 document.getElementById("address").value = addr+" "+extraAddr;
-            	convertAddr(addr);
             } else {
-                document.getElementById("address").value = '';
+                document.getElementById("address").value = addr;
             }
-
-            
-
-            
+            convertAddr(addr);
         }
     }).open();
 }

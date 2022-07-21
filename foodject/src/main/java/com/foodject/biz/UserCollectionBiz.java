@@ -44,5 +44,9 @@ public class UserCollectionBiz implements Biz<Integer, UserCollectionVO> {
 	public void modifyLine(UserCollectionVO v) throws Exception {
 		dao.updateLine(v);
 	}
+	
+	public List<UserCollectionVO> get_byShop(int k) throws Exception{
+		return dao.select_byShop(k);
+	}
 
 }
