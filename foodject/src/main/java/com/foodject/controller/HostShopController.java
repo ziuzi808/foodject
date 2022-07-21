@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.foodject.biz.HostShopBiz;
+import com.foodject.restapi.NaverObj;
 import com.foodject.vo.HostManagerVO;
 import com.foodject.vo.HostShopVO;
 
@@ -56,9 +57,18 @@ public class HostShopController {
 	public ModelAndView registerimpl(ModelAndView mv, HostShopVO obj, HttpSession session) {
 		HostManagerVO manager = null;
 		manager = (HostManagerVO) session.getAttribute("loginshop");
-		String imgname = obj.getMf().getOriginalFilename();	
+
 		obj.setMid(manager.getId());
 		obj.setStatus(1);
+		obj.setLogo("icon.jpg");
+		// ?????.jpg
+
+		try {
+			biz.register(obj);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		mv.setViewName("redirect:/host/shop");
 		mv.addObject("center", "/host/shop/center" );
 
