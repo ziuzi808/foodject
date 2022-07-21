@@ -39,6 +39,10 @@ public class UserCustBiz implements Biz<String, UserCustVO>{
 	public List<UserCustVO> get() throws Exception {
 		return dao.selectall();
 	}
+	
+	public void modifysts(UserCustVO v) throws Exception{
+		dao.updatests(v);
+	}
 
 
 }
