@@ -18,4 +18,6 @@ public interface UserMenuMapper {
 	public void updateLine(UserMenuVO obj) throws Exception;
 	public UserMenuVO select(int obj) throws Exception;
 	public List<UserMenuVO> selectall() throws Exception;
+	
+	public List<UserMenuVO> select_byShop(int sid) throws Exception;
 }

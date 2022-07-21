@@ -23,9 +23,16 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM collection
 		WHERE id=#{id}
 	</select>
+	
 	<select id="selectall" resultType="usercollectionVO">
 		SELECT * FROM collection
 	</select>
 	
+	<select id="select_byShop" parameterType="Integer" resultType="usercollectionVO">
+		SELECT DISTINCT c.id, c.name, c.line FROM collection c
+	    INNER JOIN menu mn ON mn.collid=c.id
+	    WHERE mn.sid = #{sid}
+	    ORDER BY c.line;
+	</select>
 	
 </mapper>

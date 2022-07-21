@@ -51,4 +51,6 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		AND (mk.logt BETWEEN #{logt}-0.027/COS(RADIANS(#{latt})) AND #{logt}+0.027/COS(RADIANS(#{latt})))
 	    AND c.id=#{cid};
 	</select>
+	
+	
 </mapper>

@@ -18,4 +18,6 @@ public interface UserCollectionMapper {
 	public void updateLine(UserCollectionVO obj) throws Exception;
 	public UserCollectionVO select(int obj) throws Exception;
 	public List<UserCollectionVO> selectall() throws Exception;
+	
+	public List<UserCollectionVO> select_byShop(int obj) throws Exception;
 }
