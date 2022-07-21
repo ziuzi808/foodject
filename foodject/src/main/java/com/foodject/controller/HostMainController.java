@@ -101,4 +101,9 @@ public class HostMainController {
 		
 		return "host/index";
 	}
+	@RequestMapping("/findpwd")
+	public ModelAndView findpwd(ModelAndView mv) {
+		mv.setViewName("host/findpwd");
+		return mv;
+	}
 }

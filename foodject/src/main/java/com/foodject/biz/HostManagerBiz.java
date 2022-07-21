@@ -44,5 +44,7 @@ public class HostManagerBiz implements Biz<String, HostManagerVO> {
 	public void modifysts(HostManagerVO v) throws Exception {
 		dao.updatests(v);
 	}
-
+	public void findpwd(HostManagerVO v) throws Exception {
+		dao.selectpwd(v);
+	}
 }

@@ -19,5 +19,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<delete id="updatests" parameterType="HostManagerVO">
 		UPDATE manager SET STATUS=0 WHERE ID=#{id}
 	</delete>
+	<select id="selectpwd" parameterType="String" resultType="HostManagerVO">
+		SELECT pwd FROM manager WHERE ID=#{id} and EMAIL=#{email}
+	</select>
 	
 </mapper>

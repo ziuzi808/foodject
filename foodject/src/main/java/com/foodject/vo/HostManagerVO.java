@@ -47,6 +47,12 @@ public class HostManagerVO {
 		this.id = id;
 		this.status = status;
 	}
+	public HostManagerVO(String id, String pwd, String email) {
+		super();
+		this.id = id;
+		this.pwd = pwd;
+		this.email = email;
+	}
 	
 	
 	
