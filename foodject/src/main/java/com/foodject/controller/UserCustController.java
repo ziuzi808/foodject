@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.foodject.biz.UserCustBiz;
 import com.foodject.frame.Util;
+import com.foodject.vo.HostManagerVO;
 import com.foodject.vo.UserCustVO;
 
 
@@ -46,26 +47,14 @@ public class UserCustController {
 		return mv;
 	}
 	
-	@RequestMapping("/update")
-	public String update(Model m, HttpSession session) {
-		UserCustVO cust = (UserCustVO) session.getAttribute("loginid");
-		try {
-			cust = custbiz.get(cust.getId());
-			m.addAttribute("c", cust);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		m.addAttribute("center", "/user/cust/update");
-		return "user/index";
-	}
 	
 	@RequestMapping("/login")
-	public ModelAndView login(ModelAndView mv, String msg) {
+	public String login(Model m, String msg) {
 		if(msg != null && msg.equals("f")) {
-			mv.addObject("msg", "아이디와 패스워드가 존재하지 않습니다");
+			m.addAttribute("msg", "!! 아이디 또는 비밀번호를 확인해주세요");
 		}
-		mv.setViewName("user/cust/login");
-		return mv;
+		m.addAttribute("center","user/cust/login");
+		return "user/index";
 	}
 	
 	@RequestMapping("/loginimpl")
@@ -81,7 +70,7 @@ public class UserCustController {
 				throw new Exception();
 			}
 		} catch (Exception e) {
-			return "user/cust/login";
+			return "redirect:login?msg=f";
 		}
 
 		return "user/index";
@@ -125,19 +114,16 @@ public class UserCustController {
 			e.printStackTrace();
 		}
 		
-		return "user/cust/login";
+		return "user/index";
 	}
-	
+
 	@RequestMapping("/updateimpl")
 	public String updateimpl(Model m, UserCustVO cust, String img) {
-		//이미지 경로설정
 		String pimgpath = Paths.get(System.getProperty("user.dir"), "src", "main","resources","static","custimg").toString();
-		//이미지파일 이름 저장
 		String imgname = cust.getMf().getOriginalFilename();
 		String[] splitname = imgname.split("[.]");
 		String idname = cust.getId();
-		String savename = idname + "." + splitname[splitname.length -1];
-		
+		String savename = idname + "." + splitname[splitname.length -1];		
 		if(savename.equals(idname+".")) {
 			cust.setImg("icon.jpg");			
 		}else {
@@ -148,11 +134,36 @@ public class UserCustController {
 			custbiz.modify(cust);
 			Util.saveFile(cust, pimgpath);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return "user/cust";
+		return "redirect:/cust/update";
+	}
+	
+	@RequestMapping("/update")
+	public String update(Model m, HttpSession session) {
+		UserCustVO cust = (UserCustVO) session.getAttribute("loginid");
+		try {
+			cust = custbiz.get(cust.getId());
+			m.addAttribute("c", cust);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		m.addAttribute("center", "/user/cust/update");
+		return "user/index";
+	}
+	
+	@RequestMapping("/delete")
+	public String updatests(UserCustVO cust, HttpSession session, Model m) {
+		try {
+			custbiz.modifysts(cust);
+			session.invalidate();
+			System.out.println("work?");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "user/index";
 	}
 
 

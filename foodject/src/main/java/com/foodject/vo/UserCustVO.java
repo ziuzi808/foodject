@@ -84,6 +84,10 @@ public class UserCustVO {
 		this.status = status;
 		this.img = img;
 	}
+	public UserCustVO(String id, int status) {
+		this.id = id;
+		this.status = status;
+	}
 
 	
 }
