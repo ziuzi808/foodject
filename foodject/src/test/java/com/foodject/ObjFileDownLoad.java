@@ -27,6 +27,7 @@ class ObjFileDownLoad {
 
 	@Autowired
 	HostShopBiz biz;
+	
 	@Value("${NaverAccessKey}")
 	String accessKey;
 
