@@ -17,15 +17,10 @@ class FoodjectApplicationTests {
 
 	@Test
 	void contextLoads() {
-		System.out.println("dd");
-		List<HostShopVO> vo = null;
-		try {
-			vo = biz.getmid("mid01");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(vo);
+		
+		System.out.println("user.dir : "+System.getProperty("user.dir"));
+		System.out.println("uos.name : "+System.getProperty("os.name").toLowerCase().startsWith("win"));
+		
 	}
 
 }

@@ -1,9 +1,7 @@
 package com.foodject.restapi;
 
+
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.file.Paths;
 
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -14,20 +12,27 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.AmazonS3Exception;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-
+@Component
 public class NaverObj {
+
+
     @Value("${NaverAccessKey}")
     String accessKey;
 
     @Value("${NaverSecretKey}")
     String secretKey;
+
 	
-    public void upLoad(String name, String table, MultipartFile mf) {
+	// mf = 실제 파일, name = 파일이름.jpg, table = 폴더명(db테이블명)
+    public void upLoad(MultipartFile mf, String filePath, String name, String table  ) {
     	final String endPoint = "https://kr.object.ncloudstorage.com";
 		final String regionName = "kr-standard";
 
+		System.out.println("accessKey : " + accessKey);
+		System.out.println("secretKey : "+ secretKey);
 		// S3 client
 		final AmazonS3 s3 = AmazonS3ClientBuilder.standard()
 		    .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endPoint, regionName))
@@ -37,15 +42,14 @@ public class NaverObj {
 		String bucketName = "foodject";	
 
 
-
+		System.out.println("filePath : " + filePath);
 		// upload local file
 //		String objectName = "cssimg/test1.jpg";
 		String objectName = table + "/" + name;
-		String userpath = Paths.get(System.getProperty("user.dir"), "src", "main","resources","static","foodject", table ).toString();
+		// String userpath = Paths.get(System.getProperty("user.dir"), "src", "main","resources","static","foodject", table ).toString();
 //		String filePath = "C:/Users/b4a41/Pictures/ma.jpg";
-		String filePath = userpath+name;
+		// String filePath = userpath+name;
 
-		saveFile(mf, filePath);
 		
 		try {
 		    s3.putObject(bucketName, objectName, new File(filePath));
@@ -58,18 +62,4 @@ public class NaverObj {
     
     }
 
-	public static void saveFile(MultipartFile mf, String filePath) {
-		byte [] data;
-		String img = mf.getOriginalFilename();
-
-		try {
-			data = mf.getBytes();
-			FileOutputStream fo =
-					new FileOutputStream(filePath);
-			fo.write(data);
-			fo.close();
-		} catch (IOException e) {
-			
-		}
-	}
 }
