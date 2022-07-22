@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.foodject.biz.UserCustBiz;
 import com.foodject.frame.Util;
-import com.foodject.vo.HostManagerVO;
 import com.foodject.vo.UserCustVO;
 
 
@@ -113,8 +112,7 @@ public class UserCustController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		return "user/index";
+		return "redirect:/";
 	}
 
 	@RequestMapping("/updateimpl")
@@ -162,8 +160,7 @@ public class UserCustController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		return "user/index";
+		return "redirect:/";
 	}
 
 
