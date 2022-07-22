@@ -1,10 +1,3 @@
-<style>
-#imgviewer{
-	width: 200px;
-	border: 3px solid #FFB30E;		
-}
-</style>
-
 <script>
 $(document).ready(function(){
 	//Menu Buttons
@@ -16,9 +9,7 @@ $(document).ready(function(){
 	});
 	$('#cs').click(function(){
  		location.href='/cust/cs';
-	});
-});
-
+	});	
 </script>
 
 <section class="pb-5 pt-8">
@@ -29,24 +20,21 @@ $(document).ready(function(){
         <div class="card card-span mb-3 shadow-lg">
           <div class="card-body py-0">
             <div class="row justify-content-center">
+            
              <div class="col-md-7 col-xl-5 col-xxl-4 p-4 p-lg-5">
                 <h1 class="card-title mt-xl-5 mb-4 text-center">My Page <a href="/cust"><span class="text-primary">마이페이지</span></a></h1>
-                <div class="d-grid bottom-0">
-                <a class="btn btn-lg btn-primary mt-xl-6" id="update">회원정보수정하기</a><p></p>
-                <a class="btn btn-lg btn-primary mt-xl-6" id="orders">주문내역 조회</a><p></p>
-                <a class="btn btn-lg btn-primary mt-xl-6" id="cs">고객센터</a><p></p>
+                <div class="d-grid bottom-0">                
+                <a class="btn btn-lg btn-primary mt-xl-6" id="update" href="/cust/update">회원정보수정하기</a><p></p>
+                <a class="btn btn-danger text-white mt-xl-6" id="orders" href="/cust/orders">주문내역조회 &nbsp<i class="fas fa-mouse-pointer me-2"></i></a><p></p>
+                <a class="btn btn-lg btn-primary mt-xl-6" id="cs" href="/cust/cs">고객센터</a><p></p>
                 </div>
               </div>
             
               <div class="col-md-5 col-xl-7 col-xxl-8 g-0 order-0 order-md-1">
-              <h1 class="card-title mt-xl-5 mb-4 text-center text-primary pt-5">Foodject Member</h1>               
-                <h2 class="card-title mt-xl-5 mb-4 text-center" th:text="${c.nick}+'님'"></h2>        
-                <div class="col text-center pb-6">
-                  <img id="imgviewer" class="img-fluid rounded-3 h-100" th:src="@{'/custimg/'+${c.img}}" alt="..." />
-                
-                </div>
-                
-              </div>
+                <h1 class="card-title mt-xl-5 mb-4 text-center">주문내역조회</h1>
+
+              
+			  </div>
 
             </div>
           </div>

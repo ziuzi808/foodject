@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodject.mapper.HostCollectionMapper">
+	
+
+	<insert id="insert" parameterType="hostcollectionVO">
+		INSERT INTO collection VALUES (null, #{name}, #{line})
+	</insert>
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM collection WHERE id=#{id}
+	</delete>
+	<update id="update" parameterType="hostcollectionVO">
+		UPDATE collection SET name=#{name} WHERE id=#{id}
+	</update>
+	<update id="updateLine" parameterType="hostcollectionVO">
+		UPDATE collection SET line=#{line} WHERE id=#{id}
+	</update>
+	
+	<select id="select" parameterType="Integer" resultType="hostcollectionVO">
+		SELECT * FROM collection
+		WHERE id=#{id}
+	</select>
+	
+	<select id="selectall" resultType="hostcollectionVO">
+		SELECT * FROM collection
+	</select>
+	
+	<select id="select_byShop" parameterType="Integer" resultType="hostcollectionVO">
+		SELECT DISTINCT c.id, c.name, c.line FROM collection c
+	    INNER JOIN menu mn ON mn.collid=c.id
+	    WHERE mn.sid = #{sid}
+	    ORDER BY c.line;
+	</select>
+	
+</mapper>
