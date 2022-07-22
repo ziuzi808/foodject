@@ -1,5 +1,33 @@
 <meta charset="UTF-8">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
+.pill-nav a {
+  display: block;
+  color: black;
+  padding: 14px;
+  text-decoration: none;
+  font-size: 17px;
+  border-radius: 5px;
+}
+
+.pill-nav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.pill-nav a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+#collection{
+	margin:auto;
+}
+
+</style>
 <!-- ============================================-->
 <!-- <section> begin ============================-->
 <section class="pb-5 pt-8">
@@ -26,8 +54,10 @@
 </section>
 <!-- <section> close ============================-->
 <!-- ============================================-->
-
-
+<div id="collection" class="col-8 pill-nav" >
+  <a href="#home" th:each="c:${clist}" th:text="${c.name}">Home</a>
+  <!--  클릭하면 class="active"기능 넣을까... -->
+</div>
 <!-- ============================================-->
 <!-- <section> begin ============================-->
 <section class="py-4 overflow-hidden">
