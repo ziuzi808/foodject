@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.w3c.dom.Document;
 
 import com.foodject.biz.HostManagerBiz;
 import com.foodject.vo.HostManagerVO;
@@ -60,7 +61,7 @@ public class HostMainAJAX {
 		
 		try {
 			manager = mngbiz.get(id);
-			if(manager == null) {
+			if(manager == null  && id.length()>3 ) {
 				result = "0";
 			}else {
 				result = "1";

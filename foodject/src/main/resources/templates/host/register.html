@@ -21,7 +21,9 @@
   
   
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-  
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script>
   
   
@@ -31,7 +33,7 @@
 			data:{'id':id},
 			success:function(data){
 				if(data == '1') {
-					$('#ispan').text('중복된 아이디 입니다.');
+					$('#ispan').text('사용불가 아이디 입니다.');
 				} else {
 					$('#ispan').text('사용 가능합니다!');
 				}
@@ -62,7 +64,81 @@
 	  $('input[class="form-control form-control-lg"]').keyup(function(){
 		
 		});
+	  $('#pwd2').keyup(function(){
+			var pwd = $('#pwd').val();
+			var pwd2 = $('#pwd2').val();
+				if(pwd != pwd2){
+					$('#pwdcheckspan').text('비밀번호 불일치');
+					
+				}else {
+					$('#pwdcheckspan').text('비밀번호 일치');
+					
+				}
+		 });
+	  
+	  
+	  function autoHypenTel(str) {
+		  str = str.replace(/[^0-9]/g, '');
+		  var tmp = '';
+
+		  if (str.substring(0, 2) == 02) {
+		    if (str.length < 3) {
+		      return str;
+		    } else if (str.length < 6) {
+		      tmp += str.substr(0, 2);
+		      tmp += '-';
+		      tmp += str.substr(2);
+		      return tmp;
+		    } else if (str.length < 10) {
+		      tmp += str.substr(0, 2);
+		      tmp += '-';
+		      tmp += str.substr(2, 3);
+		      tmp += '-';
+		      tmp += str.substr(5);
+		      return tmp;
+		    } else {
+		      tmp += str.substr(0, 2);
+		      tmp += '-';
+		      tmp += str.substr(2, 4);
+		      tmp += '-';
+		      tmp += str.substr(6, 4);
+		      return tmp;
+		    }
+		  } else {
+		    if (str.length < 4) {
+		      return str;
+		    } else if (str.length < 7) {
+		      tmp += str.substr(0, 3);
+		      tmp += '-';
+		      tmp += str.substr(3);
+		      return tmp;
+		    } else if (str.length < 11) {
+		      tmp += str.substr(0, 3);
+		      tmp += '-';
+		      tmp += str.substr(3, 3);
+		      tmp += '-';
+		      tmp += str.substr(6);
+		      return tmp;
+		    } else {
+		      tmp += str.substr(0, 3);
+		      tmp += '-';
+		      tmp += str.substr(3, 4);
+		      tmp += '-';
+		      tmp += str.substr(7);
+		      return tmp;
+		    }
+		  }
+		  return str;
+		}
 	
+	$('#phon').keyup(function (event) {
+		  event = event || window.event;
+		  var _val = this.value.trim();
+		  this.value = autoHypenTel(_val);
+		});
+	  
+	  
+	  
 	$('#registerbt').click(function(){ 
 		  var id = $('#id').val();
 	      var pwd = $('#pwd').val();
@@ -147,9 +223,11 @@
                   <input type="password" class="form-control form-control-lg" id="pwd" placeholder="Password" name="pwd" required>
                 </div>
                 <div class="form-group">
-                <label for="pwd2">비밀번호 확인:</label>
+                <label for="pwd2">비밀번호 확인:</label> 
+                
                 
                   <input type="password" class="form-control form-control-lg" id="pwd2" placeholder="Password Check" name="pwd2" required>
+                  <span style="font-size: smaller; color:gray;" id="pwdcheckspan"></span>
                 </div>
                 <div class="form-group">
                 <label for="name">성함:</label>
@@ -195,13 +273,13 @@
                   
                     <label class="form-check-label text-muted">
                       <input type="checkbox" class="form-check-input" id="cbx">
-                       I agree to all  Terms and Conditions
+                      이용약관에 동의합니다.
                       
                     </label>
                    
                     <center>
                     <p>
- 					 <a class="text-primary" data-toggle="modal" data-target="#myModal">Our Terms & Conditions</a>
+ 					 <a class="text-primary" data-toggle="modal" data-target="#myModal">이용약관</a>
 					</p>
 					</center>
                   </div>
@@ -250,7 +328,7 @@
                   <button id="registerbt" disabled = "disabled" type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
-                  Already have an account? <a href="host/login" class="text-primary">Login</a>
+                  Already have an account? <a href="/host/login" class="text-primary">Login</a>
                 </div>
               </form>
             </div>
