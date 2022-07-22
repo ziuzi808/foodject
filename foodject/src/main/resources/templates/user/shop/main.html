@@ -1,9 +1,36 @@
 <meta charset="UTF-8">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
+.pill-nav a {
+  display: block;
+  color: black;
+  padding: 14px;
+  text-decoration: none;
+  font-size: 17px;
+  border-radius: 5px;
+}
+
+.pill-nav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.pill-nav a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+#collection{
+	margin:auto;
+}
+
+</style>
 <!-- ============================================-->
 <!-- <section> begin ============================-->
 <section class="pb-5 pt-8">
-
   <div class="container">
     <div class="row">
       <div class="col-12">
@@ -14,21 +41,23 @@
               <div class="col-md-7 col-xl-5 col-xxl-4 p-4 p-lg-5">
                 <h1 class="card-title mt-xl-5 mb-4" th:text="${shop.name}"> 음식점명 </h1>
                 <p class="fs-1" th:text="${shop.info}">Enjoy the large size of sandwiches. Complete your meal with the perfect slice of sandwiches.</p>
-                <div class="d-grid bottom-0"><a class="btn btn-lg btn-primary mt-xl-6" href="#!">PROCEED TO ORDER<i class="fas fa-chevron-right ms-2"></i></a></div>
+                <div class="d-grid bottom-0"><a class="btn btn-lg btn-primary mt-xl-6" href="#!">주문하기<i class="fas fa-chevron-right ms-2"></i></a></div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div><!-- end of .container-->
-
+  </div>
+  <!-- end of .container-->
+  
 </section>
 <!-- <section> close ============================-->
 <!-- ============================================-->
-
-
-
+<div id="collection" class="col-8 pill-nav" >
+  <a href="#home" th:each="c:${clist}" th:text="${c.name}">Home</a>
+  <!--  클릭하면 class="active"기능 넣을까... -->
+</div>
 <!-- ============================================-->
 <!-- <section> begin ============================-->
 <section class="py-4 overflow-hidden">
@@ -41,195 +70,12 @@
         <div class="carousel slide" id="carouselPopularItems" data-bs-touch="false" data-bs-interval="false">
           <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="10000">
-              <div class="row gx-3 h-100 align-items-center">
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+              <div class="row gx-3 h-100 align-items-center" >
+                <div class="col-4 col-sm-4 col-md-4 col-lg-3 col-xl-2 mb-5 h-100" th:each="mn:${mlist}" th:if="${mn.collid == c.id}">
                   <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/cheese-burger.png" alt="..." />
                     <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                  <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/toffes-cake.png" alt="..." />
-                    <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Toffe's Cake</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Top Sticks</span></div><span class="text-1000 fw-bold">$4.00</span>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                  <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/dancake.png" alt="..." />
-                    <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Dancake</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Cake World</span></div><span class="text-1000 fw-bold">$1.99</span>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                  <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/crispy-sandwitch.png" alt="..." />
-                    <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Crispy Sandwitch</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Fastfood Dine</span></div><span class="text-1000 fw-bold">$3.00</span>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                  <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/thai-soup.png" alt="..." />
-                    <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Thai Soup</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Foody Man</span></div><span class="text-1000 fw-bold">$2.79</span>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item" data-bs-interval="5000">
-              <div class="row gx-3 h-100 align-items-center">
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                  <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/cheese-burger.png" alt="..." />
-                    <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                  <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/toffes-cake.png" alt="..." />
-                    <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Toffe's Cake</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Top Sticks</span></div><span class="text-1000 fw-bold">$4.00</span>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                  <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/dancake.png" alt="..." />
-                    <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Dancake</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Cake World</span></div><span class="text-1000 fw-bold">$1.99</span>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                  <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/crispy-sandwitch.png" alt="..." />
-                    <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Crispy Sandwitch</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Fastfood Dine</span></div><span class="text-1000 fw-bold">$3.00</span>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                  <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/thai-soup.png" alt="..." />
-                    <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Thai Soup</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Foody Man</span></div><span class="text-1000 fw-bold">$2.79</span>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item" data-bs-interval="3000">
-              <div class="row gx-3 h-100 align-items-center">
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                  <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/cheese-burger.png" alt="..." />
-                    <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                  <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/toffes-cake.png" alt="..." />
-                    <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Toffe's Cake</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Top Sticks</span></div><span class="text-1000 fw-bold">$4.00</span>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                  <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/dancake.png" alt="..." />
-                    <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Dancake</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Cake World</span></div><span class="text-1000 fw-bold">$1.99</span>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                  <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/crispy-sandwitch.png" alt="..." />
-                    <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Crispy Sandwitch</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Fastfood Dine</span></div><span class="text-1000 fw-bold">$3.00</span>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                  <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/thai-soup.png" alt="..." />
-                    <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Thai Soup</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Foody Man</span></div><span class="text-1000 fw-bold">$2.79</span>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="row gx-3 h-100 align-items-center">
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                  <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/cheese-burger.png" alt="..." />
-                    <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                  <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/toffes-cake.png" alt="..." />
-                    <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Toffe's Cake</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Top Sticks</span></div><span class="text-1000 fw-bold">$4.00</span>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                  <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/dancake.png" alt="..." />
-                    <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Dancake</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Cake World</span></div><span class="text-1000 fw-bold">$1.99</span>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                  <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/crispy-sandwitch.png" alt="..." />
-                    <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Crispy Sandwitch</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Fastfood Dine</span></div><span class="text-1000 fw-bold">$3.00</span>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                  <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/thai-soup.png" alt="..." />
-                    <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1">Thai Soup</h5>
-                      <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Foody Man</span></div><span class="text-1000 fw-bold">$2.79</span>
+                      <h5 class="fw-bold text-1000 text-truncate mb-1" th:text="${mn.name}">Cheese Burger</h5>
+                      <span class="text-1000 fw-bold" th:text="'￦ '+${mn.price}">가격</span>
                     </div>
                   </div>
                   <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
