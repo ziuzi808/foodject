@@ -1,27 +1,38 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script>
+ 
+  
+  $(document).ready(function(){  
+	  $('#implbt').click(function(){
+			location.href = "/host/shop/shopregister";
+		});
+});
+</script>
 
-
-<h3 class="font-weight-bold">메뉴판 관리</h3>
+</head>
 <div class="col-lg-12 grid-margin stretch-card">
 	<div class="card">
 		<div class="card-body">
-			<h4 class="card-title">관리할 가게를 선택해주세요.</h4>
+			<h4 class="card-title">컬렉션 관리</h4>
+			
 			<div class="table-responsive">
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>가게 ID</th>
-							<th>상호명</th>
-							<th>영업상태</th>
+							<th>컬렉션 명</th>
+							
 						</tr>
 					</thead>
 					<tbody th:if="${slist != null}" >
 						<tr  th:each="s:${slist}">
 							<td class="py-1" th:text="${s.id}"><img src="../../images/faces/face1.jpg"
 								alt="image" /></td>
+							<td th:text="${s.name}">name</td>
+							<td>
 								
-							<td><a href="" th:text="${s.name}" th:href="@{detail(id=${s.id})}">name</a></td>
-							
+							</td>
+							<td>$ 77.99</td>
+
 							<td th:if="${s.status == 1}"><label class="badge badge-success">영업 중</label></td>
 							<td th:unless="${s.status == 1}"><label class="badge badge-danger">영업 중지</label></td>
 						</tr>
@@ -30,6 +41,8 @@
 					</tbody>
 				</table>
 			</div>
+			<hr><center>
+			<button id="colimplbt" type="button" class="btn btn-info">컬렉션 등록</button></center>
 		</div>
 	</div>
 </div>
