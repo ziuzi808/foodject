@@ -3,15 +3,19 @@ package com.foodject.biz;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.foodject.frame.Biz;
 import com.foodject.mapper.HostCollectionMapper;
 import com.foodject.vo.HostCollectionVO;
 
+
+@Service
 public class HostCollectionBiz implements Biz<Integer, HostCollectionVO> {
 
 	@Autowired
 	HostCollectionMapper dao;
+	
 	
 	
 	@Override

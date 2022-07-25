@@ -3,11 +3,13 @@ package com.foodject.biz;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.foodject.frame.Biz;
 import com.foodject.mapper.HostMenuMapper;
 import com.foodject.vo.HostMenuVO;
 
+@Service
 public class HostMenuBiz implements Biz<Integer, HostMenuVO>{
 
 	@Autowired
