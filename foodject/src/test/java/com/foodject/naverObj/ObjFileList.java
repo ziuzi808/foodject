@@ -1,4 +1,4 @@
-package com.foodject;
+package com.foodject.naverObj;
 
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -42,20 +42,24 @@ class ObjFileList {
 				.build();
 
 		String bucketName = "foodject";
-
+		String objectName = "cust/moon.jpg";
 		// list all in the bucket
 		try {
 			ListObjectsRequest listObjectsRequest = new ListObjectsRequest()
 					.withBucketName(bucketName)
-					.withMaxKeys(300);
+					.withMaxKeys(300).withPrefix("cust/moon.jpg");
 
 			ObjectListing objectListing = s3.listObjects(listObjectsRequest);
 
+			
+			int cnt = 0;
 			System.out.println("Object List:");
+			
 			while (true) {
 				for (S3ObjectSummary objectSummary : objectListing.getObjectSummaries()) {
 					System.out.println("    name=" + objectSummary.getKey() + ", size=" + objectSummary.getSize()
 							+ ", owner=" + objectSummary.getOwner().getId());
+							cnt++;
 				}
 
 				if (objectListing.isTruncated()) {
@@ -64,6 +68,10 @@ class ObjFileList {
 					break;
 				}
 			}
+			System.out.println("cnt : " + cnt);
+
+			
+
 		} catch (AmazonS3Exception e) {
 			System.err.println(e.getErrorMessage());
 			System.exit(1);

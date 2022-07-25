@@ -1,4 +1,4 @@
-package com.foodject;
+package com.foodject.naverObj;
 
 import java.io.File;
 import java.nio.file.Paths;

@@ -1,4 +1,4 @@
-package com.foodject;
+package com.foodject.naverObj;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
@@ -45,18 +45,22 @@ class ObjFileDownLoad {
 		    .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endPoint, regionName))
 		    .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(accessKey, secretKey)))
 		    .build();
+		System.out.println("accessKey : " + accessKey );
+		System.out.println("secretKey : " + secretKey );
 		
 		
-		
-		String userpath = Paths.get(System.getProperty("user.dir"), "src", "main","resources","static","foodject","shop").toString();
+		String userpath = Paths.get(System.getProperty("user.dir"), "src", "main","resources","static","foodject","cust").toString();
 		System.out.println("useerpath : " + userpath);
+
 		String bucketName = "foodject";
-		String objectName = "css/test1.jpg";
-		String downloadFilePath = userpath+"/"+"test123test.jpg";
+		String objectName = "cust/moon1.jpg";
+		String downloadFilePath = userpath+"/"+"moon1.jpg";
 
 		// download object
 		try {
+			System.out.println("S3Object upper");
 		    S3Object s3Object = s3.getObject(bucketName, objectName);
+			System.out.println("S3ObjectInputStream upper");
 		    S3ObjectInputStream s3ObjectInputStream = s3Object.getObjectContent();
 
 		    OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(downloadFilePath));
