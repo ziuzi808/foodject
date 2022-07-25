@@ -24,10 +24,21 @@ body {
 }
 
 #collection{
+	/* offset-x | offset-y | blur-radius | spread-radius | color */
+	box-shadow: 2px 2px 20px 1px rgba(0, 0, 0, 0.1);
+	border-radius:5px;
 	margin:auto;
 }
 
 </style>
+
+<script>
+function scroll(){
+	alert("ㄴㅇㄹ");
+}
+</script>
+
+
 <!-- ============================================-->
 <!-- <section> begin ============================-->
 <section class="pb-5 pt-8">
@@ -50,12 +61,11 @@ body {
     </div>
   </div>
   <!-- end of .container-->
-  
 </section>
 <!-- <section> close ============================-->
 <!-- ============================================-->
-<div id="collection" class="col-8 pill-nav" >
-  <a href="#home" th:each="c:${clist}" th:text="${c.name}">Home</a>
+<div id="collection" class="col-10 col-sm-10 col-md-4 col-lg-4 col-xl-4 pill-nav" >
+  <a th:href="'#'+${c.id}" th:each="c:${clist}" th:text="${c.name}">collection</a>
   <!--  클릭하면 class="active"기능 넣을까... -->
 </div>
 <!-- ============================================-->
@@ -64,7 +74,7 @@ body {
   <div class="container">
     <div class="row h-100" th:each="c:${clist}">
       <div class="col-lg-7 mx-auto text-center mt-7 mb-5">
-        <h5 class="fw-bold fs-3 fs-lg-5 lh-sm" th:text="${c.name}">Collection name</h5>
+        <h5 class="fw-bold fs-3 fs-lg-5 lh-sm" th:text="${c.name}" th:id="${c.id}">Collection name</h5>
       </div>
       <div class="col-12">
         <div class="carousel slide" id="carouselPopularItems" data-bs-touch="false" data-bs-interval="false">
@@ -78,13 +88,11 @@ body {
                       <span class="text-1000 fw-bold" th:text="'￦ '+${mn.price}">가격</span>
                     </div>
                   </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
+                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">주문</a></div>
                 </div>
               </div>
             </div>
           </div>
-          <button class="carousel-control-prev carousel-icon" type="button" data-bs-target="#carouselPopularItems" data-bs-slide="prev"><span class="carousel-control-prev-icon hover-top-shadow" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
-          <button class="carousel-control-next carousel-icon" type="button" data-bs-target="#carouselPopularItems" data-bs-slide="next"><span class="carousel-control-next-icon hover-top-shadow" aria-hidden="true"></span><span class="visually-hidden">Next </span></button>
         </div>
       </div>
     </div>
