@@ -93,7 +93,7 @@ public class UserCustController {
 		if(session != null) {
 			session.invalidate();
 		}
-		return "user/index";
+		return "redirect:/";
 	}
 
 	@RequestMapping("/register")
@@ -128,7 +128,7 @@ public class UserCustController {
 		
 
 		
-		return "user/index";
+		return "redirect:/";
 
 	}
 

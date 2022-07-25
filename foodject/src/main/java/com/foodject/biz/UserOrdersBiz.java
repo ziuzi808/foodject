@@ -40,5 +40,12 @@ public class UserOrdersBiz implements Biz<Integer, UserOrdersVO> {
 		return dao.selectall();
 	}
 
+	public void modifysts(UserOrdersVO v) throws Exception{
+		dao.updatests(v);
+	}
+	
+	public List<UserOrdersVO> getorders(int id) throws Exception{
+		return dao.selectorders(id);
+	}
 
 }
