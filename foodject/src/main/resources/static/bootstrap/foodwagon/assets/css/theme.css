@@ -3759,6 +3759,11 @@ fieldset:disabled .btn {
   border-color: #F17228;
 }
 
+.btn-line {
+  color: #4D4C4C;
+  border-color: #4D4C4C;
+}
+
 .btn-light {
   color: #616161;
   background-color: #F9FAFD;
@@ -7858,6 +7863,10 @@ fieldset:disabled .btn {
 
 .border-5 {
   border-width: 5px !important;
+}
+
+.w-15 {
+  width: 15% !important;
 }
 
 .w-25 {

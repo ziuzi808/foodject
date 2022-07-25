@@ -49,6 +49,18 @@ public class UserOrdersVO {
 		this.id = id;
 		this.status = status;
 	}
+	public UserOrdersVO(int id, String uid, int sid, String addr, String addrd, String phon, String nick, Date date,
+			String ask) {
+		this.id = id;
+		this.uid = uid;
+		this.sid = sid;
+		this.addr = addr;
+		this.addrd = addrd;
+		this.phon = phon;
+		this.nick = nick;
+		this.date = date;
+		this.ask = ask;
+	}
 	
 	
 	

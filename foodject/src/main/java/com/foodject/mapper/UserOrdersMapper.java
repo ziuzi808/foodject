@@ -17,7 +17,8 @@ public interface UserOrdersMapper {
 	public void update(UserOrdersVO obj) throws Exception;
 	public UserOrdersVO select(Integer id) throws Exception;
 	public List<UserOrdersVO> selectall() throws Exception;
-	public void updatests(UserCustVO obj) throws Exception;
+	public void updatests(UserOrdersVO obj) throws Exception;
+	public List<UserOrdersVO> selectorders(int id) throws Exception;
 
 
 }
