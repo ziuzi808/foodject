@@ -14,11 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 
-import com.foodject.biz.UserCustBiz;
-import com.foodject.frame.Util;
-import com.foodject.vo.UserCustVO;
-
-
 
 @Controller
 @RequestMapping("/cust")
@@ -68,6 +63,8 @@ public class UserCustController {
 			m.addAttribute("msg", "!! 아이디 또는 비밀번호를 확인해주세요");
 		}
 		m.addAttribute("center","user/cust/login");
+
+		
 		return "user/index";
 	}
 	
@@ -78,7 +75,9 @@ public class UserCustController {
 			cust = custbiz.get(id);
 			if(cust == null) {
 				throw new Exception();
-			}if(cust.getPwd().equals(pwd)) {
+
+			}
+			if(cust.getPwd().equals(pwd)) {
 				session.setAttribute("loginid", cust);
 			}else {
 				throw new Exception();
