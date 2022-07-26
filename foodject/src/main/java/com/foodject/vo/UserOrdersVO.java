@@ -25,30 +25,6 @@ public class UserOrdersVO {
 	private Date date;
 	private int status;
 	private String ask;
-	
-	public UserOrdersVO(int id, String uid, int sid, String addr, String addrd, String phon, String nick) {
-		this.id = id;
-		this.uid = uid;
-		this.sid = sid;
-		this.addr = addr;
-		this.addrd = addrd;
-		this.phon = phon;
-		this.nick = nick;
-	}
-	public UserOrdersVO(int id, String uid, int sid, String addr, String addrd, String phon, String nick,String ask) {
-		this.id = id;
-		this.uid = uid;
-		this.sid = sid;
-		this.addr = addr;
-		this.addrd = addrd;
-		this.phon = phon;
-		this.nick = nick;
-		this.ask = ask;
-	}
-	public UserOrdersVO(int id, int status) {
-		this.id = id;
-		this.status = status;
-	}
 	public UserOrdersVO(int id, String uid, int sid, String addr, String addrd, String phon, String nick, Date date,
 			String ask) {
 		this.id = id;
@@ -61,8 +37,21 @@ public class UserOrdersVO {
 		this.date = date;
 		this.ask = ask;
 	}
-	
-	
+	public UserOrdersVO(int id, int status) {
+		this.id = id;
+		this.status = status;
+	}
+	public UserOrdersVO(int id, String uid, int sid, String addr, String addrd, String phon, String nick, String ask) {
+		this.id = id;
+		this.uid = uid;
+		this.sid = sid;
+		this.addr = addr;
+		this.addrd = addrd;
+		this.phon = phon;
+		this.nick = nick;
+		this.ask = ask;
+	}
+
 	
 	
 }
