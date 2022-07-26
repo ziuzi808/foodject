@@ -109,7 +109,7 @@ public class UserCustController {
 		String imgname = cust.getMf().getOriginalFilename();
 		String[] splitname = imgname.split("[.]");
 		String idname = cust.getId();
-    String savename = idname + "." + splitname[splitname.length -1];
+    	String savename = idname + "." + splitname[splitname.length -1];
 
 		if(savename.equals(idname+".")) {
 			cust.setImg("icon.jpg");			

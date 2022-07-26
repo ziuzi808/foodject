@@ -1,29 +1,71 @@
-
 <script>
+
+
+
   $(document).ready(function () {
+
+    // 취소시 가는 페이지
     $('#cancelbtn').click(function () {
       location.href = "/host/shop";
     });
-    
+
+
+    // 가게 등록
     $('#submitbtn').click(function () {
-      alert("아오");
-      // $('#registerform').attr({
-			// 	'method':'post',
-			// 	'action':'/host/shop/shopregisterimpl'
-			// }); 
-			// $('#registerform').submit(); 
-
       $('#registerform').attr({
-        'enctype':'multipart/form-data',
-				'method':'post',
-				'action':'/host/shop/shopregisterimpl'
-			}); 
-			$('#registerform').submit(); 
-
+        'enctype': 'multipart/form-data',
+        'method': 'post',
+        'action': '/host/shop/shopregisterimpl'
+      });
+      $('#registerform').submit();
 
     });
 
+    
+
+    // 첨부파일을 변경할때 마다 실행되는 이벤트 
+
+
+    // 사업자 등록증 ajax 처리
+    $('#bnumbtn').click(function (e) {
+      alert("정보 : " + $("#bnumcheck").val());
+
+      if ($("#bnumcheck").val() != null && $("#bnumcheck").val() != "") {
+        alert("imageFile upper" + $("#bnumcheck").files[0]);
+        var imageFile = $("#bnumcheck").files[0];
+        alert("imgeFile"+ imageFile);
+
+        var testForm = document.getElementById("registerform");
+        var formData = new FormData(testForm);
+        formData.append("imageFile", imageFile);
+        $.ajax({
+
+          url: '/host/shop/checkbnum',
+          async: true,
+          type: "POST",
+          data: formData,
+          processData: false,
+          contentType: false,
+          dataType: "json",
+          data: {"bnumcheck" : bnumcheck},
+          success: function (data) {
+            alert("접속 성공");
+            if( data == '0' ){
+              alert("널인셉션")
+            }else{
+              alert("처리 완료")
+            }
+          }
+        });
+      } else {
+        alert("사진을 등록해주세요");
+      }
+
+    });
+
+
   });
+
 
 </script>
 
@@ -37,7 +79,7 @@
       <p class="text-danger">
         가게 등록시 "사업자 등록증" 사진이 꼭 필요합니다.
       </p>
-      <form class="registerform" id="registerform" >
+      <form class="registerform" id="registerform">
         <div class="form-group">
           <label for="name">상호명</label>
           <input type="text" class="form-control" id="name" name="name" placeholder="상호명">
@@ -45,41 +87,50 @@
         <div class="form-group">
           <label for="bnum">사업자 번호</label>
           <input type="text" class="form-control" id="bnum" name="bnum" placeholder="사업자 번호">
-          <input type="file" class="form-control file-upload-info" id="bimg" name="bimg" placeholder="Upload Image">
         </div>
         <div class="form-group">
-          <label for="addr">주소</label>
-          <input type="text" class="form-control" id="addr" name="addr" placeholder="주소">
-        </div>
-        <div class="form-group">
-          <label for="addrd">세부 주소</label>
-          <input type="text" class="form-control" id="addrd" name="addrd" placeholder="세부 주소">
-        </div>
-        <div class="form-group">
-          <label for="phon">전화 번호</label>
-          <input type="text" class="form-control" id="phon" name="phon" placeholder="전화 번호">
-        </div>
-        <div class="form-group">
-          <label for="allmin">최소 결제 금액</label>
-          <input type="number" class="form-control" id="allmin" name="allmin" value="1000"  placeholder="최소 결제 금액">
-        </div>
-        <div class="form-group">
-          <label>가게 로고</label>
+          <label>File upload</label>
+          <input type="file" name="img[]" class="file-upload-default">
           <div class="input-group col-xs-12">
-            <input type="file" class="form-control file-upload-info" id="logo" name="mf" placeholder="Upload Image">
+            <input type="file" class="form-control file-upload-info" id="bnumcheck" name="bnumcheck"
+              placeholder="Upload Image" accept=".jpg, .jpeg, .png">
             <span class="input-group-append">
-              <!-- <button class="file-upload-browse btn btn-primary" id="logobt" type="button">Upload</button> -->
+              <button class="file-upload-browse btn btn-primary" id="bnumbtn" type="button">Check</button>
             </span>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="info">가게 소개</label>
-          <textarea class="form-control" id="info" name="info" rows="4"></textarea>
-        </div>
-        <button class="btn btn-primary" id="submitbtn" type="button" >Submit</button>
-        <button class="btn btn-light"  id="cancelbtn" type="button">Cancel</button>
+          <div class="form-group">
+            <label for="addr">주소</label>
+            <input type="text" class="form-control" id="addr" name="addr" placeholder="주소">
+          </div>
+          <div class="form-group">
+            <label for="addrd">세부 주소</label>
+            <input type="text" class="form-control" id="addrd" name="addrd" placeholder="세부 주소">
+          </div>
+          <div class="form-group">
+            <label for="phon">전화 번호</label>
+            <input type="text" class="form-control" id="phon" name="phon" placeholder="전화 번호">
+          </div>
+          <div class="form-group">
+            <label for="allmin">최소 결제 금액</label>
+            <input type="number" class="form-control" id="allmin" name="allmin" value="1000" placeholder="최소 결제 금액">
+          </div>
+          <div class="form-group">
+            <label>가게 로고</label>
+            <div class="input-group col-xs-12">
+              <input type="file" class="form-control file-upload-info" id="logo" name="mf" placeholder="Upload Image" accept=".jpg, .jpeg, .png">
+              <span class="input-group-append">
+                <!-- <button class="file-upload-browse btn btn-primary" id="logobt" type="button">Upload</button> -->
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="info">가게 소개</label>
+            <textarea class="form-control" id="info" name="info" rows="4"></textarea>
+          </div>
+          <button class="btn btn-primary" id="submitbtn" type="button">Submit</button>
+          <button class="btn btn-light" id="cancelbtn" type="button">Cancel</button>
       </form>
-     
+
     </div>
   </div>
 </div>

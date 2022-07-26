@@ -13,22 +13,25 @@ import java.nio.file.Paths;
 import java.util.UUID;
 
 import org.json.JSONArray;
-import org.json.simple.JSONObject;
+import org.json.JSONObject;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.test.context.SpringBootTest;
 
-@Component
-public class naverORCTest {
+@SpringBootTest
+class ORCTest {
 
-    @Value("${NaverOCRapiURL}")
+	
+	@Value("${NaverOCRapiURL}")
     String apiURL;
     @Value("${NaverOCRsecretKey}")
     String secretKey;
-    public void naverOCR(){
+	
+	@Test
+	void contextLoads() {
 
-		String imgpath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "static","img").toString();
-		String imageFile = imgpath +"\\biz3.png";
-
+		String imgpath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "static","foodject").toString();
+		String imageFile = imgpath +"\\biz3.jpg";
 		try {
 			URL url = new URL(apiURL);
 			HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -78,11 +81,11 @@ public class naverORCTest {
 			br.close();
 			System.out.println("REsult:");
 			System.out.println(response);
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
-
 	private void writeMultiPart(OutputStream out, String jsonMessage, File file, String boundary) throws
 	IOException {
 		StringBuilder sb = new StringBuilder();

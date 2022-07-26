@@ -41,7 +41,6 @@ public class MsgController {
 	}
 	@MessageMapping("/receiveto") // 특정 Id에게 전송
 	public void receiveto(Msg msg, SimpMessageHeaderAccessor headerAccessor) {
-		String id = msg.getSendid();
 		
 		String target = msg.getReceiveid();
 		template.convertAndSend("/send/to/"+target,msg);
