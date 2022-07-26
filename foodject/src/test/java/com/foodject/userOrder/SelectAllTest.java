@@ -25,5 +25,4 @@ class SelectAllTest {
 		}
 		System.out.println(vo);
 	}
-
 }
