@@ -25,6 +25,8 @@ public class HostMenuVO {
 	private Date date;
 	
 	private String category;
+	private String cname;
+	
 	
 	
 	
@@ -50,6 +52,12 @@ public class HostMenuVO {
 		this.name = name;
 		this.price = price;
 		this.line = line;
+	}
+
+	public HostMenuVO(int sid, String cname) {
+		super();
+		this.sid = sid;
+		this.cname = cname;
 	}
 	
 	
