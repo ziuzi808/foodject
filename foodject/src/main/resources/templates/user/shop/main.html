@@ -29,14 +29,25 @@ body {
 	border-radius:5px;
 	margin:auto;
 }
+.modal{
+	position:absolute;
+	width:100%;
+	height:100%;
+	background: rgba(0,0,0,0.8);
+	top:0;
+	left:0;
 
+}
 </style>
 
+
 <script>
-function scroll(){
-	alert("ㄴㅇㄹ");
-}
+
 </script>
+
+<!-- <Modal> begin ==============================-->
+
+
 
 
 <!-- ============================================-->
@@ -51,7 +62,7 @@ function scroll(){
               <div class="col-md-5 col-xl-7 col-xxl-8 g-0 order-0 order-md-1"><img class="img-fluid w-100 fit-cover h-100 rounded-top rounded-md-end rounded-md-top-0" src="/bootstrap/foodwagon/assets/img/gallery/crispy-sandwiches.png" alt="..." /></div>
               <div class="col-md-7 col-xl-5 col-xxl-4 p-4 p-lg-5">
                 <h1 class="card-title mt-xl-5 mb-4" th:text="${shop.name}"> 음식점명 </h1>
-                <p class="fs-1" th:text="${shop.info}">Enjoy the large size of sandwiches. Complete your meal with the perfect slice of sandwiches.</p>
+                <p class="fs-1" th:text="${shop.info}">가게 정보</p>
                 <div class="d-grid bottom-0"><a class="btn btn-lg btn-primary mt-xl-6" href="#!">주문하기<i class="fas fa-chevron-right ms-2"></i></a></div>
               </div>
             </div>
@@ -65,8 +76,32 @@ function scroll(){
 <!-- <section> close ============================-->
 <!-- ============================================-->
 <div id="collection" class="col-10 col-sm-10 col-md-4 col-lg-4 col-xl-4 pill-nav" >
-  <a th:href="'#'+${c.id}" th:each="c:${clist}" th:text="${c.name}">collection</a>
+  <a th:href="'#c'+${c.id}" th:each="c:${clist}" th:text="${c.name}">collection</a>
+</div>
   <!--  클릭하면 class="active"기능 넣을까... -->
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- ============================================-->
 <!-- <section> begin ============================-->
@@ -74,7 +109,7 @@ function scroll(){
   <div class="container">
     <div class="row h-100" th:each="c:${clist}">
       <div class="col-lg-7 mx-auto text-center mt-7 mb-5">
-        <h5 class="fw-bold fs-3 fs-lg-5 lh-sm" th:text="${c.name}" th:id="${c.id}">Collection name</h5>
+        <h5 class="fw-bold fs-3 fs-lg-5 lh-sm" th:text="${c.name}" th:id="'c'+${c.id}">Collection name</h5>
       </div>
       <div class="col-12">
         <div class="carousel slide" id="carouselPopularItems" data-bs-touch="false" data-bs-interval="false">
@@ -84,11 +119,29 @@ function scroll(){
                 <div class="col-4 col-sm-4 col-md-4 col-lg-3 col-xl-2 mb-5 h-100" th:each="mn:${mlist}" th:if="${mn.collid == c.id}">
                   <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="/bootstrap/foodwagon/assets/img/gallery/cheese-burger.png" alt="..." />
                     <div class="card-body ps-0">
-                      <h5 class="fw-bold text-1000 text-truncate mb-1" th:text="${mn.name}">Cheese Burger</h5>
+                      <h5 class="fw-bold text-1000 text-truncate mb-1" th:text="${mn.name}">메뉴 이름</h5>
                       <span class="text-1000 fw-bold" th:text="'￦ '+${mn.price}">가격</span>
                     </div>
                   </div>
-                  <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">주문</a></div>
+                  <div class="d-grid gap-2"><button type="button" class="btn btn-primary" data-toggle="modal" th:data-target="'#m'+${mn.id}">주문</button></div>
+                  
+                    <!-- Modal -->
+					<div th:id="'m'+${mn.id}" class="modal fade" role="dialog">
+					  <div class="modal-dialog">
+					    <!-- Modal content-->
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal">&times;</button>
+					        <h4 class="modal-title" th:text="${mn.name}">Modal Header</h4>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					      </div>
+					    </div>
+						<!-- content end -->
+					  </div>
+					</div>
+					<!-- modal end -->
                 </div>
               </div>
             </div>
@@ -97,7 +150,6 @@ function scroll(){
       </div>
     </div>
   </div><!-- end of .container-->
-
 </section>
 <!-- <section> close ============================-->
 <!-- ============================================-->
