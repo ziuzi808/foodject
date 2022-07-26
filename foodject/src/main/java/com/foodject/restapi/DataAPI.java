@@ -10,13 +10,17 @@ import org.json.JSONObject;
 import org.json.XML;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DataAPI {
+
+    @Value("serviceKey")
+    String serviceKey;
 	public Object dataapi(String zcode) throws Exception {
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B552584/EvCharger/getChargerInfo"); /*URL*/
-        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=a/pYFxypLYOX4S30h/QdUMV5zkTuYZjzVkaihciUWP0FL5iz5uOXi66GloRgR9xSeQiVgkgT5NyGACF9xlSuwQ=="); /*Service Key*/
+        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + serviceKey); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지 번호*/
         urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("20", "UTF-8")); /*한 페이지 결과 수 (최소 10, 최대 9999)*/
         urlBuilder.append("&" + URLEncoder.encode("zcode","UTF-8") + "=" + URLEncoder.encode(zcode, "UTF-8")); /*시도 코드 (행정구역코드 앞 2자리)*/

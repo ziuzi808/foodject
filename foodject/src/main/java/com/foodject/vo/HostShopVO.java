@@ -31,6 +31,7 @@ public class HostShopVO {
 	private int status;
 	private int marker;
 	private MultipartFile mf;
+	private MultipartFile bnumcheck;
 	
 	public HostShopVO(String name, String bnum, String addr, String addrd, String phon, String info, int allmin,
 			MultipartFile mf) {
@@ -42,6 +43,10 @@ public class HostShopVO {
 		this.info = info;
 		this.allmin = allmin;
 		this.mf = mf;
+	}
+
+	public HostShopVO(MultipartFile bnumcheck) {
+		this.bnumcheck = bnumcheck;
 	}
 
 
