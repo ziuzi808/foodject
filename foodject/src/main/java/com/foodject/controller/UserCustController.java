@@ -173,9 +173,9 @@ public class UserCustController {
 		return "redirect:/";
 	}
 
-	@RequestMapping("/orders")
-	public String orders(Model m) {
-		m.addAttribute("center","/user/cust/orders");
+	@RequestMapping("/myorders")
+	public String myorders(Model m) {
+		m.addAttribute("center","/user/cust/myorders");
 		return "user/index";
 	}
 	

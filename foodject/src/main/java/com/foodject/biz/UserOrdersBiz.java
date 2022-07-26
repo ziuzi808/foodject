@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.foodject.frame.Biz;
 import com.foodject.mapper.UserOrdersMapper;
+import com.foodject.vo.UserOrdersMyVO;
 import com.foodject.vo.UserOrdersVO;
 
 @Service
@@ -44,8 +45,9 @@ public class UserOrdersBiz implements Biz<Integer, UserOrdersVO> {
 		dao.updatests(v);
 	}
 	
-	public List<UserOrdersVO> getorders(int id) throws Exception{
-		return dao.selectorders(id);
+	public List<UserOrdersMyVO> getmy(String k) throws Exception{
+		return dao.selectmy(k);
 	}
+
 
 }

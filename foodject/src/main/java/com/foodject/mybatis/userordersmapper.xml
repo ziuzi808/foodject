@@ -10,11 +10,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="selectall" resultType="userordersVO">
 		SELECT * FROM orders
 	</select>
-	<select id="selectorders" parameterType="int" resultType="userordersVO">
-		SELECT o.id, s.name, s.logo, m.name, m.price FROM orders o
-		inner join shop s on o.sid = s.id
-		inner join menu m on s.id = m.sid
-		WHERE o.id=#{id}
+	<select id="selectmy" parameterType="String" resultType="userordersmyVO">
+		SELECT o.uid, o.date AS odate, s.name AS sname, o.status, de.mname, d.oname, de.price AS mprice, d.oprice AS oprice FROM orders o
+		JOIN detail de ON o.id = de.odid
+		JOIN shop s ON o.sid = s.id
+		JOIN dopt d ON de.id=d.did
+		WHERE o.uid=#{uid}
 	</select>
 	<insert id="insert" parameterType="userordersVO">
 		INSERT INTO orders VALUES(#{id}, #{uid}, #{sid}, #{addr}, #{addrd},#{phon}, #{nick}, SYSDATE(), 1, #{ask})
