@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.foodject.biz.HostManagerBiz;
+import com.foodject.restapi.BcrytPassward;
 import com.foodject.vo.HostManagerVO;
 
 @Controller
@@ -20,6 +21,8 @@ public class HostMainController {
 	@Autowired
 	HostManagerBiz mbiz;
 	
+	@Autowired
+	BcrytPassward bp;
 	public void mainProduct(Model m) {
 //		List<ProductVO> plist = null;
 //		String pimgpath = Paths.get(System.getProperty("user.dir"), "src", "main","resources","static","img", "product_img").toString();
@@ -54,6 +57,9 @@ public class HostMainController {
 	public String registerimpl(Model m, HostManagerVO manager, HttpSession session) {
 		
 		try {
+			//비밀번호 암호화 처리
+			//manager.setPwd(bp.hashPassward(manager.getPwd()));
+
 			mbiz.register(manager);
 			session.setAttribute("loginshop", manager);
 		} catch (Exception e) {

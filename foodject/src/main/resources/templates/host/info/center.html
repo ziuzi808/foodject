@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
 	<meta charset="UTF-8">
 	<title>Shop Websocket</title>
@@ -71,7 +70,7 @@
 
 		// 서버소켓에 연결끊기
 		function disconnect() {
-			if (stompClient !== null) {
+			if (stompClient != null) {
 				stompClient.disconnect();
 			}
 			setConnected(false);

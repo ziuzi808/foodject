@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import com.foodject.biz.UserCustBiz;
 import com.foodject.frame.Util;
+import com.foodject.restapi.BcrytPassward;
 import com.foodject.vo.UserCustVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,8 @@ public class UserCustController {
 	@Autowired
 	Util ut;
 
-
+	@Autowired
+	BcrytPassward bp;
 	
 	@RequestMapping("/update")
 	public String update(Model m, HttpSession session) {
@@ -77,6 +79,13 @@ public class UserCustController {
 				throw new Exception();
 
 			}
+			// 비밀번호 암호화 체크 처리
+			// if(bp.checkPassward(cust.getPwd(), pwd)) {
+			// 	session.setAttribute("loginid", cust);
+			// }else {
+			// 	throw new Exception();
+			// }
+
 			if(cust.getPwd().equals(pwd)) {
 				session.setAttribute("loginid", cust);
 			}else {
@@ -110,6 +119,10 @@ public class UserCustController {
 		String[] splitname = imgname.split("[.]");
 		String idname = cust.getId();
     	String savename = idname + "." + splitname[splitname.length -1];
+
+		// 비밀번호 암호화 처리
+		//cust.setPwd(bp.hashPassward(cust.getPwd()));
+
 
 		if(savename.equals(idname+".")) {
 			cust.setImg("icon.jpg");			
