@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT DISTINCT c.id, c.name, c.line FROM collection c
 	    INNER JOIN menu mn ON mn.collid=c.id
 	    WHERE mn.sid = #{sid}
-	    ORDER BY c.line;
+	    ORDER BY line;
 	</select>
 	
 </mapper>

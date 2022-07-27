@@ -20,5 +20,5 @@ public interface HostMenuMapper {
 	public List<HostMenuVO> selectall() throws Exception;
 	
 	public List<HostMenuVO> select_byShop(int sid) throws Exception;
-	public List<HostMenuVO> selectcol(int sid) throws Exception;
+	
 }

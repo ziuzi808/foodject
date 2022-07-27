@@ -52,5 +52,9 @@ public class HostCollectionBiz implements Biz<Integer, HostCollectionVO> {
 	public List<HostCollectionVO> get_byShop(int k) throws Exception{
 		return dao.select_byShop(k);
 	}
+	public List<HostCollectionVO> getcol(int k) throws Exception{
+		return dao.selectcol(k);
+	}
+
 
 }
