@@ -1,11 +1,16 @@
 package com.foodject.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import com.foodject.biz.UserCustBiz;
+import com.foodject.biz.UserOrdersBiz;
 import com.foodject.frame.Util;
+import com.foodject.restapi.BcrytPassward;
 import com.foodject.vo.UserCustVO;
+import com.foodject.vo.UserOrdersMyVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,11 +26,15 @@ public class UserCustController {
 	
 	@Autowired
 	UserCustBiz custbiz;
+	
+	@Autowired
+	UserOrdersBiz ordersbiz;
 
 	@Autowired
 	Util ut;
 
-
+	@Autowired
+	BcrytPassward bp;
 	
 	@RequestMapping("/update")
 	public String update(Model m, HttpSession session) {
@@ -77,6 +86,13 @@ public class UserCustController {
 				throw new Exception();
 
 			}
+			// 비밀번호 암호화 체크 처리
+			// if(bp.checkPassward(cust.getPwd(), pwd)) {
+			// 	session.setAttribute("loginid", cust);
+			// }else {
+			// 	throw new Exception();
+			// }
+
 			if(cust.getPwd().equals(pwd)) {
 				session.setAttribute("loginid", cust);
 			}else {
@@ -103,22 +119,22 @@ public class UserCustController {
 	
 	@RequestMapping("/registerimpl")
 	public String registerimpl(Model m, UserCustVO cust, String img) {
-		
-
 		//이미지파일 이름 저장
 		String imgname = cust.getMf().getOriginalFilename();
 		String[] splitname = imgname.split("[.]");
 		String idname = cust.getId();
     	String savename = idname + "." + splitname[splitname.length -1];
 
+		// 비밀번호 암호화 처리
+		//cust.setPwd(bp.hashPassward(cust.getPwd()));
+
+
 		if(savename.equals(idname+".")) {
 			cust.setImg("icon.jpg");			
 		}else {
 			cust.setImg(savename);
 			try {
-				
 				custbiz.register(cust);
-
 				// saveFile(실제 파일, 저장할 이름, 사용되는 DB 컬럼명)
 				ut.saveFile(cust.getMf(), savename, "cust");
 			} catch (Exception e) {
@@ -131,12 +147,10 @@ public class UserCustController {
 
 	@RequestMapping("/updateimpl")
 	public String updateimpl(Model m, UserCustVO cust, String img) {
-		
 		String imgname = cust.getMf().getOriginalFilename();
 		String[] splitname = imgname.split("[.]");
 		String idname = cust.getId();
-		String savename = idname + "." + splitname[splitname.length -1];
-		
+		String savename = idname + "." + splitname[splitname.length -1];		
 		
 		if(savename.equals(idname+".")) {
 			cust.setImg("icon.jpg");			
@@ -145,18 +159,14 @@ public class UserCustController {
 			try {
 				Util ut = new Util();
 				custbiz.modify(cust);
-
 				ut.saveFile(cust.getMf(), savename, "cust");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}				
-		
-		
+		}		
 		
 		return "redirect:/cust/update";
 	}
-
 	
 	@RequestMapping("/delete")
 	public String updatests(UserCustVO cust, HttpSession session, Model m) {
@@ -171,7 +181,15 @@ public class UserCustController {
 	}
 
 	@RequestMapping("/myorders")
-	public String myorders(Model m) {
+	public String myorders(HttpSession session, Model m) {
+		UserCustVO cust = (UserCustVO) session.getAttribute("loginid");
+		List<UserOrdersMyVO> olist = null;
+		try {
+			olist = ordersbiz.getmy(cust.getId());
+			m.addAttribute("olist",olist);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		m.addAttribute("center","/user/cust/myorders");
 		return "user/index";
 	}

@@ -26,7 +26,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="selectall" resultType="hostcollectionVO">
 		SELECT * FROM collection
 	</select>
-	
+	<select id="selectcol" parameterType="Integer" resultType="hostcollectionVO">
+		SELECT * FROM collection
+		WHERE sid=#{sid}
+	</select>
 	<select id="select_byShop" parameterType="Integer" resultType="hostcollectionVO">
 		SELECT DISTINCT c.id, c.name, c.line FROM collection c
 	    INNER JOIN menu mn ON mn.collid=c.id

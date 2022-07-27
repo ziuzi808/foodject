@@ -16,6 +16,7 @@ public class HostCollectionVO {
 	private int id;
 	private String name;
 	private int line;
+	private int sid;
 	
 	// for updateLine
 	public HostCollectionVO(int id, int line) {

@@ -20,4 +20,5 @@ public interface HostCollectionMapper {
 	public List<HostCollectionVO> selectall() throws Exception;
 	
 	public List<HostCollectionVO> select_byShop(int obj) throws Exception;
+	public List<HostCollectionVO> selectcol(int obj) throws Exception;
 }

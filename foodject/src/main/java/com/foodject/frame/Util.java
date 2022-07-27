@@ -27,7 +27,7 @@ public class Util {
 		
 		if (System.getProperty("os.name").toLowerCase().startsWith("win")){
 			// 파일이 저장 안되시면 user.dir 뒤에 foodject를 지우거나 추가하세요!! 본인 경로에 맞게 설정해야됩니다 꼭 foodject가 아닐수도있어요
-            filePath = Paths.get(System.getProperty("user.dir"), "src", "main","resources","static","foodject", table ).toString() 
+            filePath = Paths.get(System.getProperty("user.dir"), "foodject", "src", "main","resources","static","foodject", table ).toString() 
 				+ File.separator + savename;
         } else{
             filePath = "/root/apache-tomcat-8.5.27/webapps/ROOT/WEB-INF/classes/static/foodject/"+table + File.separator + savename;

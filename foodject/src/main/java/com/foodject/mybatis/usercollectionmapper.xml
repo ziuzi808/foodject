@@ -29,6 +29,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="select_byShop" parameterType="Integer" resultType="usercollectionVO">
+
 		SELECT DISTINCT * FROM collection
 	    WHERE sid = #{sid}
 	    ORDER BY line;

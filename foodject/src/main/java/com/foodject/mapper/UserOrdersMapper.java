@@ -19,7 +19,7 @@ public interface UserOrdersMapper {
 	public UserOrdersVO select(Integer id) throws Exception;
 	public List<UserOrdersVO> selectall() throws Exception;
 	public void updatests(UserOrdersVO obj) throws Exception;
-	public List<UserOrdersMyVO> selectmy(String id) throws Exception;
+	public List<UserOrdersMyVO> selectmy(String uid) throws Exception;
 
 
 }
