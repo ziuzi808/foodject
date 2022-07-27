@@ -34,33 +34,37 @@ $(document).ready(function(){
                 <h1 class="card-title mt-xl-5 mb-4 text-center">주문내역조회</h1>
                 
                 <!-- ===============주문내역항목나열============== -->
-	              <div class="px-6 pb-3">
-	              <div class="card w-xxl-100">
-	                <div class="card-body">
-	                  <nav>
-	                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-	                      <div class="col-md-2">
-	                        <img class="img-fluid rounded-3 w-100" src="/bootstrap/foodwagon/assets/img/gallery/discount-item-1.png">
-	                      </div>
-	                      <div class="col-md-10 p-3">
-	                        <h3 class="pt-3">가게이름</h3>	                        
-	                      </div>
-	                    </div>
-	                  </nav>
-	                  <div class="tab-content mt-3" id="nav-tabContent">
-	                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-	                      <form class="row gx-2 gy-2 align-items-center">
-	                        <div class="col ps-2">                                                
-	                            <h6>주문메뉴 간략(ex: 떡볶이 외 ) / 총액</h6>                         
-	                        </div>
-	                        <div class="d-grid gap-3 col-sm-auto">
-	                          <button class="btn btn-line text-dark">주문상세</button>
-	                        </div>
-	                      </form>
-	                    </div>
-	                  </div>
-	                </div>
-	              </div>
+	              <div th:each="o:${olist}">
+		              <div class="px-6 pb-3">
+		              <div class="card w-xxl-100">
+		                <div class="card-body">
+		                  <nav>
+		                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+		                      <div class="col-md-2">
+		                        <img class="img-fluid rounded-3 w-100" th:src="@{'/custimg/'+${o.slogo}}">
+		                      </div>
+		                      <div class="col-md-10 p-3">
+		                      	<p th:text="${#dates.format(o.odate,'yyyy-MM-dd')}"></p>
+		                        <h3 class="pt-2" th:text="${o.sname}">가게이름</h3>	                        
+		                      </div>
+		                    </div>
+		                  </nav>
+		                  <div class="tab-content mt-3" id="nav-tabContent">
+		                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+		                      <form class="row gx-2 gy-2 align-items-center">
+		                        <div class="col-md-4"></div> 
+		                        <div class="col-md-5">                                                
+		                            <h6 th:text="${o.mname}">주문메뉴 간략(ex: 떡볶이 외 )</h6>
+		                        </div>
+		                        <div class="d-grid gap-3 col-sm-auto">
+		                          <button class="btn btn-line text-dark">주문상세</button>
+		                        </div>
+		                      </form>
+		                    </div>
+		                  </div>
+		                </div>
+		              </div>
+		              </div>
 	              </div>
 	             <!-- ===============주문내역항목나열============== -->
 			  </div>

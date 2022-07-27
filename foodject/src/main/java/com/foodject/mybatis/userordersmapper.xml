@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM orders
 	</select>
 	<select id="selectmy" parameterType="String" resultType="userordersmyVO">
-		SELECT o.uid, o.date AS odate, s.name AS sname, o.status, de.mname, d.oname, de.price AS mprice, d.oprice AS oprice FROM orders o
+		SELECT o.uid, o.date AS odate, s.name AS sname, s.logo AS slogo, o.status, de.mname, d.oname, de.price AS mprice, d.oprice AS oprice FROM orders o
 		JOIN detail de ON o.id = de.odid
 		JOIN shop s ON o.sid = s.id
 		JOIN dopt d ON de.id=d.did
