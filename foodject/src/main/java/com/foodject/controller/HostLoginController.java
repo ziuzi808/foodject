@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.foodject.biz.HostManagerBiz;
+import com.foodject.restapi.BcrytPassward;
 import com.foodject.vo.HostManagerVO;
 
 @Controller
@@ -19,6 +20,9 @@ import com.foodject.vo.HostManagerVO;
 public class HostLoginController {
 	@Autowired
 	HostManagerBiz biz;
+
+	@Autowired
+	BcrytPassward bp;
 	
 	public void mainProduct(Model m) {
 //		List<ProductVO> plist = null;
@@ -57,7 +61,12 @@ public class HostLoginController {
 				throw new Exception("아이디가 존재하지 않습니다.");
 				
 			}
-			System.out.println("manager");
+			// if (bp.checkPassward(manager.getPwd(), pwd)) {
+			// 	session.setAttribute("loginshop", manager);
+				
+			// }else {
+			// 	throw new Exception("비밀번호가 틀립니다.");
+			// }
 			if (manager.getPwd().equals(pwd)) {
 				session.setAttribute("loginshop", manager);
 				

@@ -19,9 +19,7 @@ public class BcrytPassward {
     // dbpwd = db에 저장되어있는 pwd, inputpwd = 사용자에게 입력받은 pwd
     public boolean checkPassward(String dbpwd, String inputpwd){
 
-	
-        String encrypted = BCrypt.hashpw(dbpwd, BCrypt.gensalt());
-    if( BCrypt.checkpw( inputpwd, encrypted) ){
+    if( BCrypt.checkpw( inputpwd, dbpwd) ){
         return true;
     }
     return false;
