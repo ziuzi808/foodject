@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.foodject.biz.UserCollectionBiz;
 import com.foodject.biz.UserMenuBiz;
+import com.foodject.biz.UserOptBiz;
 import com.foodject.biz.UserShopBiz;
 import com.foodject.vo.MarkerVO;
 import com.foodject.vo.UserCollectionVO;
 import com.foodject.vo.UserMenuVO;
+import com.foodject.vo.UserOptVO;
 import com.foodject.vo.UserShopVO;
 
 @Controller
@@ -27,6 +29,9 @@ public class UserShopController {
 	
 	@Autowired
 	UserCollectionBiz cbiz;
+	
+	@Autowired
+	UserOptBiz obiz;
 	
 	
 	public void mainProduct(Model m) {
@@ -46,7 +51,8 @@ public class UserShopController {
 	public String shop(Model m, int cid, double latt, double logt) {
 		MarkerVO obj = new MarkerVO(latt,logt,cid);
 		List<UserShopVO> list = null;
-		try {
+		
+		try {	
 			list = sbiz.getMain(obj);
 			m.addAttribute("shoplist",list);
 			m.addAttribute("center", "user/shop/center");
@@ -61,15 +67,22 @@ public class UserShopController {
 	public String main(Model m, int sid) {
 		List<UserMenuVO> mlist = null;
 		List<UserCollectionVO> clist = null;
+		List<UserOptVO> olist = null;
 		UserShopVO obj = null;
 		
 		try {
 			obj = sbiz.get(sid);
 			m.addAttribute("shop",obj);
+			
 			clist = cbiz.get_byShop(sid);
 			m.addAttribute("clist",clist);
+			
 			mlist = mnbiz.get_byShop(sid);
 			m.addAttribute("mlist",mlist);
+			
+			olist = obiz.get_byShop(sid);
+			m.addAttribute("olist",olist);
+			
 			m.addAttribute("center","/user/shop/main");
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -125,9 +125,6 @@ public class UserCustController {
 				e.printStackTrace();
 			}
 		}				
-		
-
-		
 		return "redirect:/";
 
 	}
