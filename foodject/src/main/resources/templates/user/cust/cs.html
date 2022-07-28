@@ -1,11 +1,24 @@
 <script>
+
 $(document).ready(function(){
   $("#ajaxmodal").click(function(){
     alert("모달 에이작스");
     $("#modalbtn").click();
   });
 });
-
+$(document).ready(function(){
+	//Menu Buttons
+	$('#update').click(function(){
+ 		location.href='/cust/update';
+	});
+	$('#myorders').click(function(){
+ 		location.href='/cust/myorders';
+	});
+	$('#cs').click(function(){
+ 		location.href='/cust/cs';
+	});	
+	
+});
 </script>
 
   
@@ -52,10 +65,7 @@ $(document).ready(function(){
 </body>
 </html>
 
-
-
-
-
+<section class="pb-5 pt-8">
 
   <div class="container">
     <div class="row">
@@ -74,10 +84,10 @@ $(document).ready(function(){
               </div>
             
               <div class="col-md-5 col-xl-7 col-xxl-8 g-0 order-0 order-md-1">
-                <h1 class="card-title mt-xl-5 mb-4 text-center">CS Page</h1>
-              
-			  </div>
+                <h1 class="card-title mt-xl-5 mb-4 text-center">CS</h1>
+                
 
+			  </div>
             </div>
           </div>
         </div>

@@ -15,8 +15,8 @@
 							<th>영업상태</th>
 						</tr>
 					</thead>
-					<tbody th:if="${slist != null}" >
-						<tr  th:each="s:${slist}" >
+					<tbody  >
+						<tr  th:each="s:${slist}" th:if="${slist != null}">
 							<td class="py-1" th:text="${s.id}"><img src="../../images/faces/face1.jpg"
 								alt="image" /></td>
 								

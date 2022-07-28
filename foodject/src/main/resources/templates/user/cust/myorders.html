@@ -1,5 +1,16 @@
 <script>
+function idajax(oid){
+	$.ajax({
+		url: '/cust/myordersde',
+		type: 'get',
+		data: {}
+	})	
+};
+
+
+
 $(document).ready(function(){
+	
 	//Menu Buttons
 	$('#update').click(function(){
  		location.href='/cust/update';
@@ -10,6 +21,8 @@ $(document).ready(function(){
 	$('#cs').click(function(){
  		location.href='/cust/cs';
 	});	
+
+});
 
 </script>
 
@@ -54,11 +67,11 @@ $(document).ready(function(){
 		                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 		                      <form class="row gx-2 gy-2 align-items-center">
 		                        <div class="col-md-4"></div> 
-		                        <div class="col-md-5">                                                
-		                            <h6 th:text="${o.mname}">주문메뉴 간략(ex: 떡볶이 외 )</h6>
+		                        <div class="col-md-5">
 		                        </div>
 		                        <div class="d-grid gap-3 col-sm-auto">
-		                          <button class="btn btn-line text-dark">주문상</button>
+		                          	<a type="button" th:onclick="|location.href='@{view(oid=${o.oid})}'|" class="btn btn-line text-dark" th:id="${o.oid}+'btn'">주문상세</a>							
+								                          
 		                        </div>
 		                      </form>
 		                    </div>

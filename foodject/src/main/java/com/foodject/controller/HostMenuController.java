@@ -27,7 +27,9 @@ public class HostMenuController {
 	
 	@Autowired
 	HostShopBiz biz;
+	@Autowired
 	HostCollectionBiz cbiz;
+	@Autowired
 	HostMenuBiz mbiz;
 	
 	public void mainProduct(Model m) {
@@ -74,23 +76,47 @@ public class HostMenuController {
 	}
 	@RequestMapping("/col")	
 	public String col(Model m, int sid) {
-		List<HostMenuVO> mlist = null;
 		List<HostCollectionVO> clist = null;
-		HostShopVO obj = null;
 		
 		try {
-			obj = biz.get(sid);
-			m.addAttribute("shop",obj);
-			clist = cbiz.get_byShop(sid);
+			
+			clist = cbiz.getcol(sid);
 			m.addAttribute("clist",clist);
-			mlist = mbiz.get_byShop(sid);
-			m.addAttribute("mlist",mlist);
-			m.addAttribute("center","/host/menu/setting");
+			m.addAttribute("center","/host/menu/col");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "host/index";
 	}
+	@RequestMapping("/msel")	
+	public String menu(Model m, int collid) {
+		List<HostMenuVO> mnlist = null;
+		
+		try {
+			
+			mnlist = mbiz.getmenu(collid);
+			m.addAttribute("mnlist",mnlist);
+			m.addAttribute("center","/host/menu/msel");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "host/index";
+	}
+	@RequestMapping("/msel/delete")
+	public String delete(Model m, int[] sArray) {
+		try {
+			for (int i = 0; i < sArray.length; i++) {
+				
+				mbiz.remove(sArray[i]);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+}
+		
+		return "redirect:/msel";
+	}
+	
+	
 	@RequestMapping("collection")
 	public String collection(Model m) {
 		m.addAttribute("center", "host/menu/collection");
