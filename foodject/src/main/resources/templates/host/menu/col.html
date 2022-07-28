@@ -23,20 +23,18 @@
 							
 						</tr>
 					</thead>
-					<tbody th:if="${slist != null}" >
-						<tr  th:each="s:${slist}" th:each="c:${clist}">
-							<td class="py-1" th:text="${s.id}"><img src="../../images/faces/face1.jpg"
-								alt="image" /></td>
-							<td th:text="${s.name}">name</td>
+					<tbody th:if="${clist != null}" >
+						<tr  th:each="c:${clist}">
+							
+							<td ><a th:text="${c.name}" th:href="@{msel(collid=${c.id})}">name</a></td>
 							<td>
 								
 							</td>
 							<td>$ 77.99</td>
 
-							<td th:if="${s.status == 1}"><label class="badge badge-success">영업 중</label></td>
-							<td th:unless="${s.status == 1}"><label class="badge badge-danger">영업 중지</label></td>
+							
 						</tr>
-						<tr th:unless="${slist != null}" >		
+						<tr th:unless="${clist != null}" >		
 						</tr>
 					</tbody>
 				</table>

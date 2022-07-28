@@ -4,7 +4,9 @@ package com.foodject.controller;
 import javax.servlet.http.HttpSession;
 
 import com.foodject.biz.HostManagerBiz;
+import com.foodject.biz.HostMenuBiz;
 import com.foodject.vo.HostManagerVO;
+import com.foodject.vo.HostMenuVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -18,6 +20,8 @@ public class HostMainAJAX {
 	@Autowired
 	HostManagerBiz mngbiz;
 	
+	@Autowired
+	HostMenuBiz mnbiz;
 	
 	
 	
@@ -71,7 +75,22 @@ public class HostMainAJAX {
 		}
 		return result;
 	}
-	
+//	@RequestMapping("mnprice")
+//	public String mnprice(Model m, HttpSession session,  int id, int price) {
+//		String result = "";
+//		HostMenuVO mn = null;
+//		HostMenuVO menu = new HostMenuVO(id, price);
+//		try {
+//			mnbiz.modify(menu);
+//			mn = mnbiz.get(id);
+//			result = Integer.toString(mn.getPrice());
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		return result;
+//	}
 
 }
 
