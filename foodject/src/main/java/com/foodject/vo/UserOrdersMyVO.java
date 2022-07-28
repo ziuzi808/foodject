@@ -16,10 +16,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class UserOrdersMyVO {
-
 	
 	private String uid;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date odate;
 	private String sname;
 	private String slogo;
@@ -28,42 +26,35 @@ public class UserOrdersMyVO {
 	private String mname;
 	private String oname;
 	private int oprice;
-	
-	public UserOrdersMyVO(String uid, Date odate, String sname, int mprice, String mname, String oname, int oprice, String slogo) {
-		this.uid = uid;
-		this.odate = odate;
-		this.sname = sname;
-		this.mprice = mprice;
-		this.mname = mname;
-		this.oname = oname;
-		this.oprice = oprice;
-		this.slogo = slogo;
-	}
+	private int oid;
 
-	public UserOrdersMyVO(String uid, Date odate, String sname, int status, String mname, String oname, String slogo) {
-		this.uid = uid;
-		this.odate = odate;
-		this.sname = sname;
-		this.status = status;
-		this.mname = mname;
-		this.oname = oname;
-		this.slogo = slogo;
-	}
 
-	public UserOrdersMyVO(String uid, Date odate, String sname, int status, String mname) {
-		this.uid = uid;
-		this.odate = odate;
-		this.sname = sname;
-		this.status = status;
-		this.mname = mname;
-	}
 
+	//delete
 	public UserOrdersMyVO(String uid, int status) {
 		this.uid = uid;
 		this.status = status;
 	}
-	
-	
+
+	//selectmy
+	public UserOrdersMyVO(String uid, Date odate, String sname, int oid, String slogo) {
+		this.uid = uid;
+		this.odate = odate;
+		this.sname = sname;
+		this.slogo = slogo;
+		this.oid = oid;
+	}
+
+	//selectmenu
+	public UserOrdersMyVO(String uid, int mprice, String mname, String oname, int oprice, int oid) {
+		this.uid = uid;
+		this.mprice = mprice;
+		this.mname = mname;
+		this.oname = oname;
+		this.oprice = oprice;
+		this.oid = oid;
+	}
+
 
 	
 	
