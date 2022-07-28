@@ -18,7 +18,7 @@ public class HostCollectionVO {
 	private int line;
 	private int sid;
 	
-	// for updateLine
+	
 	public HostCollectionVO(int id, int line) {
 		this.id = id;
 		this.line = line;

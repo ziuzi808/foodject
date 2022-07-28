@@ -49,5 +49,7 @@ public class HostMenuBiz implements Biz<Integer, HostMenuVO>{
 	public List<HostMenuVO> get_byShop(int sid) throws Exception {
 		return dao.select_byShop(sid);
 	}
-	
+	public List<HostMenuVO> getmenu(int collid) throws Exception {
+		return dao.selectmenu(collid);
+	}
 }

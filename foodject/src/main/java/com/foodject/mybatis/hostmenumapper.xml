@@ -28,6 +28,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="selectall" resultType="hostmenuVO">
 		SELECT * FROM menu
 	</select>
+	<select id="selectmenu" parameterType="Integer" resultType="hostmenuVO">
+		SELECT * FROM menu
+		WHERE collid=#{collid}
+	</select>
 	
 	
 	

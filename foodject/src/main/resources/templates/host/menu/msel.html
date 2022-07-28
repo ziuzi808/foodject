@@ -1,0 +1,106 @@
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+ 
+ /*  function mody(id){
+		var price = $('#price'+id).val();
+
+		$.ajax({
+			url:'mnprice',
+			data:{
+			'id': id,
+			'price' : price
+			},
+			success:function(data){
+					$('#price'+id).text(data);
+				}
+			});
+
+	 };   
+  */
+  
+  
+  $(document).ready(function(){  
+	  $("#selectall").click(function() {
+			if($("#selectall").is(":checked")) $("input[name=selected]").prop("checked", true);
+			else $("input[name=selected]").prop("checked", false);
+		});
+		
+		$("input[name=selected]").click(function() {
+			var total = $("input[name=selected]").length;
+			var checked = $("input[name=selected]:checked").length;
+			
+			if(total != checked) $("#selectall").prop("checked", false);
+			else $("#selectall").prop("checked", true); 
+		});
+		$('#menudltlbt').click(function(){
+			var c = confirm('삭제 하시겠습니까?');
+			var sArray =[];
+			 $("input[name=selected]:checked").each(function(i) {
+				 sArray.push($(this).val());
+			 });
+		
+			
+			if(c == true){
+				location.href='/host/menu/msel/delete?sArray='+sArray;
+			}
+		})
+		
+		
+	  
+	  
+	  
+	  $('#menuimplbt').click(function(){
+			location.href = "/host/shop/shopregister";
+		});
+});
+</script>
+
+</head>
+<div class="col-lg-12 grid-margin stretch-card">
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">메뉴판 관리</h4>
+			
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+                    <tr>
+                        <th><input type="checkbox" id="selectall" /></th>
+                        <th>메뉴명</th>
+                        <th>가격</th>
+                        
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr th:each="mn: ${mnlist}">
+                 
+                      	<td><input type="checkbox" name="selected" th:value="${mn.id}"></td>
+                        <td><a  th:text="${mn.name}" th:href="@{detail(id=${mn.id})}"></a></td>
+                        <!-- <img id="pimg" th:src="@{'/img/product_img/'+${cr.img0}}"></a></td> -->
+                        
+                        <td><input  type="number" th:id="'price'+${mn.id}" th:value="${mn.price}"></input><button id="uptprice" >수정</button></td>
+                        
+                       
+
+                       
+                       <!--  <td 
+                        th:if="${cr.status} == 1"
+                        th:text="판매중"></td>
+                         <td 
+                        th:if="${cr.status} != 1"
+                        th:text="매진"></td> -->
+                       
+                    </tr>
+                
+                </tbody>	
+				</table>
+			</div>
+			<hr><center>
+			<button id="menuimplbt" type="button" class="btn btn-info">메뉴 등록</button>
+			<button id="menudltlbt" type="button" class="btn btn-info">메뉴 삭제</button>
+			</center>
+		</div>
+	</div>
+</div>
