@@ -14,6 +14,7 @@ import java.util.UUID;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -26,10 +27,13 @@ public class NaverORC {
     @Value("${NaverOCRsecretKey}")
     String secretKey;
 	
-	public void checkNaverORC(String imageFile) {
+	public Object checkNaverORC(String imageFile) {
 
 		// String imgpath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "static","foodject").toString();
 		// String imageFile = imgpath +"\\biz3.jpg";
+
+
+		Object obj = null;
 		try {
 			URL url = new URL(apiURL);
 			HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -79,11 +83,16 @@ public class NaverORC {
 			br.close();
 			System.out.println("REsult:");
 			System.out.println(response);
+
+			JSONParser parser = new JSONParser();
+			obj = parser.parse(response.toString());
 			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		return obj;
 	}
+
 	private void writeMultiPart(OutputStream out, String jsonMessage, File file, String boundary) throws
 	IOException {
 		StringBuilder sb = new StringBuilder();

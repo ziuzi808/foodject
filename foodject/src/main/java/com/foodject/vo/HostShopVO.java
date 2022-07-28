@@ -32,6 +32,8 @@ public class HostShopVO {
 	private int marker;
 	private MultipartFile mf;
 	private MultipartFile bnumcheck;
+	private double latt;
+	private double logt;
 	
 	public HostShopVO(String name, String bnum, String addr, String addrd, String phon, String info, int allmin,
 			MultipartFile mf) {
@@ -44,6 +46,43 @@ public class HostShopVO {
 		this.allmin = allmin;
 		this.mf = mf;
 	}
+	
+
+	public HostShopVO(String name, String bnum, String addr, String addrd, String phon, String info, int allmin,
+			MultipartFile mf, double latt, double logt) {
+		this.name = name;
+		this.bnum = bnum;
+		this.addr = addr;
+		this.addrd = addrd;
+		this.phon = phon;
+		this.info = info;
+		this.allmin = allmin;
+		this.mf = mf;
+		this.latt = latt;
+		this.logt = logt;
+	}
+	
+
+	public HostShopVO(String mid, String name, String bnum, String addr, String addrd, String phon, String info,
+			int allmin, int status, int marker) {
+		this.mid = mid;
+		this.name = name;
+		this.bnum = bnum;
+		this.addr = addr;
+		this.addrd = addrd;
+		this.phon = phon;
+		this.info = info;
+		this.allmin = allmin;
+		this.status = status;
+		this.marker = marker;
+	}
+
+
+	public HostShopVO(double latt, double logt) {
+		this.latt = latt;
+		this.logt = logt;
+	}
+
 
 	public HostShopVO(MultipartFile bnumcheck) {
 		this.bnumcheck = bnumcheck;

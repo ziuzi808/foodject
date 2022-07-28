@@ -18,8 +18,7 @@ public class HostShopBiz implements Biz<Integer, HostShopVO> {
 	
 	@Override
 	public void register(HostShopVO v) throws Exception {
-		dao.insert(v);
-		
+		dao.insert(v);	
 	}
 
 	@Override
@@ -45,5 +44,11 @@ public class HostShopBiz implements Biz<Integer, HostShopVO> {
 
 	public List<HostShopVO> getmid(String v) throws Exception{
 		return dao.selectmid(v);
+	}
+	public int registerMarker(HostShopVO v) throws Exception {
+		return dao.insertMarker(v);
+	}
+	public int registerShop(HostShopVO v) throws Exception {
+		return dao.insertShop(v);
 	}
 }

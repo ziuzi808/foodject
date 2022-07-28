@@ -1,6 +1,12 @@
 <script>
 
 $(document).ready(function(){
+  $("#ajaxmodal").click(function(){
+    alert("모달 에이작스");
+    $("#modalbtn").click();
+  });
+});
+$(document).ready(function(){
 	//Menu Buttons
 	$('#update').click(function(){
  		location.href='/cust/update';
@@ -14,6 +20,50 @@ $(document).ready(function(){
 	
 });
 </script>
+
+  
+<section class="pb-5 pt-8">
+
+<div class="container mt-3">
+  <h3>Modal Example</h3>
+  <p>Click on the button to open the modal.</p>
+  
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" id="modalbtn">
+    Open modal
+  </button>
+  <button type="button" class="btn btn-primary" id="ajaxmodal" >
+    Open ajax
+  </button>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
 
 <section class="pb-5 pt-8">
 

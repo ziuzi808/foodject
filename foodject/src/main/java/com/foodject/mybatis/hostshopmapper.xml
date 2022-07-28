@@ -2,11 +2,21 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.foodject.mapper.HostShopMapper">
+<mapper namespace="com.foodject.mapper.HostShopMapper" >
 
 	<select id="selectmid" parameterType="String" resultType="HostShopVO">
-		select * from shop where mid=#{mid};
+		select * from shop where mid=#{mid} and status != 0;
 	</select>
+	<!-- <insert id="insert" parameterType="HostShopVO" userGeneratedKeys="true" keyProperty="id"> -->
+	<insert id="insertMarker" parameterType="HostShopVO" useGeneratedKeys="true" keyProperty="marker" keyColumn="id">
+		INSERT INTO marker VALUES(id=null, #{latt}, #{logt} );
+	</insert>
 
+	<insert id="insertShop" parameterType="HostShopVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id" >
+		INSERT INTO shop VALUES( id = null, #{mid}, #{name}, #{bnum}, #{addr}, #{addrd}, #{phon}, null, #{info}, SYSDATE(), #{allmin}, #{status}, #{marker});
+	</insert>
+	<update id="update" parameterType="HostShopVO">
+		UPDATE cust SET name=#{name}, bnum=#{bnum}, addr=#{addr}, addrd=#{addrd}, phon=#{phon}, logo=#{logo}, info=#{info}, allmin=#{allmin}, status = #{status} WHERE id=#{id}
+	</update>
 	
 </mapper>
