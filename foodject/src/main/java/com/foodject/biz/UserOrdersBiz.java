@@ -49,5 +49,7 @@ public class UserOrdersBiz implements Biz<Integer, UserOrdersVO> {
 		return dao.selectmy(k);
 	}
 
-
+	public List<UserOrdersMyVO> getmymenu(String k) throws Exception{
+		return dao.selectmymenu(k);
+	}
 }
