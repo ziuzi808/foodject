@@ -11,10 +11,13 @@ import com.foodject.vo.HostShopVO;
 @Mapper
 public interface HostShopMapper {
 
-	public void insert(HostShopVO obj) throws Exception;
+	public String insert(HostShopVO obj) throws Exception;
 	public void delete(int id) throws Exception;
 	public void update(HostShopVO obj) throws Exception;
 	public HostShopVO select(int id) throws Exception;
 	public List<HostShopVO> selectall() throws Exception;
 	public List<HostShopVO> selectmid(String obj) throws Exception;
+	public int insertMarker(HostShopVO obj) throws Exception;
+	public int insertShop(HostShopVO obj)throws Exception;
+	
 }

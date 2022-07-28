@@ -20,7 +20,7 @@ function convertAddr(addr){
 	     	// 결과값으로 받은 위치의 좌표를 변수에 저장합니다.
 	        latt=result[0].y;
 	        logt=result[0].x;
-	     	//alert(latt+"/"+logt);
+	     	alert(latt+"/"+logt);
 	        error = 0;
 	    }else{
 	    	error = 1;
@@ -50,6 +50,7 @@ function scrollDown(){
 	// option { left, top, behvior }
 	window.scrollTo({ left: 0, top: sc, behavior: "smooth" });
 }
+
 function execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
