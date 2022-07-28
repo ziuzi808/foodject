@@ -1,4 +1,12 @@
+<script>
+$(document).ready(function(){
+  $("#ajaxmodal").click(function(){
+    alert("모달 에이작스");
+    $("#modalbtn").click();
+  });
+});
 
+</script>
 
   
 <section class="pb-5 pt-8">
@@ -7,8 +15,11 @@
   <h3>Modal Example</h3>
   <p>Click on the button to open the modal.</p>
   
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" id="modalbtn">
     Open modal
+  </button>
+  <button type="button" class="btn btn-primary" id="ajaxmodal" >
+    Open ajax
   </button>
 </div>
 

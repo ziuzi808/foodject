@@ -100,6 +100,7 @@ public class HostShopController {
 			obj.setLogo(savename);
 			try {
 				// saveFile(실제 파일, 저장할 이름, 사용되는 DB 컬럼명)
+				biz.modify(obj);
 				ut.saveFile(obj.getMf(), savename, "shop");
 			} catch (Exception e) {
 				e.printStackTrace();
