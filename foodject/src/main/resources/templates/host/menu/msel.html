@@ -2,9 +2,9 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
  
- /*  function mody(id){
+  function mody(id){
 		var price = $('#price'+id).val();
-
+		alert(price);
 		$.ajax({
 			url:'mnprice',
 			data:{
@@ -12,12 +12,12 @@
 			'price' : price
 			},
 			success:function(data){
-					$('#price'+id).text(data);
+					
 				}
 			});
 
 	 };   
-  */
+  
   
   
   $(document).ready(function(){  
@@ -80,7 +80,7 @@
                         <td><a  th:text="${mn.name}" th:href="@{detail(id=${mn.id})}"></a></td>
                         <!-- <img id="pimg" th:src="@{'/img/product_img/'+${cr.img0}}"></a></td> -->
                         
-                        <td><input  type="number" th:id="'price'+${mn.id}" th:value="${mn.price}"></input><button id="uptprice" >수정</button></td>
+                        <td><input  type="number" th:id="'price'+${mn.id}" th:value="${mn.price}"></input><button th:onclick="'mody('+${mn.id}+');'" >수정</button></td>
                         
                        
 
