@@ -9,16 +9,14 @@ import java.util.Iterator;
 
 import javax.servlet.http.HttpSession;
 
-import com.foodject.biz.HostManagerBiz;
-import com.foodject.restapi.NaverORC;
-import com.foodject.vo.HostManagerVO;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.foodject.biz.HostManagerBiz;
+import com.foodject.restapi.NaverORC;
 
 @RestController
 @RequestMapping("/host/shop")

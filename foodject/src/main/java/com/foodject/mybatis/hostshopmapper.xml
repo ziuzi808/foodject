@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INSERT INTO shop VALUES( id = null, #{mid}, #{name}, #{bnum}, #{addr}, #{addrd}, #{phon}, null, #{info}, SYSDATE(), #{allmin}, #{status}, #{marker});
 	</insert>
 	<update id="update" parameterType="HostShopVO">
-		UPDATE cust SET name=#{name}, bnum=#{bnum}, addr=#{addr}, addrd=#{addrd}, phon=#{phon}, logo=#{logo}, info=#{info}, allmin=#{allmin}, status = #{status} WHERE id=#{id}
+		UPDATE shop SET name=#{name}, bnum=#{bnum}, addr=#{addr}, addrd=#{addrd}, phon=#{phon}, logo=#{logo}, info=#{info}, allmin=#{allmin}, status = #{status} WHERE id=#{id}
 	</update>
 	
 </mapper>
