@@ -1,26 +1,16 @@
 <script>
-
-function oidajax (oid){
-	alert("ajax btn");
-
-	$.ajax({
-		url: '/cust/myordersde',
-		type: 'get',
-		data: {"oid": oid},
-		success: function(data){
-			
-		},
-		error: function(){
-			alert("oid error!");		
-		}
-	});	
-	$('#link'+oid).click();
+function modalajax(oid){
+	alert('ajax');
+	var oidbtn = 'modalbtn'+oid;
 	
+	alert(oidbtn);
+	$('myModal11').modal('show');
+//	$('#'+oidbtn).trigger("click");
 };
 
-$(document).ready(function(){
 
-	
+
+$(document).ready(function(){
 	//Menu Buttons
 	$('#update').click(function(){
  		location.href='/cust/update';
@@ -31,9 +21,8 @@ $(document).ready(function(){
 	$('#cs').click(function(){
  		location.href='/cust/cs';
 	});	
-
+	
 });
-
 </script>
 
 <section class="pb-5 pt-8">
@@ -77,13 +66,56 @@ $(document).ready(function(){
 		                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 		                      <form class="row gx-2 gy-2 align-items-center">
 		                        <div class="col-md-4"></div> 
-		                        <div class="col-md-5">
+		                        <div class="col-md-5">                                                
+		                            
 		                        </div>
 		                        <div class="d-grid gap-3 col-sm-auto">
-		                          <a type="button" style="display: none;" th:onclick="|location.href='@{/cust/myordersde(oid=${o.oid})}'|" class="btn btn-line text-dark" th:id="'link'+${o.oid}">진짜주문상세</a>							
-								  <a type="button" th:id="'a'+${o.oid}"	 th:onclick="oidajax([[${o.oid}]]);" th:value="${o.oid}" class="btn btn-line text-dark" >주문상세</a>
-								  
-								</div>
+		                          
+		                           <!--===== 테스트 The Modal =====-->
+				<div class="container mt-3">
+				<button th:id="${'modalbtn'+o.oid}" type="button" class="btn btn-line text-dark" data-bs-toggle="modal" data-bs-target="#myModal">
+									주문상세
+									  </button>
+									  <button th:onclick="modalajax([[${o.oid}]]);">ajax</button>
+									</div>
+									
+									<!-- The Modal -->
+									<div class="modal" id="myModal11">
+									  <div class="modal-dialog">
+									    <div class="modal-content">
+									
+									      <!-- Modal Header -->
+									      <div class="modal-header">
+									        <h4 class="modal-title"><i class="fas fa-list"></i>&nbsp  &nbsp 주문상세</h4>
+									        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+									      </div>
+									
+									      <!-- Modal body -->
+									      <div class="modal-body">
+									      	<h5 th:text="${o.status}"></h5>
+									        <h2 th:text="${o.sname}"></h2>
+									        <h6 th:text="${'주문일시: '+#dates.format(o.odate,'yyyy년 MM월 dd일 HH시 mm분')}"></h6>
+									        <h6 class="pb-2" th:text="${'주문번호: '+o.oid+'번'}"></h6>
+									        <div class="pb-3 text-center">
+									        	<button type="button" class="btn btn-line text-dark"><i class="fas fa-home"></i>&nbsp 가게보기</button>
+									        </div>
+									        <div class="card">
+									          <div class="p-3">
+									          </div>												
+									        </div>
+									      </div>
+									
+									      <!-- Modal footer -->
+									      <div class="modal-footer">
+									        <button type="button" class="btn btn-line text-dark" data-bs-dismiss="modal">닫기</button>
+									      </div>
+									
+									    </div>
+									  </div>
+									</div>
+		                          <!--===== 테스트 The Modal =====-->
+		                          
+		                        </div>
 		                      </form>
 		                    </div>
 		                  </div>

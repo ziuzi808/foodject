@@ -196,19 +196,20 @@ public class UserCustController {
 		return "user/index";
 	}
 	
-//	@RequestMapping("/myordersde")
-//	public String myordersde(HttpSession session, Model m) {
-//		UserCustVO cust = (UserCustVO) session.getAttribute("loginid");
-//		List<UserOrdersMyVO> mlist = null;
-//		try {
-//			mlist = ordersbiz.getmymenu();
-//			m.addAttribute("mlist",mlist);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		m.addAttribute("center", "/user/cust/myordersde");
-//		return "user/index";
-//	}
+	@RequestMapping("/myordersde")
+	public String myordersde(HttpSession session, String oid, Model m) {
+		UserCustVO cust = (UserCustVO) session.getAttribute("loginid");
+		List<UserOrdersMyVO> mlist = null;
+		try {
+			mlist = ordersbiz.getmymenu(oid);
+			System.out.println(mlist);
+			m.addAttribute("mlist",mlist);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		m.addAttribute("center", "/user/cust/myordersde");
+		return "user/index";
+	}
 	
 	@RequestMapping("/cs")
 	public String cs(Model m) {
