@@ -75,22 +75,22 @@ public class HostMainAJAX {
 		}
 		return result;
 	}
-	@RequestMapping("mnprice")
-	public String mnprice(Model m, HttpSession session,  int id, int price) {
-		String result = "";
-		HostMenuVO mn = null;
-		HostMenuVO menu = new HostMenuVO(id, price);
-		try {
-			mnbiz.modify(menu);
-			mn = mnbiz.get(id);
-			result = Integer.toString(mn.getPrice());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return result;
-	}
+//	@RequestMapping("mnprice")
+//	public String mnprice(Model m,  int id, int price) {
+//		String result = "";
+//		HostMenuVO mn = null;
+//		HostMenuVO menu = new HostMenuVO(id, price);
+//		try {
+//			mnbiz.modify(menu);
+//			mn = mnbiz.get(id);
+//			result = Integer.toString(mn.getPrice());
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		return result;
+//	}
 
 }
 

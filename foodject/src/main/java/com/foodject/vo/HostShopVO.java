@@ -89,6 +89,13 @@ public class HostShopVO {
 	}
 
 
+	public HostShopVO(String id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+
+	
 
 
 }

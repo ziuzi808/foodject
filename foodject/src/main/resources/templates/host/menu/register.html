@@ -1,0 +1,56 @@
+<script type="text/javascript"
+  th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${kakaosrc} + '&libraries=services'"></script>
+<script>
+
+ 
+
+  $(document).ready(function () {
+   
+
+    
+
+   
+    $('#cancelbtn').click(function () {
+      location.href = "/host/menu/msel";
+    });
+    $('#submitbtn').click(function () {
+      $('#registerform').attr({
+        'enctype': 'multipart/form-data',
+        'method': 'post',
+        'action': '/host/shop/shopregisterimpl'
+      });
+      $('#registerform').submit();
+
+    });
+  });
+</script>
+<div class="col-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title" th:text="${col.name} + ' 메뉴 추가'">메뉴 등록</h4>
+      <form class="registerform" id="registerform">
+        
+        
+        
+      
+        <div class="form-group">
+          <label for="name">메뉴명</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="메뉴명">
+        </div>
+       
+        <div class="form-group">
+          <label for="price">가격</label>
+          <input type="number" class="form-control" id="price" name="price" placeholder="메뉴 가격">
+        </div>
+         <div class="form-group">
+          <label for="line">순서</label>
+          <input type="number" class="form-control" id="line" name="line" placeholder="메뉴 순서">
+        </div>
+       
+       
+        <button class="btn btn-primary" id="submitbtn" type="button">Submit</button>
+        <button class="btn btn-light" id="cancelbtn" type="button">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>

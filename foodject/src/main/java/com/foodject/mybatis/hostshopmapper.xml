@@ -18,5 +18,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<update id="update" parameterType="HostShopVO">
 		UPDATE cust SET name=#{name}, bnum=#{bnum}, addr=#{addr}, addrd=#{addrd}, phon=#{phon}, logo=#{logo}, info=#{info}, allmin=#{allmin}, status = #{status} WHERE id=#{id}
 	</update>
-	
+	<select id="select" parameterType="Integer" resultType="HostShopVO">
+		SELECT * FROM shop
+		WHERE id=#{id}
+	</select>
 </mapper>

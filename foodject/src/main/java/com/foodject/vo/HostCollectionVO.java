@@ -23,6 +23,13 @@ public class HostCollectionVO {
 		this.id = id;
 		this.line = line;
 	}
+
+
+	public HostCollectionVO(int id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
 	
 	
 }
