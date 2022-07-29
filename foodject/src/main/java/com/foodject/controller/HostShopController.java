@@ -8,7 +8,6 @@ import com.foodject.biz.HostShopBiz;
 import com.foodject.frame.Util;
 import com.foodject.vo.HostManagerVO;
 import com.foodject.vo.HostShopVO;
-import com.foodject.vo.MarkerVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -48,6 +47,7 @@ public class HostShopController {
 		if (list.size() != 0) {
 			mv.addObject("slist", list);
 		}
+		mv.addObject("kakaosrc",kakaoJSKey);
 		mv.setViewName("/host/index");
 		mv.addObject("center", "/host/shop/center");
 		return mv;

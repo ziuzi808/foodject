@@ -9,12 +9,12 @@ import java.util.Iterator;
 
 import javax.servlet.http.HttpSession;
 
-import com.foodject.biz.HostManagerBiz;
+import com.foodject.biz.HostShopBiz;
+import com.foodject.frame.Util;
 import com.foodject.restapi.NaverORC;
-import com.foodject.vo.HostManagerVO;
+import com.foodject.vo.HostShopVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,10 +25,59 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 public class HostShopAJAX {
 
 	@Autowired
-	HostManagerBiz mbiz;
+	HostShopBiz sbiz;
 	@Autowired
 	NaverORC orc;
+	@Autowired
+	Util ut;
 	
+	@RequestMapping("shopModify")
+	public Object shopModify( MultipartHttpServletRequest  mfsr,  HostShopVO obj  ) {
+		// HostManagerVO manager = (HostManagerVO) session.getAttribute("loginshop");
+		System.out.println("shopModify start : ");
+		MultipartFile mf = null;
+		String filename = "";
+
+
+
+		Iterator<String> it = mfsr.getFileNames();
+		while( it.hasNext() ){
+		filename = it.next();
+		mf = mfsr.getFile(filename);
+		}
+		if( mf == null ){
+			System.out.println("mf null ");
+		}else{
+			ut.saveFile(mf, obj.getLogo(), "shop");
+
+		}
+		System.out.println("mf : "+mf);
+		System.out.println("filename : "+filename);
+		System.out.println("HostShopVO : " + obj);
+		System.out.println("shopModify name end ");
+		
+		try {
+			sbiz.modify(obj);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("end obj; " + obj);
+		return "1";
+	}
+	@RequestMapping("shopinfo")
+	public Object shopinfo(int  id) {
+		// HostManagerVO manager = (HostManagerVO) session.getAttribute("loginshop");
+		System.out.println("shopinfo id : " + id);
+		HostShopVO obj = null;
+		try {
+			obj = sbiz.get(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return obj;
+	}
 	@RequestMapping("checkbnum")
 	public Object checkbnum(MultipartHttpServletRequest  mfsr, HttpSession session) {
 		// HostManagerVO manager = (HostManagerVO) session.getAttribute("loginshop");
