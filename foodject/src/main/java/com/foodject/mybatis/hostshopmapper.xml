@@ -21,9 +21,11 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INSERT INTO shop VALUES( id = null, #{mid}, #{name}, #{bnum}, #{addr}, #{addrd}, #{phon}, null, #{info}, SYSDATE(), #{allmin}, #{status}, #{marker});
 	</insert>
 	<update id="update" parameterType="HostShopVO">
+
 		update shop s inner join marker m on s.marker = m.id 
 		set s.name=#{name}, s.bnum=#{bnum}, s.addr=#{addr}, s.addrd=#{addrd}, s.phon=#{phon}, s.logo=#{logo}, s.info=#{info}, s.allmin=#{allmin}, s.status = #{status}, m.latt = #{latt} , m.logt=#{logt}
 		where s.id=#{id};
+
 	</update>
 	
 	

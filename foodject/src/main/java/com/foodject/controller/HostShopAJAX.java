@@ -9,6 +9,7 @@ import java.util.Iterator;
 
 import javax.servlet.http.HttpSession;
 
+
 import com.foodject.biz.HostShopBiz;
 import com.foodject.frame.Util;
 import com.foodject.restapi.NaverORC;
@@ -19,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.foodject.biz.HostManagerBiz;
+import com.foodject.restapi.NaverORC;
 
 @RestController
 @RequestMapping("/host/shop")
