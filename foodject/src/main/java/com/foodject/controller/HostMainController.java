@@ -4,7 +4,7 @@ package com.foodject.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +17,8 @@ import com.foodject.vo.HostManagerVO;
 @Controller
 @RequestMapping("/host")
 public class HostMainController {
+	@Value("${kakaoJSKey}")
+	String kakaoJSKey;
 	
 	@Autowired
 	HostManagerBiz mbiz;
@@ -40,6 +42,7 @@ public class HostMainController {
 	public ModelAndView main(ModelAndView mv) {
 		mv.setViewName("host/index");
 		mv.addObject("center", "host/center");
+		mv.addObject("kakaosrc",kakaoJSKey);
 		return mv;
 	}
 	

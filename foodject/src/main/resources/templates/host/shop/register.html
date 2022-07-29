@@ -1,17 +1,106 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
-<!-- // -->
-
+<script type="text/javascript"
+  th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${kakaosrc} + '&libraries=services'"></script>
 <script>
+  var geocoder = new kakao.maps.services.Geocoder();
+
+  function convertAddr(addr) {
+    geocoder.addressSearch(addr, function (result, status) {
+      //alert(addr);
+      // 정상적으로 검색이 완료됐으면
+      if (status === kakao.maps.services.Status.OK) {
+
+        // 결과값으로 받은 위치의 좌표를 변수에 저장합니다.
+        var latt = '';
+        var logt = '';
+        latt = result[0].y;
+        logt = result[0].x;
+        $("#latt").val(latt);
+        $("#logt").val(logt);
+        // alert(latt+"/"+logt);
+        error = 0;
+      } else {
+        error = 1;
+      }
+    });
+
+  };
+
   $(document).ready(function () {
+    $("#addrbtn").click(function () {
+      execDaumPostcode();
+    });
+
+
+    function execDaumPostcode() {
+      new daum.Postcode({
+        oncomplete: function (data) {
+          // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+          // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+          // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+          var addr = ''; // 주소 변수
+          var extraAddr = ''; // 참고항목 변수
+
+          //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+          if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+            addr = data.roadAddress;
+
+          } else { // 사용자가 지번 주소를 선택했을 경우(J)
+            addr = data.jibunAddress;
+
+          }
+
+
+          // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+          if (data.userSelectedType === 'R') {
+            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+            if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+              extraAddr += data.bname;
+            }
+            // 건물명이 있고, 공동주택일 경우 추가한다.
+            if (data.buildingName !== '' && data.apartment === 'Y') {
+              extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+            if (extraAddr !== '') {
+              extraAddr = ' (' + extraAddr + ')';
+            }
+            // 조합된 참고항목을 해당 필드에 넣는다.
+
+            $("#address").val(addr + " " + extraAddr);
+            // document.getElementById("address").value = addr + " " + extraAddr;
+          } else {
+            $("#address").val(addr);
+            // document.getElementById("address").value = addr;
+          }
+
+          convertAddr(addr);
+
+        }
+
+      }).open();
+
+    }
+
+    function display(data) {
+      var code = data.code;
+      if (code == '0011') {
+        alert("사업자 등록증을 다시 확인해주세요");
+        $('#name').val("");
+        $('#bnum').val("");
+        $('#addr').val("");
+        return;
+      }
+      var name = data.images[0].fields[1].inferText.split(": ");
+      var bnum = data.images[0].fields[0].inferText.split(": ");
+      // var addr = data.images[0].fields[2].inferText.split(": ");
+      $('#name').val(name[1]);
+      $('#bnum').val(bnum[1]);
+
+    }
+
+
 
     // 취소시 가는 페이지
     $('#cancelbtn').click(function () {
@@ -30,18 +119,18 @@
 
     });
 
-    
+
 
     // 첨부파일을 변경할때 마다 실행되는 이벤트 
 
 
     // 사업자 등록증 ajax 처리
     $('#bnumbtn').click(function (e) {
-      alert("정보 : " + $("#bnumcheck").val());
+
 
       if ($("#bnumcheck").val() != null && $("#bnumcheck").val() != "") {
         const ImageInput = $("#bnumcheck")[0];
-        console.log("mf : " , ImageInput.files );
+        console.log("mf : ", ImageInput.files);
 
         const formData = new FormData();
         formData.append("image", ImageInput.files[0]);
@@ -52,11 +141,11 @@
           processData: false,
           contentType: false,
           success: function (data) {
-            alert("접속 성공");
-            if( data == '0' ){
-              alert("널인셉션")
-            }else{
-              alert("처리 완료")
+            if (data == '0') {
+              alert("파일을 확인해주세요")
+            } else {
+
+              display(data);
             }
           }
         });
@@ -68,13 +157,7 @@
 
 
   });
-
-
 </script>
-
-
-
-
 <div class="col-12 grid-margin stretch-card">
   <div class="card">
     <div class="card-body">
@@ -84,98 +167,63 @@
       </p>
       <form class="registerform" id="registerform">
         <div class="form-group">
-          <label for="name">상호명</label>
-          <input type="text" class="form-control" id="name" name="name" placeholder="상호명">
-        </div>
-        <div class="form-group">
-          <label for="bnum">사업자 번호</label>
-          <input type="text" class="form-control" id="bnum" name="bnum" placeholder="사업자 번호">
-        </div>
-        <div class="form-group">
           <label>File upload</label>
-          <input type="file" name="img[]" class="file-upload-default">
           <div class="input-group col-xs-12">
-            <input type="file" class="form-control file-upload-info" id="bnumcheck" name="bnumcheck"
-              placeholder="Upload Image" accept=".jpg, .jpeg, .png">
+            <input type="file" class="form-control file-upload-info" id="bnumcheck" placeholder="Upload Image"
+              accept=".jpg, .jpeg, .png">
             <span class="input-group-append">
               <button class="file-upload-browse btn btn-primary" id="bnumbtn" type="button">Check</button>
             </span>
           </div>
-          <div class="form-group">
-            <label for="addr">주소</label>
-            <input type="text" class="form-control" id="addr" name="addr" placeholder="주소">
+        </div>
+        <div class="form-group">
+          <label for="name">상호명</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="상호명" readonly>
+        </div>
+        <div class="form-group">
+          <label for="bnum">사업자 번호</label>
+          <input type="text" class="form-control" id="bnum" name="bnum" placeholder="사업자 번호" readonly>
+        </div>
+        <div class="form-group">
+          <label for="addr">주소</label>
+          <div class="input-group col-xs-12">
+            <input type="text" class="form-control" id="address" name="addr" readonly="readonly" placeholder="주소">
+            <span class="input-group-append">
+              <button class="file-upload-browse btn btn-primary" id="addrbtn" type="button">주소 검색</button>
+              <input type="number" hidden id="latt" name="latt">
+              <input type="number" hidden id="logt" name="logt">
+            </span>
           </div>
-          <div class="form-group">
-            <label for="addrd">세부 주소</label>
-            <input type="text" class="form-control" id="addrd" name="addrd" placeholder="세부 주소">
+        </div>
+        <div class="form-group">
+          <label for="addrd">세부 주소</label>
+          <input type="text" class="form-control" id="addrd" name="addrd" placeholder="세부 주소">
+        </div>
+        <div class="form-group">
+          <label for="phon">전화 번호</label>
+          <input type="tel" maxlength="13" class="form-control" id="phon" name="phon" placeholder="전화 번호">
+        </div>
+        <div class="form-group">
+          <label for="allmin">최소 결제 금액</label>
+          <input type="number" class="form-control" id="allmin" name="allmin" value="1000" placeholder="최소 결제 금액">
+        </div>
+        <div class="form-group">
+          <label>가게 로고</label>
+          <div class="input-group col-xs-12">
+            <input type="file" class="form-control file-upload-info" id="logo" name="mf" placeholder="Upload Image"
+              accept=".jpg, .jpeg, .png">
+            <span class="input-group-append">
+              <!-- <button class="file-upload-browse btn btn-primary" id="logobt" type="button">Upload</button> -->
+            </span>
           </div>
-          <div class="form-group">
-            <label for="phon">전화 번호</label>
-            <input type="text" class="form-control" id="phon" name="phon" placeholder="전화 번호">
-          </div>
-          <div class="form-group">
-            <label for="allmin">최소 결제 금액</label>
-            <input type="number" class="form-control" id="allmin" name="allmin" value="1000" placeholder="최소 결제 금액">
-          </div>
-          <div class="form-group">
-            <label>가게 로고</label>
-            <div class="input-group col-xs-12">
-              <input type="file" class="form-control file-upload-info" id="logo" name="mf" placeholder="Upload Image" accept=".jpg, .jpeg, .png">
-              <span class="input-group-append">
-                <!-- <button class="file-upload-browse btn btn-primary" id="logobt" type="button">Upload</button> -->
-              </span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="info">가게 소개</label>
-            <textarea class="form-control" id="info" name="info" rows="4"></textarea>
-          </div>
-          <button class="btn btn-primary" id="submitbtn" type="button">Submit</button>
-          <button class="btn btn-light" id="cancelbtn" type="button">Cancel</button>
+        </div>
+        <div class="form-group">
+          <label for="info">가게 소개</label>
+          <textarea class="form-control" id="info" name="info" rows="4"></textarea>
+        </div>
+        <button class="btn btn-primary" id="submitbtn" type="button">Submit</button>
+        <button class="btn btn-light" id="cancelbtn" type="button">Cancel</button>
       </form>
-      <!-- 모달 -->
-        
-<div class="container mt-3">
-  <h3>Modal Example</h3>
-  <p>Click on the button to open the modal.</p>
-  
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-    Open modal
-  </button>
-</div>
-
-<!-- The Modal -->
-<div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        Modal body..
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-      </div>
-
     </div>
   </div>
 </div>
-
-
-
-      <!-- 모달끝 -->
-    </div>
-  </div>
-</div>
-
-
-</body>
-</html>

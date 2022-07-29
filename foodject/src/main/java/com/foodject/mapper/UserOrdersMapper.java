@@ -2,12 +2,11 @@ package com.foodject.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
-
-import com.foodject.vo.UserCustVO;
 import com.foodject.vo.UserOrdersMyVO;
 import com.foodject.vo.UserOrdersVO;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 @Repository
 @Mapper
@@ -20,6 +19,6 @@ public interface UserOrdersMapper {
 	public List<UserOrdersVO> selectall() throws Exception;
 	public void updatests(UserOrdersVO obj) throws Exception;
 	public List<UserOrdersMyVO> selectmy(String uid) throws Exception;
-
+	public List<UserOrdersMyVO> selectmymenu(String uid) throws Exception;
 
 }

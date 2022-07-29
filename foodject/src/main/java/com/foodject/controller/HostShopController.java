@@ -5,27 +5,35 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.foodject.biz.HostShopBiz;
+import com.foodject.frame.Util;
 import com.foodject.vo.HostManagerVO;
 import com.foodject.vo.HostShopVO;
+import com.foodject.vo.MarkerVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+
+
 @Controller
 @RequestMapping("/host/shop")
 public class HostShopController {
-	
-	@Autowired
-	HostShopBiz biz;
 
+	@Value("${kakaoJSKey}")
+	String kakaoJSKey;
+	@Autowired
+	HostShopBiz biz;	
+	@Autowired
+	Util ut;
 
 	@RequestMapping("")
-	public ModelAndView shop(ModelAndView mv, HttpSession session ) {
+	public ModelAndView shop(ModelAndView mv, HttpSession session) {
 		HostManagerVO manager = null;
 		List<HostShopVO> list = null;
-		if( session.getAttribute("loginshop") == null ){
+		if (session.getAttribute("loginshop") == null) {
 			mv.setViewName("redirect:/host");
 			return mv;
 		}
@@ -37,17 +45,19 @@ public class HostShopController {
 			e.printStackTrace();
 		}
 
-		if( list.size() != 0 ){
-			mv.addObject("slist", list );
+		if (list.size() != 0) {
+			mv.addObject("slist", list);
 		}
 		mv.setViewName("/host/index");
-		mv.addObject("center", "/host/shop/center" );
+		mv.addObject("center", "/host/shop/center");
 		return mv;
 	}
+
 	@RequestMapping("/shopregister")
 	public ModelAndView register(ModelAndView mv) {
 		mv.setViewName("/host/index");
-		mv.addObject("center", "/host/shop/register" );
+		mv.addObject("kakaosrc",kakaoJSKey);
+		mv.addObject("center", "/host/shop/register");
 		return mv;
 	}
 
@@ -55,36 +65,64 @@ public class HostShopController {
 	public ModelAndView registerimpl(ModelAndView mv, HostShopVO obj, HttpSession session) {
 		HostManagerVO manager = null;
 		manager = (HostManagerVO) session.getAttribute("loginshop");
+		System.out.println("obj : " + obj);
 
 		obj.setMid(manager.getId());
 		obj.setStatus(1);
-		obj.setLogo("icon.jpg");
 		// ?????.jpg
 
+		System.out.println("latt : " + obj.getLatt());
+		System.out.println("logt : " + obj.getLogt());
+		// System.out.println("latt : " + latt);
+		// System.out.println("logt : " + logt);
+
+
 		try {
-			biz.register(obj);
+			biz.registerMarker(obj);
+			
+			System.out.println("registerMarker.obj : "+obj);
+			
+			biz.registerShop(obj);
+
+			System.out.println("register.obj : "+obj);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+		String imgname = obj.getMf().getOriginalFilename();
+		String[] splitname = imgname.split("[.]");
+		String idname = obj.getId();
+		String savename = idname + "." + splitname[splitname.length - 1];
+
+		if(savename.equals(idname+".")) {
+			obj.setLogo("icon.jpg");			
+		}else {
+			obj.setLogo(savename);
+			try {
+				// saveFile(실제 파일, 저장할 이름, 사용되는 DB 컬럼명)
+				biz.modify(obj);
+				ut.saveFile(obj.getMf(), savename, "shop");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}	
 		mv.setViewName("redirect:/host/shop");
-		mv.addObject("center", "/host/shop/center" );
+		mv.addObject("center", "/host/shop/center");
 
 		return mv;
 	}
 
-
 	@RequestMapping("/orderlist")
 	public ModelAndView orderlist(ModelAndView mv) {
 		mv.setViewName("/host/index");
-		mv.addObject("center", "/host/shop/orderlist" );
+		mv.addObject("center", "/host/shop/orderlist");
 		return mv;
 	}
 
 	@RequestMapping("/shopadd")
 	public ModelAndView shopadd(ModelAndView mv) {
 		mv.setViewName("/host/index");
-		mv.addObject("center", "/host/shop/shopadd" );
+		mv.addObject("center", "/host/shop/shopadd");
 		return mv;
 	}
 }

@@ -1,49 +1,151 @@
+</head>
+
+<style type="text/css">
+	.logoimg {
+		height: 10%;
+		width: 10%;
+	}
+
+	.modal {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+
+		width: 400px;
+		height: 600px;
+
+		padding: 40px;
+
+		text-align: center;
+
+		background-color: rgb(255, 255, 255);
+		border-radius: 10px;
+		box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+		transform: translateX(-50%) translateY(-50%);
+	}
+
+	.modal.show {
+		display: block;
+	}
+
+	.foodject_modal > .modal_background {
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		width: 1000%;
+		height: 1000%;
+		z-index: 5;
+		background-color: rgba(0, 0, 0, 0.4);
+		
+	}
+</style>
+
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-  <script>
- 
-  
-  $(document).ready(function(){  
-	  $('#implbt').click(function(){
+<script>
+
+
+	$(document).ready(function () {
+		$('#implbt').click(function () {
 			location.href = "/host/shop/shopregister";
 		});
-});
+	});
 </script>
 
-</head>
-<div class="col-lg-12 grid-margin stretch-card">
-	<div class="card">
-		<div class="card-body">
-			<h4 class="card-title">가게 목록</h4>
-			<button id="implbt" type="button" class="btn btn-info">가게 등록</button>
-			<div class="table-responsive">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>가게 ID</th>
-							<th>상호명</th>
-							<th>주문 미수락</th>
-							<th>일매출</th>
-							<th>영업상태</th>
-						</tr>
-					</thead>
-					<tbody th:if="${slist != null}" >
-						<tr  th:each="s:${slist}">
-							<td class="py-1" th:text="${s.id}"><img src="../../images/faces/face1.jpg"
-								alt="image" /></td>
-							<td th:text="${s.name}">name</td>
-							<td>
-								
-							</td>
-							<td>$ 77.99</td>
+<body>
+	<!-- <div class="foodject_modal">
+		<div class="modal_back">Modalback
+			<div class="modal_body">modal body
 
-							<td th:if="${s.status == 1}"><label class="badge badge-success">영업 중</label></td>
-							<td th:unless="${s.status == 1}"><label class="badge badge-danger">영업 중지</label></td>
-						</tr>
-						<tr th:unless="${slist != null}" >		
-						</tr>
-					</tbody>
-				</table>
+			</div>
+		</div>
+	</div> -->
+	<button class="btn-open-popup">Modal 띄우기</button>
+	<script>
+		const modal = document.querySelector('.modal');
+		const btnOpenPopup = document.querySelector('.btn-open-popup');
+
+		btnOpenPopup.addEventListener('click', () => {
+			modal.style.display = 'block';
+		});
+	</script>
+	<div class="foodject_modal">
+		<div class="modal_background">모달백그라운드</div>
+		<div class="modal_body"> 모달 바디
+			<div class="col-lg-12 grid-margin stretch-card">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">가게 목록</h4>
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th style="width: 2px;">가게 ID</th>
+										<th style="width: 2px;">로고</th>
+
+										<th>상호명</th>
+										<th>주문 미수락</th>
+										<th>일매출</th>
+										<th>영업상태</th>
+									</tr>
+								</thead>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+</body>
+<body>
+	<!-- 모달 끝 -->
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">가게 목록</h4>
+				<button id="implbt" type="button" class="btn btn-info">가게 등록</button>
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th style="width: 2px;">가게 ID</th>
+								<th style="width: 2px;">로고</th>
+
+								<th>상호명</th>
+								<th>주문 미수락</th>
+								<th>일매출</th>
+								<th>영업상태</th>
+							</tr>
+						</thead>
+
+						<tbody th:if="${slist != null}">
+							<tr th:each="s:${slist}">
+								<td class="py-1" th:text="${s.id}"> </td>
+								<td>
+									<img class="logoimg" th:if="${s.logo != null }" th:src="${'/foodject/shop/'+s.logo}"
+										alt="image" />
+									<img class="logoimg" th:unless="${s.logo != null }" src="/foodject/shop/logo1.jpg"
+										alt="image" />
+								</td>
+
+
+								<td><a th:text="${s.name}" href="/index">name</a></td>
+								<td>
+
+								</td>
+								<td>$ 177.99</td>
+
+								<td th:if="${s.status == 1}"><label class="badge badge-success">영업 중</label></td>
+								<td th:unless="${s.status == 1}"><label class="badge badge-danger">영업 중지</label></td>
+							</tr>
+							<tr th:unless="${slist != null}">
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
