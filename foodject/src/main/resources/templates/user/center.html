@@ -20,7 +20,7 @@ function convertAddr(addr){
 	     	// 결과값으로 받은 위치의 좌표를 변수에 저장합니다.
 	        latt=result[0].y;
 	        logt=result[0].x;
-	     	alert(latt+"/"+logt);
+	     	// alert(latt+"/"+logt);
 	        error = 0;
 	    }else{
 	    	error = 1;
@@ -32,8 +32,8 @@ function selectMain(cid){
 	if(error == 0){
 		location.href="/shop?cid="+cid+"&latt="+latt+"&logt="+logt;
 	}else{
+		$('#address').focus();
 		alert('배달 장소를 입력하세요');
-		$('address').focus();
 	}
 };
 
@@ -108,6 +108,7 @@ function execDaumPostcode() {
 
               <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light">혹시, 배고프세요?</h1><br>
               <h1 class="text-800 mb-5 fs-4">치킨, 피자, 떡볶이, 삼겹살 ... <br class="d-none d-xxl-block" />무엇이든 주문해보세요!</h1>
+              <h3> 대구 중구 동성로6길 61 </h3>
 
               <div class="card w-xxl-75">
                 <div class="card-body">
@@ -136,7 +137,7 @@ function execDaumPostcode() {
                         <div class="col">
                           <div class="input-group-icon"><i class="fas fa-map-marker-alt text-danger input-box-icon"></i>
                             <label class="visually-hidden" for="inputPickup" >Address</label>
-                            <input class="form-control input-box form-foodwagon-control" id="address" type="text" placeholder="Enter Your Address" />
+                            <input class="form-control input-box form-foodwagon-control" type="text" placeholder="Enter Your Address" />
                           </div>
                         </div>
                         <div class="d-grid gap-3 col-sm-auto">

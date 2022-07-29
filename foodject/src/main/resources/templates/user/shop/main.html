@@ -38,7 +38,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
-  padding-top: 50%; /* Location of the box */
+  padding-top: 20%; /* Location of the box */
+  padding-left:20%;
+  padding-right:20%;
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -96,32 +98,73 @@ body {font-family: Arial, Helvetica, sans-serif;}
 }
 
 .modal-body {padding: 2px 16px;}
+
 </style>
 
 <script>
-function openModal(mnid){
+/* 주문서에 메뉴,옵션 추가 */
+function addOptcart(mnid){	
+	alert("Start addOptcart")
+	$('#'+mnid+'option_form').attr({
+		'method':'post',
+		'action':'/shop/addOptcart'
+	});
+	$('#'+mnid+'option_form').submit();
+	alert("End addOptcart");
+}
+function addCart(uid,mnid,cnt){
+	$.ajax({
+		url:'/shop/main/addCart',
+		data:{'uid':uid, 'mnid':mnid, 'cnt':cnt},
+		success:function(data){
+			alert('장바구니에 정상적으로 등록되었습니다')	
+		}
+	});	
+};
+
+ 
+function addOrderSheet(mnid){
+	var uid = $('#uid').val();
+	var cnt = $('#'+mnid+'cnt').val();
+	addCart(uid,mnid,cnt);
+	addOptcart(mnid);
 	
-	// Get the modal
-	var modal = document.getElementById('m'+mnid);	
-	// When the user clicks the button, open the modal 
-	modal.style.display = "block";
-	
+	closeModal(mnid);
 }
 
+
+
+/* modal을 열거나, 옵션이 존재하지 않을 경우 바로 주문서에 추가함. */
+function openModal(mnid){
+	// Get the modal
+	var modal = document.getElementById('m'+mnid);
+	// When the user clicks the button, open the modal 
+	modal.style.display = "block";
+}
+/* x를 누르면 modal이 닫히도록 함. */ 
 function closeModal(mnid){
 	// var btn = document.getElementById(mname+'_closebtn');
 	var modal = document.getElementById('m'+mnid);
 	modal.style.display = "none";
+	$('input[name="option"]').each(function(){
+		this.checked=false;
+	});
 }
 
+/* 모든 모달을 HTMLCollection으로 받아옴. */ 
 var modalArr = document.getElementsByClassName("modal");
 
+/* 모달 이외의 부분을 클릭하면 모달이 close 되도록 함. */
 window.onclick = function(event) {
 	for(let i = 0; i < modalArr.length ; i++){
 		if (event.target == modalArr[i]) {
 			modalArr[i].style.display = "none";
+			$('input[name="option"]').each(function(){
+				this.checked=false;
+			});
 		}
 	}
+
 }
 
 </script>
@@ -188,16 +231,23 @@ window.onclick = function(event) {
 					  <div class="modal-content">
 					    <div class="modal-header">
 					    <span class="close" th:onclick="closeModal([[${mn.id}]]);">&times;</span>
-					      <h2>추가옵션</h2>
+					      <h2>옵션</h2>
 					    </div>
 					    <div class="modal-body">
 					      <br>
+					      <h3>[여기에 상품 이미지 넣어야 함]</h3>
+					      <input type="hidden" th:value="${mn.id}" id="mnid">
+					      <input type="hidden" th:value="${session.loginid.id}" id="uid">
+					      <h5>주문 수량 : <input type="number" th:id="${mn.id}+'cnt'" class="number_cnt col-2" value="1" min="1"></h5><br>
 					      
-					      <h5 th:each="o:${olist}"><input type="checkbox" th:if="${o.mnid == mn.id}" th:text="' '+${o.name}" th:value="${o.id}"></h5><br>
+					      <form th:id="${mn.id}+'option_form'">
+					      	<input type="hidden" name="sid" th:value="${sid}">
+					      	<h5 th:each="o:${olist}"><input type="checkbox" name="option" th:if="${o.mnid == mn.id}" th:text="' '+${o.name}" th:value="${o.id}"></h5><br>
+					      </form>
 					    </div>
 					    <div class="modal-footer">
 					      <div class="modal-footer">
-					        <button type="button" class="btn btn-danger" th:id="${mn.id}+'_closebtn'" th:onclick="closeModal([[${mn.id}]]);">담기</button>
+					        <button type="button" class="btn btn-danger" th:id="${mn.id}+'_closebtn'" th:onclick="addOrderSheet([[${mn.id}]]);">담기</button>
 					      </div>
 					    </div>
 					  </div>

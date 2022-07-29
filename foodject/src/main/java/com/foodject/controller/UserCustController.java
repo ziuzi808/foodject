@@ -101,7 +101,7 @@ public class UserCustController {
 		} catch (Exception e) {
 			return "redirect:login?msg=f";
 		}
-		return "user/index";
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/logout")
