@@ -71,6 +71,8 @@ public class UserShopController {
 		UserShopVO obj = null;
 		
 		try {
+			m.addAttribute("sid",sid);
+			
 			obj = sbiz.get(sid);
 			m.addAttribute("shop",obj);
 			
@@ -92,7 +94,20 @@ public class UserShopController {
 		return "user/index";
 	}
 	
-	
+	@RequestMapping("/addOptcart")
+	public String addOptcart(Model m, int sid, int[] option) {
+		System.out.println("Enter java");
+		for (int i : option) {
+			System.out.println(i);
+		}
+		
+//		List<Integer> list = option;
+//		for (Integer optionId : list) {
+//			System.out.println(optionId);
+//		}
+		
+		return "redirect:/shop/main?sid="+sid;
+	}
 	
 
 }

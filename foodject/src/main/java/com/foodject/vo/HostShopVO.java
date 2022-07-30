@@ -3,6 +3,7 @@ package com.foodject.vo;
 import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,9 +32,57 @@ public class HostShopVO {
 	private int status;
 	private int marker;
 	private MultipartFile mf;
+	private MultipartHttpServletRequest  mfsr;
 	private MultipartFile bnumcheck;
 	private double latt;
 	private double logt;
+
+	
+
+
+	public HostShopVO(String id, String mid, String name, String bnum, String addr, String addrd, String phon,
+			String logo, String info, int allmin, int status, int marker, MultipartHttpServletRequest  mfsr, double latt, double logt) {
+		this.id = id;
+		this.mid = mid;
+		this.name = name;
+		this.bnum = bnum;
+		this.addr = addr;
+		this.addrd = addrd;
+		this.phon = phon;
+		this.logo = logo;
+		this.info = info;
+		this.allmin = allmin;
+		this.status = status;
+		this.marker = marker;
+		this.mfsr = mfsr;
+		this.latt = latt;
+		this.logt = logt;
+	}
+
+
+
+
+
+	public HostShopVO(String id, String mid, String name, String bnum, String addr, String addrd, String phon,
+			String logo, String info, Date date, int allmin, int status, int marker) {
+		this.id = id;
+		this.mid = mid;
+		this.name = name;
+		this.bnum = bnum;
+		this.addr = addr;
+		this.addrd = addrd;
+		this.phon = phon;
+		this.logo = logo;
+		this.info = info;
+		this.date = date;
+		this.allmin = allmin;
+		this.status = status;
+		this.marker = marker;
+	}
+
+
+	
+	
 	
 	public HostShopVO(String name, String bnum, String addr, String addrd, String phon, String info, int allmin,
 			MultipartFile mf) {
