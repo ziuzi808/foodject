@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.foodject.biz.HostCollectionBiz;
 import com.foodject.biz.HostMenuBiz;
 import com.foodject.biz.HostShopBiz;
+import com.foodject.frame.Util;
 import com.foodject.vo.HostCollectionVO;
 import com.foodject.vo.HostManagerVO;
 import com.foodject.vo.HostMenuVO;
@@ -111,7 +112,9 @@ public class HostMenuController {
 		return "host/index";
 	}
 	@RequestMapping("/msel/delete")
-	public String delete(Model m, int[] sArray) {
+	public String delete(Model m, int[] sArray, int id, int collid) {
+
+		
 		try {
 			for (int i = 0; i < sArray.length; i++) {
 				
@@ -121,7 +124,7 @@ public class HostMenuController {
 			e.printStackTrace();
 }
 		
-		return "redirect:/msel";
+		return "redirect:/host/menu/msel?id="+id+"&collid="+collid;
 	}
 	
 	
@@ -131,10 +134,13 @@ public class HostMenuController {
 		return "host/index";
 	}
 	@RequestMapping("/menuregister")
-	public ModelAndView register(ModelAndView mv, int id) {
+	public ModelAndView register(ModelAndView mv, int id, int collid) {
 		HostCollectionVO col = null;
-		
+		List<HostMenuVO> mnlist = null;
 		try {
+			mnlist = mbiz.getmenu(collid);
+			mv.addObject("mnlist",mnlist);
+			
 			col = cbiz.get(id);
 			mv.addObject("col",col);
 		} catch (Exception e) {
@@ -146,6 +152,18 @@ public class HostMenuController {
 		mv.addObject("center", "/host/menu/register");
 		return mv;
 	}
-	
+//	@RequestMapping("/menuregisterimpl")
+//	public String addimpl(Model m, HostMenuVO mn ) {
+//		String imgname = p.getMf().getOriginalFilename();
+//		mn.setImgname(imgname);
+//		try {
+//			biz.register(mn);
+//			Util.saveFile(p.getMf(),admindir,userdir);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return "redirect:select";
+//	}
 	
 }
