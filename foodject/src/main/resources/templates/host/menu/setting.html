@@ -5,7 +5,7 @@
 <div class="col-lg-12 grid-margin stretch-card">
 	<div class="card">
 		<div class="card-body">
-			<h4 class="card-title">관리할 가게를 선택해주세요.</h4>
+			<h4 class="card-title">가게 선택</h4>
 			<div class="table-responsive">
 				<table class="table table-striped">
 					<thead>
@@ -20,7 +20,7 @@
 							<td class="py-1" th:text="${s.id}"><img src="../../images/faces/face1.jpg"
 								alt="image" /></td>
 								
-							<td><a href="" th:text="${s.name}" th:href="@{col(sid=${s.id})}">name</a></td>
+							<td><a href="" th:text="${s.name}" th:href="@{col(sid=${s.id},id=${s.id})}">name</a></td>
 							
 							<td th:if="${s.status == 1}"><label class="badge badge-success">영업 중</label></td>
 							<td th:unless="${s.status == 1}"><label class="badge badge-danger">영업 중지</label></td>

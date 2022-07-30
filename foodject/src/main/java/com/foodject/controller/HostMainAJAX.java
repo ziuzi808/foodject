@@ -76,7 +76,7 @@ public class HostMainAJAX {
 		return result;
 	}
 //	@RequestMapping("mnprice")
-//	public String mnprice(Model m, HttpSession session,  int id, int price) {
+//	public String mnprice(Model m,  int id, int price) {
 //		String result = "";
 //		HostMenuVO mn = null;
 //		HostMenuVO menu = new HostMenuVO(id, price);

@@ -75,13 +75,17 @@ public class HostMenuController {
 		return mv;
 	}
 	@RequestMapping("/col")	
-	public String col(Model m, int sid) {
+	public String col(Model m, int sid, int id) {
 		List<HostCollectionVO> clist = null;
-		
+		HostShopVO sh = null;
 		try {
 			
 			clist = cbiz.getcol(sid);
 			m.addAttribute("clist",clist);
+			
+			sh = biz.get(id);
+			m.addAttribute("sh",sh);
+			
 			m.addAttribute("center","/host/menu/col");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -89,13 +93,17 @@ public class HostMenuController {
 		return "host/index";
 	}
 	@RequestMapping("/msel")	
-	public String menu(Model m, int collid) {
+	public String menu(Model m, int collid, int id) {
 		List<HostMenuVO> mnlist = null;
-		
+		HostCollectionVO col = null;
 		try {
 			
 			mnlist = mbiz.getmenu(collid);
 			m.addAttribute("mnlist",mnlist);
+			
+			col = cbiz.get(id);
+			m.addAttribute("col",col);
+			
 			m.addAttribute("center","/host/menu/msel");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -122,7 +130,22 @@ public class HostMenuController {
 		m.addAttribute("center", "host/menu/collection");
 		return "host/index";
 	}
-	
+	@RequestMapping("/menuregister")
+	public ModelAndView register(ModelAndView mv, int id) {
+		HostCollectionVO col = null;
+		
+		try {
+			col = cbiz.get(id);
+			mv.addObject("col",col);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		mv.setViewName("/host/index");
+		mv.addObject("center", "/host/menu/register");
+		return mv;
+	}
 	
 	
 }
