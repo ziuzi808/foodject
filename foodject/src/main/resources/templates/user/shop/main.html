@@ -114,10 +114,10 @@ function addOptcart(mnid){
 }
 
 /* 메뉴 장바구니 추가 */
-function addCart(uid,mnid,num){
+function addCart(uid,mnid,num,chk){
 	$.ajax({
 		url:'/shop/main/addCart',
-		data:{'uid':uid, 'mnid':mnid, 'num':num},
+		data:{'uid':uid, 'mnid':mnid, 'num':num, 'chk':chk},
 		async: false,	//동기식으로 처리
 		success:function(data){
 			alert('cartIn:'+data+' 메뉴가 장바구니에 정상적으로 등록되었습니다');
@@ -128,11 +128,15 @@ function addCart(uid,mnid,num){
 
 /* 주문서에 메뉴,옵션 추가 */
 function addOrderSheet(mnid){
+	var chk = $("input:checkbox[name=option]:checked").length
 	var uid = $('#uid').val();
 	var num = $('#'+mnid+'num').val();
+	 
 	
-	addCart(uid,mnid,num);
-	addOptcart(mnid);
+	addCart(uid,mnid,num,chk);
+	if(chk != 0){
+		addOptcart(mnid);
+	}
 	closeModal(mnid);
 }
 
