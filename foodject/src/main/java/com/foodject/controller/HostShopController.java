@@ -27,7 +27,33 @@ public class HostShopController {
 	HostShopBiz biz;	
 	@Autowired
 	Util ut;
+	
+	@RequestMapping("analysis")
+	public ModelAndView analysis(ModelAndView mv, HttpSession session) {
 
+		HostManagerVO manager = null;
+		List<HostShopVO> list = null;
+		if (session.getAttribute("loginshop") == null) {
+			mv.setViewName("redirect:/host");
+			return mv;
+		}
+		manager = (HostManagerVO) session.getAttribute("loginshop");
+		String mid = manager.getId();
+		try {
+			list = biz.getmid(mid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		if (list.size() != 0) {
+			mv.addObject("slist", list);
+		}
+		System.out.println("slist : " + list);
+		mv.addObject("kakaosrc",kakaoJSKey);
+		mv.setViewName("/host/index");
+		mv.addObject("center", "/host/shop/analysis");
+		return mv;
+	}
 	@RequestMapping("")
 	public ModelAndView shop(ModelAndView mv, HttpSession session) {
 		HostManagerVO manager = null;
@@ -47,6 +73,7 @@ public class HostShopController {
 		if (list.size() != 0) {
 			mv.addObject("slist", list);
 		}
+		System.out.println("slist : " + list);
 		mv.addObject("kakaosrc",kakaoJSKey);
 		mv.setViewName("/host/index");
 		mv.addObject("center", "/host/shop/center");
